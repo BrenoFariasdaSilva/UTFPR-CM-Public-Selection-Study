@@ -43,7 +43,6 @@ Project-Description.
   - [Setup](#setup)
     - [Clone the repository](#clone-the-repository)
   - [Installation:](#installation)
-  - [Run Programing Language Code:](#run-programing-language-code)
   - [Usage](#usage)
   - [Contributing](#contributing)
   - [Collaborators](#collaborators)
@@ -78,7 +77,7 @@ Bullet points of the requirements.
   sudo apt install manpages-dev -y
   ``` 
 
-## Run Programing Language Code:
+## Usage
 
 Each code directory will have a `Makefile` with the necessary commands to run the code. To run the code, navigate to the desired directory and run the following command:
 
@@ -91,14 +90,6 @@ If the 'Makefile' in a specific ain't available, you can run the C code with the
 ```bash
 gcc -o main main.c
 ./main
-```
-
-## Usage
-
-In order to run the project, run the following command:
-
-```bash
-make run
 ```
 
 ## Contributing
