@@ -1,6 +1,6 @@
 <div align="center">
   
-# [Template-Project.](https://github.com/BrenoFariasdaSilva/Template-Project) <img src="https://github.com/BrenoFariasdaSilva/Template-Project/blob/d4173c3b2249a77b6b1a223b86e801ea2042eddc/.assets/Icons/GitHub%20Colored%20Icon.svg"  width="3%" height="3%">
+# [UTFPR-CM-Public-Selection-Study.](https://github.com/BrenoFariasdaSilva/UTFPR-CM-Public-Selection-Study) <img src="https://github.com/BrenoFariasdaSilva/UTFPR-CM-Public-Selection-Study/blob/d4173c3b2249a77b6b1a223b86e801ea2042eddc/.assets/Icons/GitHub%20Colored%20Icon.svg"  width="3%" height="3%">
 
 </div>
 
@@ -16,16 +16,16 @@ Project-Description.
 
 <div align="center">
 
-![GitHub Code Size in Bytes](https://img.shields.io/github/languages/code-size/BrenoFariasdaSilva/Template-Project)
-![GitHub Commits](https://img.shields.io/github/commit-activity/t/BrenoFariasdaSilva/Template-Project/main)
-![GitHub Last Commit](https://img.shields.io/github/last-commit/BrenoFariasdaSilva/Template-Project)
-![GitHub Forks](https://img.shields.io/github/forks/BrenoFariasdaSilva/Template-Project)
-![GitHub Language Count](https://img.shields.io/github/languages/count/BrenoFariasdaSilva/Template-Project)
-![GitHub License](https://img.shields.io/github/license/BrenoFariasdaSilva/Template-Project)
-![GitHub Stars](https://img.shields.io/github/stars/BrenoFariasdaSilva/Template-Project)
-![GitHub Contributors](https://img.shields.io/github/contributors/BrenoFariasdaSilva/Template-Project)
-![GitHub Created At](https://img.shields.io/github/created-at/BrenoFariasdaSilva/Template-Project)
-![wakatime](https://wakatime.com/badge/github/BrenoFariasdaSilva/Template-Project.svg)
+![GitHub Code Size in Bytes](https://img.shields.io/github/languages/code-size/BrenoFariasdaSilva/UTFPR-CM-Public-Selection-Study)
+![GitHub Commits](https://img.shields.io/github/commit-activity/t/BrenoFariasdaSilva/UTFPR-CM-Public-Selection-Study/main)
+![GitHub Last Commit](https://img.shields.io/github/last-commit/BrenoFariasdaSilva/UTFPR-CM-Public-Selection-Study)
+![GitHub Forks](https://img.shields.io/github/forks/BrenoFariasdaSilva/UTFPR-CM-Public-Selection-Study)
+![GitHub Language Count](https://img.shields.io/github/languages/count/BrenoFariasdaSilva/UTFPR-CM-Public-Selection-Study)
+![GitHub License](https://img.shields.io/github/license/BrenoFariasdaSilva/UTFPR-CM-Public-Selection-Study)
+![GitHub Stars](https://img.shields.io/github/stars/BrenoFariasdaSilva/UTFPR-CM-Public-Selection-Study)
+![GitHub Contributors](https://img.shields.io/github/contributors/BrenoFariasdaSilva/UTFPR-CM-Public-Selection-Study)
+![GitHub Created At](https://img.shields.io/github/created-at/BrenoFariasdaSilva/UTFPR-CM-Public-Selection-Study)
+![wakatime](https://wakatime.com/badge/github/BrenoFariasdaSilva/UTFPR-CM-Public-Selection-Study.svg)
 
 </div>
 
@@ -36,7 +36,7 @@ Project-Description.
 </div>
 
 ## Table of Contents
-- [Template-Project. ](#template-project-)
+- [UTFPR-CM-Public-Selection-Study. ](#utfpr-cm-public-selection-study-)
   - [Table of Contents](#table-of-contents)
   - [Introduction](#introduction)
   - [Requirements](#requirements)
@@ -71,8 +71,8 @@ Bullet points of the requirements.
 1. Clone the repository with the following command:
 
    ```bash
-   git clone https://github.com/BrenoFariasdaSilva/Template-Project.git
-   cd Template-Project
+   git clone https://github.com/BrenoFariasdaSilva/UTFPR-CM-Public-Selection-Study.git
+   cd UTFPR-CM-Public-Selection-Study
    ```
 
 ## Installation:
@@ -112,7 +112,7 @@ Bullet points of the requirements.
 
 ### Dataset - Optional
 
-1. Download the dataset from [WEBSITE-HERE]() and place it in this project directory `(/Template-Project)` and run the following command:
+1. Download the dataset from [WEBSITE-HERE]() and place it in this project directory `(/UTFPR-CM-Public-Selection-Study)` and run the following command:
 
    ```bash
    make dataset
