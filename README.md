@@ -132,14 +132,14 @@ Discuss the results obtained in the project.
 
 ## How to Cite?
 
-If you use the Repository-Name in your research, please cite it using the following BibTeX entry:
+If you use the UTFPR-CM-Public-Selection-Study in your research, please cite it using the following BibTeX entry:
 
 ```
-@misc{softwareRepository-Name:2024,
-  title = {Repository-Name: Project-Description},
+@misc{softwareUTFPR-CM-Public-Selection-Study:2024,
+  title = {UTFPR-CM-Public-Selection-Study: Project-Description},
   author = {Breno Farias da Silva},
   year = {2024},
-  howpublished = {https://github.com/BrenoFariasdaSilva/Repository-Name},
+  howpublished = {https://github.com/BrenoFariasdaSilva/UTFPR-CM-Public-Selection-Study},
   note = {Accessed on September 11, 2024}
 }
 ```
