@@ -72,24 +72,12 @@ Bullet points of the requirements.
 
 ## Installation:
 
-* Programing Language:
-
-  * Manually:
-      ```bash
-      # Programing Language:
-      sudo apt install program-language -y
-      ```
-
-  * Using Makefile:
-      ```bash
-      make install
-      ```
-
-  * Using ShellScript:
-      ```bash
-      chmod +x install.sh
-      sudo ./install.sh
-      ```  
+* C Language:
+  ```bash
+  # C:
+  sudo apt install build-essential -y
+  sudo apt install manpages-dev -y
+  ``` 
 
 ## Run Programing Language Code:
 
