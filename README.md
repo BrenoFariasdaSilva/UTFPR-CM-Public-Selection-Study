@@ -81,8 +81,17 @@ Bullet points of the requirements.
 
 ## Run Programing Language Code:
 
+Each code directory will have a `Makefile` with the necessary commands to run the code. To run the code, navigate to the desired directory and run the following command:
+
 ```bash
-# Command here 
+make run
+```
+
+If the 'Makefile' in a specific ain't available, you can run the C code with the following command:
+
+```bash
+gcc -o main main.c
+./main
 ```
 
 ### Dependencies
