@@ -44,7 +44,6 @@ Project-Description.
     - [Clone the repository](#clone-the-repository)
   - [Installation:](#installation)
   - [Run Programing Language Code:](#run-programing-language-code)
-    - [Dependencies](#dependencies)
   - [Usage](#usage)
   - [Contributing](#contributing)
   - [Collaborators](#collaborators)
@@ -93,14 +92,6 @@ If the 'Makefile' in a specific ain't available, you can run the C code with the
 gcc -o main main.c
 ./main
 ```
-
-### Dependencies
-
-1. Install the project dependencies with the following command:
-
-   ```bash
-   make dependencies
-   ```
 
 ## Usage
 
