@@ -1,6 +1,6 @@
 <div align="center">
   
-# [UTFPR-CM-Public-Selection-Study.](https://github.com/BrenoFariasdaSilva/UTFPR-CM-Public-Selection-Study) <img src="https://github.com/BrenoFariasdaSilva/UTFPR-CM-Public-Selection-Study/blob/d4173c3b2249a77b6b1a223b86e801ea2042eddc/.assets/Icons/GitHub%20Colored%20Icon.svg"  width="3%" height="3%">
+# [UTFPR-CM-Public-Selection-Study.](https://github.com/BrenoFariasdaSilva/UTFPR-CM-Public-Selection-Study) <img src="https://github.com/BrenoFariasdaSilva/UTFPR-CM-Public-Selection-Study/blob/38cf82e31f70527147da91258310a4a5a423c03b/.assets/Icons/BooksStack.svg"  width="3%" height="3%">
 
 </div>
 
