@@ -209,3 +209,11 @@ for (int i = 0; i < LIN; i++)
 
 ---
 - Limitações
+
+### Matrizes (arrays 2D) (Matrices)
+- Representação em memória (row-major em C)
+- Acesso e travessia
+- Operações clássicas
+  - Soma
+  - Multiplicação
+- Generalização para n dimensões
