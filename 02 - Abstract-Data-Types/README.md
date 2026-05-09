@@ -1,7 +1,22 @@
-# Tipos Abstratos de Dados (TADs)  
+
+# Tipos Abstratos de Dados (TADs)
 *(Abstract Data Types - ADTs)*
 
 ---
+
+# 2.0 Visão Geral: Estruturas Estáticas vs. Dinâmicas
+
+Em estruturas de dados, **estático** significa tamanho fixo e alocação em tempo de compilação (ex: arrays), enquanto **dinâmico** permite crescimento/redução em tempo de execução (ex: listas encadeadas, realloc, malloc/free).
+
+| Tipo     | Alocação                            | Tamanho  | Vantagens                         | Desvantagens                        |
+| -------- | ----------------------------------- | -------- | --------------------------------- | ----------------------------------- |
+| Estático | Em tempo de compilação (stack/data) | Fixo     | Simples, rápido, sem fragmentação | Limite fixo, desperdício de memória |
+| Dinâmico | Em tempo de execução (heap)         | Variável | Flexível, cresce conforme uso     | Mais complexo, risco de vazamento   |
+
+---
+
+---
+
 
 # 2.1 Conceito de TAD (ADT Concept)
 
@@ -10,118 +25,23 @@ Um **Tipo Abstrato de Dados (TAD)** é uma especificação matemática de um con
 
 ---
 
-## Separação entre interface e implementação
-- **Interface:** define *o que* o TAD faz  
-- **Implementação:** define *como* o TAD faz  
-
-### Exemplo
-```c
-// Interface (lista.h)
-void inserir(int x);
-int remover(int x);
-
-// Implementação (lista.c)
-```
-
-## Encapsulamento
-- Oculta detalhes internos  
-- Garante integridade dos dados  
-- Permite troca de implementação  
-
----
-
-# 2.2 Listas (Lists)
-
-## Lista sequencial
-```c
-typedef struct {
-    int dados[100];
-    int tamanho;
-} Lista;
-```
-
-### Complexidade
-- Inserção: O(n)  
-- Remoção: O(n)  
-- Busca: O(n)  
-
----
-
-## Lista encadeada
-
-### Estrutura de nó
-```c
-typedef struct No {
-    int valor;
-    struct No* prox;
-} No;
-```
-
-### Inserção no início
-```c
-No* inserir_inicio(No* head, int x) {
-    No* novo = malloc(sizeof(No));
-    novo->valor = x;
-    novo->prox = head;
-    return novo;
-}
-```
-
-### Percurso
-```c
-for (No* p = head; p != NULL; p = p->prox)
-    printf("%d\n", p->valor);
-```
-
----
-
-## Lista duplamente encadeada
-```c
-typedef struct No {
-    int valor;
-    struct No* prox;
-    struct No* ant;
-} No;
-```
-
----
-
-## Lista circular
-- Último aponta para o primeiro  
-- Não possui NULL  
-
----
-
-# 2.3 Pilhas (Stacks)
-
-## Definição
-LIFO (Last In, First Out)
-
-## Implementação
-```c
-int pilha[100];
-int topo = -1;
-```
-
-## Operações
-- push  
-- pop  
-- top  
-
-## Complexidade
-- O(1)
-
----
-
-# 2.4 Filas (Queues)
-
 ## Definição
 FIFO (First In, First Out)
 
-## Vetor circular
+
+## Implementação Estática (vetor circular)
 ```c
 int fila[100];
 int inicio = 0, fim = 0;
+```
+## Implementação Dinâmica (lista encadeada)
+```c
+typedef struct No {
+    int valor;
+    struct No* prox;
+} No;
+No* inicio = NULL;
+No* fim = NULL;
 ```
 
 ## Operações
@@ -129,6 +49,7 @@ int inicio = 0, fim = 0;
 - dequeue  
 
 ---
+
 
 # 2.5 Tabelas Hash (Hash Tables)
 
@@ -139,9 +60,10 @@ int hash(int chave) {
 }
 ```
 
+
 ## Colisões
-- Encadeamento  
-- Endereçamento aberto  
+- **Encadeamento externo:** cada posição da tabela aponta para uma lista encadeada (dinâmica) de elementos
+- **Endereçamento aberto:** elementos colidem e são realocados em outras posições do próprio array (estático)
 
 ## Fator de carga
 α = n / m
@@ -152,30 +74,39 @@ int hash(int chave) {
 
 ---
 
+
 # COMPARAÇÕES IMPORTANTES
 
-| Estrutura | Acesso | Inserção | Remoção |
-|----------|--------|----------|--------|
-| Array | O(1) | O(n) | O(n) |
-| Lista | O(n) | O(1) | O(1) |
-| Hash | O(1) | O(1) | O(1) |
+| Estrutura                   | Acesso | Inserção | Remoção | Alocação |
+| --------------------------- | ------ | -------- | ------- | -------- |
+| Array Estático              | O(1)   | O(n)     | O(n)    | Estática |
+| Array Dinâmico              | O(1)   | O(n)     | O(n)    | Dinâmica |
+| Lista Encadeada             | O(n)   | O(1)     | O(1)    | Dinâmica |
+| Pilha Estática              | O(1)   | O(1)     | O(1)    | Estática |
+| Pilha Dinâmica              | O(1)   | O(1)     | O(1)    | Dinâmica |
+| Fila Estática               | O(1)   | O(1)     | O(1)    | Estática |
+| Fila Dinâmica               | O(1)   | O(1)     | O(1)    | Dinâmica |
+| Hash (encadeada)            | O(1)   | O(1)     | O(1)    | Dinâmica |
+| Hash (endereçamento aberto) | O(1)   | O(1)     | O(1)    | Estática |
 
 ---
 
+
 # COMO ISSO CAI NA PROVA
 
+
 Você precisa:
-- Definir TAD  
-- Comparar estruturas  
-- Explicar colisões  
-- Implementar em C  
-- Analisar complexidade  
+- Definir TAD e explicar diferença entre estático e dinâmico
+- Comparar vantagens e desvantagens de cada abordagem
+- Explicar colisões e métodos de resolução
+- Implementar versões estáticas e dinâmicas em C
+- Analisar complexidade e uso de memória
 
 ---
 
 # CONCLUSÃO
 
 Domínio esperado:
-- Implementação em C  
-- Comparação teórica  
-- Entendimento de complexidade  
+- Implementação em C (estático e dinâmico)
+- Comparação teórica e prática
+- Entendimento de complexidade e uso de memória
