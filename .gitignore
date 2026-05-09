@@ -200,3 +200,6 @@ Magnet\ Links\ from\ URL/*.csv
 **/Output/**
 
 !**/requirements.txt
+
+# Ignore Auto Committer Files.
+readme_sections_committer.py
