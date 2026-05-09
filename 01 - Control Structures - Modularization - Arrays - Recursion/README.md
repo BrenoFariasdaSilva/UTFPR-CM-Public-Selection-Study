@@ -318,3 +318,13 @@ int fatorial_tail(int n, int acc) {
 ```
 
 ---
+
+### Resumo: características da recursão
+| Característica          | Recursão Normal    | Recursão de Cauda |
+| ----------------------- | ------------------ | ----------------- |
+| Cálculo pendente        | Sim (após retorno) | Não               |
+| Uso de pilha            | O(n) frames        | O(1) com TCO      |
+| Risco de stack overflow | Maior              | Menor (com TCO)   |
+| Legibilidade            | Mais direta        | Requer acumulador |
+
+---
