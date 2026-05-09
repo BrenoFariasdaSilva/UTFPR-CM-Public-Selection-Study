@@ -217,3 +217,12 @@ for (int i = 0; i < LIN; i++)
   - Soma
   - Multiplicação
 - Generalização para n dimensões
+
+## 1.5 Recursividade (Recursion)
+
+- Técnica em que uma função chama a si mesma para resolver subproblemas menores.
+
+### Definição formal
+- Uma função recursiva é definida por:
+  - **Caso base:** condição que encerra a recursão (sem chamada recursiva).
+  - **Caso recursivo:** chamada da função para um subproblema mais simples.
