@@ -280,3 +280,13 @@ void hanoi(int n, char A, char B, char C) {
 ```
 
 ---
+
+### Recursão vs iteração
+| Aspecto        | Recursão                       | Iteração                        |
+| -------------- | ------------------------------ | ------------------------------- |
+| Legibilidade   | Alta para problemas recursivos | Alta para laços simples         |
+| Desempenho     | Overhead de chamadas de função | Geralmente mais eficiente       |
+| Uso de memória | O(n) na pilha                  | O(1) tipicamente                |
+| Quando usar    | Árvores, divisão e conquista   | Sequências lineares, contadores |
+
+---
