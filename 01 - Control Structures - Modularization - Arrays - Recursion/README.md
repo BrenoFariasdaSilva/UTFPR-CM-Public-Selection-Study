@@ -305,3 +305,16 @@ void hanoi(int n, char A, char B, char C) {
 - **Repetição desnecessária:** recursão ingênua pode recalcular subproblemas (ex: Fibonacci sem memoização).
 
 ---
+
+### Recursão de cauda (Tail Recursion)
+- A chamada recursiva é a última instrução da função.
+- Permite otimização da pilha (Tail Call Optimization, TCO) em compiladores que suportam.
+```c
+int fatorial_tail(int n, int acc) {
+    if (n == 0) return acc;
+    return fatorial_tail(n-1, acc*n);
+}
+// Chamada inicial: fatorial_tail(5, 1)
+```
+
+---
