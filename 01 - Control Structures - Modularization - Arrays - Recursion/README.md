@@ -290,3 +290,12 @@ void hanoi(int n, char A, char B, char C) {
 | Quando usar    | Árvores, divisão e conquista   | Sequências lineares, contadores |
 
 ---
+
+### Análise de complexidade
+- Cada chamada recursiva consome espaço na pilha de execução.
+- Exemplo:
+  - Fatorial: O(n) tempo, O(n) espaço (n chamadas empilhadas)
+  - Fibonacci: O(2^n) tempo (sem otimização), O(n) espaço
+  - Torre de Hanoi: O(2^n) movimentos
+
+---
