@@ -1,4 +1,3 @@
-
 # Tipos Abstratos de Dados (TADs)
 *(Abstract Data Types - ADTs)*
 
@@ -48,18 +47,23 @@ int remover(int x);
 ## Listas: Estáticas (Sequenciais) e Dinâmicas (Encadeadas)
 
 ### Lista Sequencial Estática
+
 Armazena elementos em um array de tamanho fixo. Simples, mas limitada pelo tamanho máximo.
+
 ```c
 typedef struct {
     int dados[100]; // tamanho fixo
     int tamanho;
 } ListaEstatica;
 ```
+
 **Vantagens:** acesso rápido por índice, fácil de implementar.
 **Desvantagens:** limite fixo, desperdício de memória se pouco usada.
 
 #### Operações principais
+
 - **Inserção no final:**
+
 ```c
 int inserir(ListaEstatica *l, int x) {
     if (l->tamanho == 100) return 0; // cheia
@@ -67,7 +71,9 @@ int inserir(ListaEstatica *l, int x) {
     return 1;
 }
 ```
+
 - **Remoção por valor:**
+
 ```c
 int remover(ListaEstatica *l, int x) {
     for (int i = 0; i < l->tamanho; i++) {
@@ -81,7 +87,9 @@ int remover(ListaEstatica *l, int x) {
     return 0;
 }
 ```
+
 - **Busca linear:**
+
 ```c
 int buscar(ListaEstatica *l, int x) {
     for (int i = 0; i < l->tamanho; i++)
@@ -91,7 +99,9 @@ int buscar(ListaEstatica *l, int x) {
 ```
 
 ### Lista Sequencial Dinâmica
+
 Usa ponteiro para array alocado dinamicamente (malloc/realloc), permitindo crescer conforme necessário.
+
 ```c
 typedef struct {
     int *dados;     // ponteiro para array
@@ -99,11 +109,14 @@ typedef struct {
     int capacidade; // tamanho alocado
 } ListaDinamica;
 ```
+
 **Vantagens:** cresce conforme uso, sem limite fixo.
 **Desvantagens:** realocações podem ser custosas, acesso ainda é O(1).
 
 #### Operações principais
+
 - **Inicialização:**
+
 ```c
 void inicializar(ListaDinamica *l, int capacidade) {
     l->dados = malloc(capacidade * sizeof(int));
@@ -111,7 +124,9 @@ void inicializar(ListaDinamica *l, int capacidade) {
     l->capacidade = capacidade;
 }
 ```
+
 - **Inserção:**
+
 ```c
 int inserir(ListaDinamica *l, int x) {
     if (l->tamanho == l->capacidade) {
@@ -122,7 +137,9 @@ int inserir(ListaDinamica *l, int x) {
     return 1;
 }
 ```
+
 - **Remoção por valor:**
+
 ```c
 int remover(ListaDinamica *l, int x) {
     for (int i = 0; i < l->tamanho; i++) {
@@ -136,21 +153,27 @@ int remover(ListaDinamica *l, int x) {
     return 0;
 }
 ```
+
 - **Busca:** igual à estática.
 
 ### Lista Encadeada (Dinâmica)
+
 Cada elemento aponta para o próximo (e/ou anterior). Alocação totalmente dinâmica.
+
 ```c
 typedef struct No {
     int valor;
     struct No* prox;
 } No;
 ```
+
 **Vantagens:** inserção/remoção eficientes em qualquer posição, cresce sem limite fixo.
 **Desvantagens:** acesso sequencial (O(n)), uso extra de memória para ponteiros.
 
 #### Operações principais
+
 - **Inserção no início:**
+
 ```c
 No* inserir_inicio(No* head, int x) {
     No* novo = malloc(sizeof(No));
@@ -159,7 +182,9 @@ No* inserir_inicio(No* head, int x) {
     return novo;
 }
 ```
+
 - **Remoção do início:**
+  
 ```c
 No* remover_inicio(No* head) {
     if (!head) return NULL;
@@ -168,7 +193,9 @@ No* remover_inicio(No* head) {
     return temp;
 }
 ```
+
 - **Busca:**
+
 ```c
 No* buscar(No* head, int x) {
     for (No* p = head; p; p = p->prox)
@@ -178,6 +205,7 @@ No* buscar(No* head, int x) {
 ```
 
 #### Lista Duplamente Encadeada
+
 ```c
 typedef struct No {
     int valor;
@@ -206,7 +234,9 @@ int topo = -1;
 ```
 
 ### Operações
+
 - **push:**
+  
 ```c
 int push(int x) {
     if (topo == 99) return 0; // cheia
@@ -214,14 +244,18 @@ int push(int x) {
     return 1;
 }
 ```
+
 - **pop:**
+  
 ```c
 int pop() {
     if (topo == -1) return -1; // vazia
     return pilha[topo--];
 }
 ```
+
 - **top:**
+  
 ```c
 int top() {
     if (topo == -1) return -1;
@@ -240,7 +274,9 @@ No* topo = NULL;
 ```
 
 ### Operações
+
 - **push:**
+  
 ```c
 void push(int x) {
     No* novo = malloc(sizeof(No));
@@ -249,7 +285,9 @@ void push(int x) {
     topo = novo;
 }
 ```
+
 - **pop:**
+  
 ```c
 int pop() {
     if (!topo) return -1;
@@ -260,7 +298,9 @@ int pop() {
     return v;
 }
 ```
+
 - **top:**
+
 ```c
 int top() {
     if (!topo) return -1;
@@ -273,21 +313,22 @@ int top() {
 
 ---
 
-
 # 2.4 Filas (Queues)
 
 ## Definição
 FIFO (First In, First Out)
 
-
-
 ## Implementação Estática (vetor circular)
+
 ```c
 int fila[100];
 int inicio = 0, fim = 0;
+
 ```
 ### Operações
+
 - **enqueue:**
+
 ```c
 int enqueue(int x) {
     if ((fim + 1) % 100 == inicio) return 0; // cheia
@@ -296,7 +337,9 @@ int enqueue(int x) {
     return 1;
 }
 ```
+
 - **dequeue:**
+
 ```c
 int dequeue() {
     if (inicio == fim) return -1; // vazia
@@ -315,8 +358,10 @@ typedef struct No {
 No* inicio = NULL;
 No* fim = NULL;
 ```
+
 ### Operações
 - **enqueue:**
+
 ```c
 void enqueue(int x) {
     No* novo = malloc(sizeof(No));
@@ -330,7 +375,9 @@ void enqueue(int x) {
     }
 }
 ```
+
 - **dequeue:**
+  
 ```c
 int dequeue() {
     if (!inicio) return -1;
@@ -345,9 +392,7 @@ int dequeue() {
 
 ---
 
-
 # 2.5 Tabelas Hash (Hash Tables)
-
 
 ## Função hash
 ```c
@@ -410,7 +455,6 @@ int buscar(No* tabela[], int chave) {
 - **Encadeamento externo:** cada posição da tabela aponta para uma lista encadeada (dinâmica) de elementos. Vantagem: sem limite rígido de ocupação por posição.
 - **Endereçamento aberto:** elementos colidem e são realocados em outras posições do próprio array (estático). Vantagem: não usa ponteiros, mas pode degradar se a tabela ficar cheia.
 
-
 ## Fator de carga
 α = n / m (n = número de elementos, m = tamanho da tabela)
 
@@ -420,7 +464,6 @@ int buscar(No* tabela[], int chave) {
 - Pior caso: O(n)  
 
 ---
-
 
 # COMPARAÇÕES IMPORTANTES
 
@@ -438,9 +481,7 @@ int buscar(No* tabela[], int chave) {
 
 ---
 
-
 # COMO ISSO CAI NA PROVA
-
 
 Você precisa:
 - Definir TAD e explicar diferença entre estático e dinâmico
