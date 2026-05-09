@@ -232,3 +232,51 @@ for (int i = 0; i < LIN; i++)
 - O retorno ocorre em ordem inversa (LIFO), desempilhando as chamadas.
 
 ---
+
+### Exemplos clássicos
+
+#### Fatorial
+```c
+int fatorial(int n) {
+    if (n == 0) return 1; // caso base
+    return n * fatorial(n - 1); // caso recursivo
+}
+```
+**Trace para fatorial(4):**
+```
+fatorial(4)
+  → 4 * fatorial(3)
+      → 3 * fatorial(2)
+          → 2 * fatorial(1)
+              → 1 * fatorial(0)
+                  → 1
+```
+Resultado: 24
+
+#### Fibonacci
+```c
+int fib(int n) {
+    if (n <= 1) return n;
+    return fib(n-1) + fib(n-2);
+}
+```
+**Trace para fib(4):**
+```
+fib(4)
+  → fib(3) + fib(2)
+      → (fib(2) + fib(1)) + (fib(1) + fib(0))
+```
+Resultado: 3
+
+#### Torre de Hanoi
+```c
+void hanoi(int n, char A, char B, char C) {
+    if (n > 0) {
+        hanoi(n-1, A, C, B);
+        printf("Move disco %d de %c para %c\n", n, A, C);
+        hanoi(n-1, B, A, C);
+    }
+}
+```
+
+---
