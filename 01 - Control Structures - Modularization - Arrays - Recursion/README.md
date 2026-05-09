@@ -299,3 +299,9 @@ void hanoi(int n, char A, char B, char C) {
   - Torre de Hanoi: O(2^n) movimentos
 
 ---
+
+### Problemas comuns
+- **Stack overflow:** ocorre quando a recursão é muito profunda ou não há caso base correto.
+- **Repetição desnecessária:** recursão ingênua pode recalcular subproblemas (ex: Fibonacci sem memoização).
+
+---
