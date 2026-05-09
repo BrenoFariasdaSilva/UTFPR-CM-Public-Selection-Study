@@ -90,6 +90,54 @@ int buscar(ListaEstatica *l, int x) {
 }
 ```
 
+### Lista Sequencial Dinâmica
+Usa ponteiro para array alocado dinamicamente (malloc/realloc), permitindo crescer conforme necessário.
+```c
+typedef struct {
+    int *dados;     // ponteiro para array
+    int tamanho;    // elementos usados
+    int capacidade; // tamanho alocado
+} ListaDinamica;
+```
+**Vantagens:** cresce conforme uso, sem limite fixo.
+**Desvantagens:** realocações podem ser custosas, acesso ainda é O(1).
+
+#### Operações principais
+- **Inicialização:**
+```c
+void inicializar(ListaDinamica *l, int capacidade) {
+    l->dados = malloc(capacidade * sizeof(int));
+    l->tamanho = 0;
+    l->capacidade = capacidade;
+}
+```
+- **Inserção:**
+```c
+int inserir(ListaDinamica *l, int x) {
+    if (l->tamanho == l->capacidade) {
+        l->capacidade *= 2;
+        l->dados = realloc(l->dados, l->capacidade * sizeof(int));
+    }
+    l->dados[l->tamanho++] = x;
+    return 1;
+}
+```
+- **Remoção por valor:**
+```c
+int remover(ListaDinamica *l, int x) {
+    for (int i = 0; i < l->tamanho; i++) {
+        if (l->dados[i] == x) {
+            for (int j = i; j < l->tamanho-1; j++)
+                l->dados[j] = l->dados[j+1];
+            l->tamanho--;
+            return 1;
+        }
+    }
+    return 0;
+}
+```
+- **Busca:** igual à estática.
+
 ## Definição
 FIFO (First In, First Out)
 
