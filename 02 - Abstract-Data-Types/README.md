@@ -36,6 +36,15 @@ int remover(int x);
 // Implementação (lista.c)
 ```
 
+## Encapsulamento
+- Oculta detalhes internos  
+- Garante integridade dos dados  
+- Permite troca de implementação  
+
+---
+
+# 2.2 Listas (Lists)
+
 ## Definição
 FIFO (First In, First Out)
 
