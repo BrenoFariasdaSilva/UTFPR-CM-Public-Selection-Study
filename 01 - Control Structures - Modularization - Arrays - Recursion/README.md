@@ -73,3 +73,32 @@ for (int i = 0; i < n; i++) {
 }
 ```
 **Atenção:** O número total de iterações é multiplicativo (n × m).
+
+### break e continue
+- `break`: interrompe imediatamente apenas o loop mais interno em execução.
+- `continue`: pula para a próxima iteração do loop mais interno.
+
+**Exemplo: break em laço aninhado**
+```c
+for (int i = 0; i < 3; i++) {
+  for (int j = 0; j < 3; j++) {
+    if (j == 1) break; // sai apenas do for interno
+    printf("%d %d\n", i, j);
+  }
+}
+```
+
+**Exemplo: continue em laço aninhado**
+```c
+for (int i = 0; i < 3; i++) {
+  for (int j = 0; j < 3; j++) {
+    if (j == 1) continue; // pula apenas a iteração do for interno
+    printf("%d %d\n", i, j);
+  }
+}
+```
+
+**Comportamento em laços aninhados:**
+- `break` e `continue` afetam somente o loop mais interno onde estão inseridos.
+- Para sair de múltiplos níveis, é necessário lógica adicional (ex: flags, goto).
+- Erros comuns: esperar que `break`/`continue` afetem todos os níveis.
