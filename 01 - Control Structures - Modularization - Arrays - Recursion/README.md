@@ -102,3 +102,12 @@ for (int i = 0; i < 3; i++) {
 - `break` e `continue` afetam somente o loop mais interno onde estão inseridos.
 - Para sair de múltiplos níveis, é necessário lógica adicional (ex: flags, goto).
 - Erros comuns: esperar que `break`/`continue` afetem todos os níveis.
+
+### Complexidade de loops
+- Um único loop sobre n elementos: O(n)
+- Dois loops aninhados: O(n²)
+- Três loops aninhados: O(n³)
+- Cada nível adicional multiplica o número total de iterações.
+- Exemplo: para matriz n × m, total de iterações = n × m (O(nm)).
+
+---
