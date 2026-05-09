@@ -22,6 +22,20 @@ Um **Tipo Abstrato de Dados (TAD)** é uma especificação matemática de um con
 
 ---
 
+## Separação entre interface e implementação
+
+- **Interface:** define *o que* o TAD faz  
+- **Implementação:** define *como* o TAD faz  
+
+### Exemplo
+```c
+// Interface (lista.h)
+void inserir(int x);
+int remover(int x);
+
+// Implementação (lista.c)
+```
+
 ## Definição
 FIFO (First In, First Out)
 
