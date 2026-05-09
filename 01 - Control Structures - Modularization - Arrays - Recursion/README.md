@@ -62,3 +62,14 @@ for (int i = 0; i < n; i++) {
 ```
 **Vantagens:** Sintaxe clara para laços contados. Fácil de ler e manter.
 **Desvantagens:** Menos flexível para condições complexas ou múltiplos contadores.
+
+### Laços aninhados (Nested Loops)
+- Um loop dentro de outro. Usados para percorrer estruturas multidimensionais (ex: matrizes).
+```c
+for (int i = 0; i < n; i++) {
+  for (int j = 0; j < m; j++) {
+    // bloco
+  }
+}
+```
+**Atenção:** O número total de iterações é multiplicativo (n × m).
