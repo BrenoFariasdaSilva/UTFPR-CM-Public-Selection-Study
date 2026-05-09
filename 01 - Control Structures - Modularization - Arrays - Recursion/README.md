@@ -1,11 +1,19 @@
-# Estruturas de Controle, Modularização, Vetores/Matrizes e Recursividade  
-*(Control Structures, Modularization, Arrays/Matrices and Recursion)*
+# 1. Estruturas de controle, modularização, vetores/matrizes e recursividade (Control Structures, Modularization, Arrays/Matrices and Recursion)
 
----
-
-# 1.1 Estruturas de decisão (Decision Structures)
-
-## Conceito de fluxo de controle
-Fluxo de controle define a ordem de execução das instruções em um programa. Em C, por padrão, a execução é sequencial, mas pode ser alterada por estruturas de decisão e repetição.
-
----
+## 1.1 Estruturas de decisão (Decision Structures)
+- Conceito de fluxo de controle
+- if simples
+  - Sintaxe em C
+  - Avaliação de expressões booleanas
+- if-else
+  - Encadeamento
+  - Problema do “dangling else”
+- if-else if-else
+  - Cadeias de decisão
+- switch-case
+  - Funcionamento interno
+  - Uso com break
+  - Fall-through
+  - Limitações (tipos inteiros)
+- Comparação entre if e switch
+- Boas práticas
