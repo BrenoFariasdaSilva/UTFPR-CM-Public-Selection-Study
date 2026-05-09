@@ -196,6 +196,9 @@ Permite percorrer nos dois sentidos.
 # 2.3 Pilhas (Stacks)
 
 ## Definição
+LIFO (Last In, First Out)
+
+## Definição
 FIFO (First In, First Out)
 
 
