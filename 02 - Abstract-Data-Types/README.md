@@ -268,6 +268,14 @@ int top() {
 }
 ```
 
+## Complexidade
+- Todas as operações: O(1)
+
+---
+
+
+# 2.4 Filas (Queues)
+
 ## Definição
 FIFO (First In, First Out)
 
