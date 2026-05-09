@@ -180,3 +180,14 @@ inicio:
 - Operações comuns
   - Busca linear
   - Inserção
+
+## 1.4 Estruturas homogêneas (Homogeneous Data Structures)
+
+### Vetores (arrays 1D) (Arrays)
+- Estruturas de dados homogêneas de tamanho fixo, armazenadas em posições contíguas de memória.
+- Acesso por índice: O(1).
+- Passagem para funções: arrays decaem para ponteiros (`int v[]` ≡ `int *v`), permitindo que alterações na função afetem o array original.
+```c
+void altera(int v[], int n) { v[0] = 99; } // afeta o array original
+```
+- Limitações: tamanho fixo, não há verificação de limites.
