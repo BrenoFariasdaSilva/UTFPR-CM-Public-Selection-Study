@@ -229,6 +229,45 @@ int top() {
 }
 ```
 
+## Implementação Dinâmica (lista encadeada)
+
+```c
+typedef struct No {
+    int valor;
+    struct No* prox;
+} No;
+No* topo = NULL;
+```
+
+### Operações
+- **push:**
+```c
+void push(int x) {
+    No* novo = malloc(sizeof(No));
+    novo->valor = x;
+    novo->prox = topo;
+    topo = novo;
+}
+```
+- **pop:**
+```c
+int pop() {
+    if (!topo) return -1;
+    int v = topo->valor;
+    No* temp = topo;
+    topo = topo->prox;
+    free(temp);
+    return v;
+}
+```
+- **top:**
+```c
+int top() {
+    if (!topo) return -1;
+    return topo->valor;
+}
+```
+
 ## Definição
 FIFO (First In, First Out)
 
