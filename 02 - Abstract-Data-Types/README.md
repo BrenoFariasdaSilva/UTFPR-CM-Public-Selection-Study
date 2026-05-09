@@ -198,6 +198,37 @@ Permite percorrer nos dois sentidos.
 ## Definição
 LIFO (Last In, First Out)
 
+## Implementação Estática (array)
+
+```c
+int pilha[100]; // tamanho fixo
+int topo = -1;
+```
+
+### Operações
+- **push:**
+```c
+int push(int x) {
+    if (topo == 99) return 0; // cheia
+    pilha[++topo] = x;
+    return 1;
+}
+```
+- **pop:**
+```c
+int pop() {
+    if (topo == -1) return -1; // vazia
+    return pilha[topo--];
+}
+```
+- **top:**
+```c
+int top() {
+    if (topo == -1) return -1;
+    return pilha[topo];
+}
+```
+
 ## Definição
 FIFO (First In, First Out)
 
