@@ -161,3 +161,22 @@ inicio:
   - Local
   - Global
   - Estático
+
+## 1.3 Modularização (Modularization)
+
+- Modularização consiste em dividir o programa em funções/módulos independentes, cada um com responsabilidade única.
+- Funções facilitam manutenção, reuso e testes.
+- Código modular reduz acoplamento e aumenta coesão.
+
+### Relação com SOLID
+- **SRP (Single Responsibility Principle):** cada função deve ter um único propósito, facilitando manutenção e testes.
+- **OCP (Open/Closed Principle):** módulos/funções devem ser abertos para extensão, mas fechados para modificação. Novos comportamentos devem ser adicionados por novas funções/módulos, sem alterar código estável. Em C, isso é obtido separando funções em arquivos e headers, permitindo extensão sem reescrever implementações existentes.
+
+- Organização em arquivos `.c` (implementação) e `.h` (interface) reforça modularidade e encapsulamento.
+
+---
+
+
+- Operações comuns
+  - Busca linear
+  - Inserção
