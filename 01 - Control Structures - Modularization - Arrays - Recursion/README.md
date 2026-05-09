@@ -51,3 +51,14 @@ do {
 ```
 **Vantagens:** Garante execução inicial. Útil para validação de entrada.
 **Desvantagens:** Pode executar desnecessariamente se a condição já for falsa.
+
+### for
+- Estrutura compacta para laços com contador explícito: inicialização, condição e incremento em uma linha.
+- Uso: quando o número de iterações é conhecido ou controlado por variável.
+```c
+for (int i = 0; i < n; i++) {
+  // bloco
+}
+```
+**Vantagens:** Sintaxe clara para laços contados. Fácil de ler e manter.
+**Desvantagens:** Menos flexível para condições complexas ou múltiplos contadores.
