@@ -138,6 +138,63 @@ int remover(ListaDinamica *l, int x) {
 ```
 - **Busca:** igual à estática.
 
+### Lista Encadeada (Dinâmica)
+Cada elemento aponta para o próximo (e/ou anterior). Alocação totalmente dinâmica.
+```c
+typedef struct No {
+    int valor;
+    struct No* prox;
+} No;
+```
+**Vantagens:** inserção/remoção eficientes em qualquer posição, cresce sem limite fixo.
+**Desvantagens:** acesso sequencial (O(n)), uso extra de memória para ponteiros.
+
+#### Operações principais
+- **Inserção no início:**
+```c
+No* inserir_inicio(No* head, int x) {
+    No* novo = malloc(sizeof(No));
+    novo->valor = x;
+    novo->prox = head;
+    return novo;
+}
+```
+- **Remoção do início:**
+```c
+No* remover_inicio(No* head) {
+    if (!head) return NULL;
+    No* temp = head->prox;
+    free(head);
+    return temp;
+}
+```
+- **Busca:**
+```c
+No* buscar(No* head, int x) {
+    for (No* p = head; p; p = p->prox)
+        if (p->valor == x) return p;
+    return NULL;
+}
+```
+
+#### Lista Duplamente Encadeada
+```c
+typedef struct No {
+    int valor;
+    struct No* prox;
+    struct No* ant;
+} No;
+```
+Permite percorrer nos dois sentidos.
+
+#### Lista Circular
+- O último nó aponta para o primeiro
+- Não possui NULL como fim
+
+---
+
+# 2.3 Pilhas (Stacks)
+
 ## Definição
 FIFO (First In, First Out)
 
