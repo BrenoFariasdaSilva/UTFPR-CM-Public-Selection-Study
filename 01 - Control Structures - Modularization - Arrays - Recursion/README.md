@@ -152,3 +152,12 @@ inicio:
 - Tratamento de erro em código de baixo nível/sistemas.
 
 ---
+
+## 1.3 Modularização (Modularization)
+  - Declaração vs definição
+  - Protótipos
+  - Por valor (C padrão)
+  - Simulação de passagem por referência (ponteiros)
+  - Local
+  - Global
+  - Estático
