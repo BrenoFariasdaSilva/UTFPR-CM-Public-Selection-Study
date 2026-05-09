@@ -111,3 +111,44 @@ for (int i = 0; i < 3; i++) {
 - Exemplo: para matriz n × m, total de iterações = n × m (O(nm)).
 
 ---
+
+## goto (desvio incondicional de fluxo)
+
+O comando `goto` em C realiza um salto incondicional para um rótulo (label) definido no código.
+
+**Sintaxe mínima:**
+```c
+goto rotulo;
+
+rotulo:
+  // destino
+```
+
+- O rótulo é um identificador seguido de dois pontos.
+- O fluxo de execução salta diretamente para o rótulo, ignorando código intermediário.
+
+**Exemplo: simulação de repetição**
+```c
+int i = 0;
+inicio:
+  if (i < 5) {
+    printf("%d\n", i);
+    i++;
+    goto inicio;
+  }
+```
+
+**Por que goto prejudica a programação estruturada:**
+- Quebra o fluxo linear, dificulta leitura e manutenção.
+- Facilita o surgimento de "código espaguete" (spaghetti code).
+
+**Contexto histórico:**
+- Muito usado em C antigo e programação de sistemas (décadas de 1970/80).
+- Ainda válido no padrão C moderno, mas fortemente desencorajado.
+- Praticamente obsoleto após a adoção dos princípios de programação estruturada.
+
+**Casos raros de uso válido:**
+- Centralização de limpeza de recursos (cleanup).
+- Tratamento de erro em código de baixo nível/sistemas.
+
+---
