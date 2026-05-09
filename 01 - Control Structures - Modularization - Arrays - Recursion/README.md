@@ -191,3 +191,21 @@ inicio:
 void altera(int v[], int n) { v[0] = 99; } // afeta o array original
 ```
 - Limitações: tamanho fixo, não há verificação de limites.
+
+### Matrizes (arrays 2D) (Matrices)
+- Representadas como arrays de arrays: `int m[LIN][COL]`.
+- Passagem para funções: é obrigatório informar o número de colunas (`void f(int m[][COL], int lin)`), pois a aritmética de deslocamento depende desse valor.
+- Relação array/ponteiro: `m[i][j]` é equivalente a `*(&m[0][0] + i*COL + j)`.
+- **Layout em memória:** C usa ordem row-major: linhas armazenadas sequencialmente.
+- **Cálculo de endereço:**
+  - `endereço = base + ((i * num_colunas) + j)`
+- **Eficiência:** Percorrer por linhas é mais eficiente devido à localidade de cache.
+```c
+for (int i = 0; i < LIN; i++)
+  for (int j = 0; j < COL; j++)
+    m[i][j] = ...;
+```
+- Generalização para n dimensões: sintaxe e aritmética análogas.
+
+---
+- Limitações
