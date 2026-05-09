@@ -17,3 +17,11 @@
   - Limitações (tipos inteiros)
 - Comparação entre if e switch
 - Boas práticas
+
+## 1.2 Estruturas de repetição (Loop Structures)
+  - Pré-teste
+  - Pós-teste
+  - Estrutura completa
+  - Uso idiomático
+  - break
+  - continue
