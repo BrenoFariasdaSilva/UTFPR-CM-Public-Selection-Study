@@ -226,3 +226,9 @@ for (int i = 0; i < LIN; i++)
 - Uma função recursiva é definida por:
   - **Caso base:** condição que encerra a recursão (sem chamada recursiva).
   - **Caso recursivo:** chamada da função para um subproblema mais simples.
+
+### Pilha de chamadas
+- Cada chamada recursiva é empilhada até atingir o caso base.
+- O retorno ocorre em ordem inversa (LIFO), desempilhando as chamadas.
+
+---
