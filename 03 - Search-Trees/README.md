@@ -92,3 +92,43 @@ No* buscar(No* raiz, int x) {
     return buscar(raiz->dir, x);
 }
 ```
+
+## Remoção
+```c
+No* minValor(No* no) {
+    while (no->esq != NULL)
+        no = no->esq;
+    return no;
+}
+
+No* remover(No* raiz, int x) {
+    if (raiz == NULL) return raiz; // Caso base: árvore vazia
+
+    if (x < raiz->valor) // Remover da subárvore esquerda
+        raiz->esq = remover(raiz->esq, x);
+    else if (x > raiz->valor) // Remover da subárvore direita
+        raiz->dir = remover(raiz->dir, x);
+    else { // Nó encontrado, realizar remoção
+        if (raiz->esq == NULL) { // Caso 1: nó com apenas um filho direito ou sem filhos
+            No* temp = raiz->dir;
+            free(raiz);
+            return temp;
+        }
+        else if (raiz->dir == NULL) { // Caso 2: nó com apenas um filho esquerdo
+            No* temp = raiz->esq;
+            free(raiz);
+            return temp;
+        }
+
+        No* temp = minValor(raiz->dir);
+        raiz->valor = temp->valor;
+        raiz->dir = remover(raiz->dir, temp->valor);
+    }
+    return raiz;
+}
+```
+
+---
+
+# Percursos
+Há três tipos principais de percursos em árvores binárias: in-order, pre-order e post-order. Cada um tem uma ordem diferente de visitação dos nós.
