@@ -336,3 +336,26 @@ typedef struct NoB {
 Existem outros tipos de árvore B, como:
 - **Árvores B+:** As chaves são armazenadas apenas nas folhas. Útil para sistemas de arquivos e bancos de dados, pois permite buscas eficientes. Diferente da árvore B, onde as chaves podem estar em nós internos, a árvore B+ armazena todas as chaves nas folhas, e os nós internos apenas direcionam a busca.
 - **Árvores B*:** Mantêm um número mínimo de chaves em cada nó. Útil para reduzir o número de nós e melhorar a eficiência em operações de inserção e remoção. Diferente da árvore B, onde os nós podem ter um número variável de chaves, a árvore B* mantém um número mínimo de chaves em cada nó, o que pode levar a uma estrutura mais compacta e eficiente.
+
+## Árvores A (2-3, 2-3-4)
+Árvores A são árvores balanceadas onde cada nó pode ter 2, 3 ou 4 filhos (ex: árvore 2-3, 2-3-4). São casos particulares de árvores B.
+
+- **Árvore 2-3:** cada nó tem 2 ou 3 filhos, 1 ou 2 chaves. A inserção e remoção redistribuem as chaves para manter a árvore balanceada. 
+- **Árvore 2-3-4:** cada nó tem 2, 3 ou 4 filhos, 1, 2 ou 3 chaves. A inserção e remoção redistribuem as chaves para manter a árvore balanceada.
+- **Balanceamento automático:** inserção e remoção redistribuem chaves entre nós por meio de fusões e divisões para manter a estrutura balanceada.
+
+Essas árvores são usadas em implementações de dicionários, bancos de dados e sistemas de arquivos.
+
+---
+
+# COMO CAI NA PROVA
+- Definir árvore e BST
+- Explicar remoção
+- Implementar em C
+- Analisar complexidade
+
+---
+
+# CONCLUSÃO
+- Estruturas eficientes
+- Base para algoritmos avançados
