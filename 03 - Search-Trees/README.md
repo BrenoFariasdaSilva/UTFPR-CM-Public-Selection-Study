@@ -64,3 +64,20 @@ typedef struct No {
 - O valor do nó é maior que os valores de todos os nós na subárvore esquerda
 - O valor do nó é menor que os valores de todos os nós na subárvore direita
 - Não há valores duplicados
+
+## Inserção
+```c
+No* inserir(No* raiz, int x) {
+    if (raiz == NULL) { // Caso base: inserir em uma posição vazia
+        No* novo = malloc(sizeof(No));
+        novo->valor = x;
+        novo->esq = novo->dir = NULL;
+        return novo;
+    }
+    if (x < raiz->valor) // Inserir na subárvore esquerda
+        raiz->esq = inserir(raiz->esq, x);
+    else  // Inserir na subárvore direita
+        raiz->dir = inserir(raiz->dir, x);
+    return raiz;
+}
+```
