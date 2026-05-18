@@ -313,3 +313,26 @@ No* removerRB(No* raiz, int valor) {
 ```
 
 > **Nota:** As funções de correção após inserção e remoção são detalhadas e envolvem vários casos, mas o essencial é que, após cada operação, as propriedades da árvore Rubro-Negra são restauradas usando rotações e ajustes de cor.
+
+## Árvores B
+Árvore B é uma árvore de busca balanceada multi-ária (m-ária), muito usada em bancos de dados e sistemas de arquivos.
+
+- **Cada nó pode ter vários filhos (grau m)**
+- **Todos os nós folha estão no mesmo nível**
+- **Permite grande quantidade de dados com poucas operações de disco**
+- **Inserção e remoção mantêm a árvore balanceada redistribuindo ou fundindo nós**
+
+**Exemplo de nó de árvore B (grau m):**
+```c
+#define M 4 // grau máximo
+typedef struct NoB {
+    int chaves[M-1];
+    struct NoB* filhos[M];
+    int numChaves;
+    int folha;
+} NoB;
+```
+
+Existem outros tipos de árvore B, como:
+- **Árvores B+:** As chaves são armazenadas apenas nas folhas. Útil para sistemas de arquivos e bancos de dados, pois permite buscas eficientes. Diferente da árvore B, onde as chaves podem estar em nós internos, a árvore B+ armazena todas as chaves nas folhas, e os nós internos apenas direcionam a busca.
+- **Árvores B*:** Mantêm um número mínimo de chaves em cada nó. Útil para reduzir o número de nós e melhorar a eficiência em operações de inserção e remoção. Diferente da árvore B, onde os nós podem ter um número variável de chaves, a árvore B* mantém um número mínimo de chaves em cada nó, o que pode levar a uma estrutura mais compacta e eficiente.
