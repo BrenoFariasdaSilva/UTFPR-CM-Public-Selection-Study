@@ -187,3 +187,41 @@ void postorder(No* raiz) {
 # 3.5 Árvores balanceadas
 
 Árvores balanceadas mantêm sua altura próxima do mínimo possível, garantindo operações eficientes (inserção, remoção, busca) próximas de $O(\log n)$.
+
+## AVL
+Árvore AVL é uma árvore binária de busca balanceada onde, para todo nó, a diferença de altura entre as subárvores esquerda e direita (fator de balanceamento) é no máximo 1.
+
+- **Fator de balanceamento:** $\text{altura(esq)} - \text{altura(dir)}$ deve ser -1, 0 ou 1.
+- **Balanceamento automático:** após inserção/remoção, rotações simples ou duplas corrigem o desbalanceamento.
+- **Vantagem:** garante altura mínima, operações sempre $O(\log n)$.
+- **Desvantagem:** pode exigir muitas rotações em inserções/remover.
+
+**Exemplo de rotação simples à direita:**
+```c
+No* rotacaoDireita(No* y) {
+    No* x = y->esq;
+    No* T2 = x->dir;
+    x->dir = y;
+    y->esq = T2;
+    return x;
+}
+```
+
+**Exemplo de rotação simples à esquerda:**
+```c
+No* rotacaoEsquerda(No* x) {
+    No* y = x->dir;
+    No* T2 = y->esq;
+    y->esq = x;
+    x->dir = T2;
+    return y;
+}
+```
+
+**Exemplo de rotação dupla (esquerda-direita):**
+```c
+No* rotacaoEsquerdaDireita(No* z) {
+    z->esq = rotacaoEsquerda(z->esq);
+    return rotacaoDireita(z);
+}
+```
