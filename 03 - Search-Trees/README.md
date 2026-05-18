@@ -47,3 +47,20 @@ Essas classificações determinam a estrutura e as aplicações possíveis para 
 # 3.2 Árvores binárias
 Árvore binária é uma estrutura de dados onde cada nó tem no máximo dois filhos, geralmente referidos como filho esquerdo e filho direito.
 As árvores binárias são amplamente utilizadas em algoritmos de busca, ordenação e representação hierárquica de dados.
+
+## Estrutura em C
+```c
+typedef struct No {
+    int valor;
+    struct No* esq;
+    struct No* dir;
+} No;
+```
+
+---
+
+# 3.3 Árvores Binárias de Busca (BST)
+Árvore Binária de Busca é um tipo especial de árvore binária onde cada nó segue a propriedade de busca:
+- O valor do nó é maior que os valores de todos os nós na subárvore esquerda
+- O valor do nó é menor que os valores de todos os nós na subárvore direita
+- Não há valores duplicados
