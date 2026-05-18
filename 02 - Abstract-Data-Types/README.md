@@ -254,6 +254,9 @@ Desvantagens: Pode ser mais complexa de implementar e entender, acesso ainda é 
 Pilhas são estruturas de dados que seguem o princípio LIFO (Last In, First Out). O último elemento inserido é o primeiro a ser removido. São usadas em diversas aplicações, como chamadas de função, undo/redo, e avaliação de expressões.
 
 ## Definição
+LIFO (Last In, First Out)
+
+## Definição
 FIFO (First In, First Out)
 Útil em aplicações como gerenciamento de tarefas, buffers, e simulações.
 
