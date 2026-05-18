@@ -160,3 +160,30 @@ void preorder(No* raiz) {
     }
 }
 ```
+
+## Post-order
+No percurso post-order visita o nó da esquerda, depois o nó da direita e por último o nó atual. 
+Útil para deletar a árvore ou para avaliar expressões em árvores de expressão.
+
+```c
+void postorder(No* raiz) {
+    if (raiz != NULL) {
+        postorder(raiz->esq);
+        postorder(raiz->dir);
+        printf("%d ", raiz->valor);
+    }
+}
+```
+
+---
+
+# 3.4 Complexidade
+- O(h)
+- Melhor: O(log n)
+- Pior: O(n)
+
+---
+
+# 3.5 Árvores balanceadas
+
+Árvores balanceadas mantêm sua altura próxima do mínimo possível, garantindo operações eficientes (inserção, remoção, busca) próximas de $O(\log n)$.
