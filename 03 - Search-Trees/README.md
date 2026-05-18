@@ -132,3 +132,17 @@ No* remover(No* raiz, int x) {
 
 # Percursos
 Há três tipos principais de percursos em árvores binárias: in-order, pre-order e post-order. Cada um tem uma ordem diferente de visitação dos nós.
+
+## In-order
+No percurso in-order visita o nó da esquerda, depois o nó atual e depois o nó da direita. Em uma BST, isso resulta em uma saída ordenada dos valores.
+Útil para imprimir os valores em ordem crescente.
+
+```c
+void inorder(No* raiz) {
+    if (raiz != NULL) {
+        inorder(raiz->esq);
+        printf("%d ", raiz->valor);
+        inorder(raiz->dir);
+    }
+}
+```
