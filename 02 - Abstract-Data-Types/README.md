@@ -156,6 +156,103 @@ int remover(ListaDinamica *l, int x) {
 
 - **Busca:** igual à estática.
 
+### Lista Encadeada (Dinâmica)
+
+Cada elemento aponta para o próximo (e/ou anterior). Alocação totalmente dinâmica.
+
+```c
+typedef struct No {
+    int valor;
+    struct No* prox;
+} No;
+```
+
+```c
+typedef struct {
+    No* head;
+    int tamanho;
+} ListaEncadeada;
+```     
+
+**Vantagens:** inserção/remoção eficientes em qualquer posição, cresce sem limite fixo.
+**Desvantagens:** acesso sequencial (O(n)), uso extra de memória para ponteiros.
+
+#### Operações principais
+
+- **Inserção no início:**
+
+```c
+ListaEncadeada* inserir_inicio(ListaEncadeada* lista, int x) {
+    No* novo = malloc(sizeof(No));
+    novo->valor = x;
+    novo->prox = lista->head;
+    lista->head = novo;
+    lista->tamanho++;
+    return lista;
+}
+```
+
+- **Remoção do início:**
+  
+```c
+ListaEncadeada* remover_inicio(ListaEncadeada* lista) {
+    if (!lista->head) return lista;
+    No* temp = lista->head->prox;
+    free(lista->head);
+    lista->head = temp;
+    lista->tamanho--;
+    return lista;
+}
+```
+
+- **Busca:**
+
+```c
+int buscar(ListaEncadeada* lista, int x) {
+    No* atual = lista->head;
+    while (atual) {
+        if (atual->valor == x) return 1;
+        atual = atual->prox;
+    }
+    return 0;
+}
+```
+
+#### Lista Duplamente Encadeada
+
+Similar à encadeada, mas cada nó tem ponteiro para o próximo e para o anterior.
+
+```c
+typedef struct No {
+    int valor;
+    struct No* prox;
+    struct No* ant;
+} No;
+```
+
+Vantagens: Acesso bidirecional, remoção eficiente em qualquer posição.
+Desvantagens: Mais memória (dois ponteiros), acesso ainda é O(n).
+
+#### Lista Circular
+
+Semelhante à encadeada, mas o último nó aponta para o primeiro, formando um ciclo.
+
+```c
+typedef struct No {
+    int valor;
+    struct No* prox;
+} No;
+```
+
+Vantagens: Útil para aplicações cíclicas (ex: round-robin), pode ser mais eficiente para certas operações.
+Desvantagens: Pode ser mais complexa de implementar e entender, acesso ainda é O(n).
+
+---
+
+# 2.3 Pilhas (Stacks)
+
+Pilhas são estruturas de dados que seguem o princípio LIFO (Last In, First Out). O último elemento inserido é o primeiro a ser removido. São usadas em diversas aplicações, como chamadas de função, undo/redo, e avaliação de expressões.
+
 ## Definição
 FIFO (First In, First Out)
 Útil em aplicações como gerenciamento de tarefas, buffers, e simulações.
