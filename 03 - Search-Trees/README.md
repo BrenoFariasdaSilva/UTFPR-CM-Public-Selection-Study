@@ -81,3 +81,14 @@ No* inserir(No* raiz, int x) {
     return raiz;
 }
 ```
+
+## Busca
+```c
+No* buscar(No* raiz, int x) {
+    if (raiz == NULL || raiz->valor == x) // Caso base: nó encontrado ou árvore vazia
+        return raiz;
+    if (x < raiz->valor) // Buscar na subárvore esquerda
+        return buscar(raiz->esq, x);
+    return buscar(raiz->dir, x);
+}
+```
