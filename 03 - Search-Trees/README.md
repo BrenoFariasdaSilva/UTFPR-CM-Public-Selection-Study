@@ -225,3 +225,91 @@ No* rotacaoEsquerdaDireita(No* z) {
     return rotacaoDireita(z);
 }
 ```
+
+## Red-Black (Rubros-Negras)
+
+Árvore Rubro-Negra é uma árvore binária de busca balanceada com regras de coloração para garantir altura $O(\log n)$.
+
+- **Cada nó é vermelho ou preto**
+- **A raiz é sempre preta**
+- **Nenhum caminho pode ter dois nós vermelhos consecutivos**
+- **Todo caminho da raiz até folha nula tem o mesmo número de nós pretos**
+- **Altura máxima:** $2\log(n+1)$
+- **Vantagem:** balanceamento mais flexível, menos rotações que AVL em média
+- **Desvantagem:** mais complexa de implementar
+
+**Exemplo de estrutura de nó:**
+```c
+typedef enum { VERMELHO, PRETO } Cor;
+typedef struct No {
+    int valor;
+    Cor cor;
+    struct No *esq, *dir, *pai;
+} No;
+```
+
+Operações de inserção e remoção em árvores Rubro-Negras envolvem ajustes de cor e rotações para manter as propriedades da árvore:
+
+### Operações principais em Árvores Rubro-Negras
+
+- **Rotação à esquerda:**
+```c
+No* rotacaoEsquerda(No* raiz, No* x) {
+    No* y = x->dir;
+    x->dir = y->esq;
+    if (y->esq != NULL)
+        y->esq->pai = x;
+    y->pai = x->pai;
+    if (x->pai == NULL)
+        raiz = y;
+    else if (x == x->pai->esq)
+        x->pai->esq = y;
+    else
+        x->pai->dir = y;
+    y->esq = x;
+    x->pai = y;
+    return raiz;
+}
+```
+
+- **Rotação à direita:**
+```c
+No* rotacaoDireita(No* raiz, No* y) {
+    No* x = y->esq;
+    y->esq = x->dir;
+    if (x->dir != NULL)
+        x->dir->pai = y;
+    x->pai = y->pai;
+    if (y->pai == NULL)
+        raiz = x;
+    else if (y == y->pai->esq)
+        y->pai->esq = x;
+    else
+        y->pai->dir = x;
+    x->dir = y;
+    y->pai = x;
+    return raiz;
+}
+```
+
+- **Inserção:**
+```c
+// Insere como em uma BST, depois corrige as cores e faz rotações se necessário
+No* inserirRB(No* raiz, int valor) {
+    // ...inserção padrão BST...
+    // ...ajustes de cor e rotações...
+    return raiz;
+}
+```
+
+- **Remoção:**
+```c
+// Remove como em uma BST, depois corrige as cores e faz rotações se necessário
+No* removerRB(No* raiz, int valor) {
+    // ...remoção padrão BST...
+    // ...ajustes de cor e rotações...
+    return raiz;
+}
+```
+
+> **Nota:** As funções de correção após inserção e remoção são detalhadas e envolvem vários casos, mas o essencial é que, após cada operação, as propriedades da árvore Rubro-Negra são restauradas usando rotações e ajustes de cor.
