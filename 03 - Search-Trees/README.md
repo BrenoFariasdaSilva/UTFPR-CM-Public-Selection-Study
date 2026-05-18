@@ -146,3 +146,17 @@ void inorder(No* raiz) {
     }
 }
 ```
+
+## Pre-order
+No percurso pre-order visita o nó atual primeiro, depois o nó da esquerda e depois o nó da direita. 
+Útil para criar uma cópia da árvore ou para expressar a estrutura da árvore.
+
+```c
+void preorder(No* raiz) {
+    if (raiz != NULL) {
+        printf("%d ", raiz->valor);
+        preorder(raiz->esq);
+        preorder(raiz->dir);
+    }
+}
+```
