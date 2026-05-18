@@ -33,3 +33,17 @@ Uma **árvore** é uma estrutura de dados hierárquica composta por nós:
 - **Árvore incompleta:** não preenche os critérios de completa ou cheia; pode ter níveis intermediários parcialmente preenchidos.
 
 ---
+
+## Tipos quanto ao número de filhos
+
+- **Árvore binária:** cada nó tem no máximo 2 filhos.
+- **Árvore ternária:** cada nó tem no máximo 3 filhos.
+- **Árvore m-ária:** cada nó tem no máximo m filhos (ex: árvore 4-ária, árvore 5-ária, etc).
+
+Essas classificações determinam a estrutura e as aplicações possíveis para cada tipo de árvore.
+
+---
+
+# 3.2 Árvores binárias
+Árvore binária é uma estrutura de dados onde cada nó tem no máximo dois filhos, geralmente referidos como filho esquerdo e filho direito.
+As árvores binárias são amplamente utilizadas em algoritmos de busca, ordenação e representação hierárquica de dados.
