@@ -44,6 +44,60 @@ int remover(int x);
 
 # 2.2 Listas (Lists)
 
+## Listas: Estáticas (Sequenciais) e Dinâmicas (Encadeadas)
+
+### Lista Sequencial Estática
+
+Armazena elementos em um array de tamanho fixo. Simples, mas limitada pelo tamanho máximo.
+
+```c
+typedef struct {
+    int dados[100]; // tamanho fixo
+    int tamanho;
+} ListaEstatica;
+```
+
+**Vantagens:** acesso rápido por índice, fácil de implementar.
+**Desvantagens:** limite fixo, desperdício de memória se pouco usada.
+
+#### Operações principais
+
+- **Inserção no final:**
+
+```c
+int inserir(ListaEstatica *l, int x) {
+    if (l->tamanho == 100) return 0; // cheia
+    l->dados[l->tamanho++] = x;
+    return 1;
+}
+```
+
+- **Remoção por valor:**
+
+```c
+int remover(ListaEstatica *l, int x) {
+    for (int i = 0; i < l->tamanho; i++) {
+        if (l->dados[i] == x) {
+            for (int j = i; j < l->tamanho-1; j++)
+                l->dados[j] = l->dados[j+1];
+            l->tamanho--;
+            return 1;
+        }
+    }
+    return 0;
+}
+```
+
+- **Busca linear:**
+
+```c
+int buscar(ListaEstatica *l, int x) {
+    for (int i = 0; i < l->tamanho; i++)
+        if (l->dados[i] == x) return i;
+    return -1;
+}
+```
+
 ## Definição
 FIFO (First In, First Out)
 Útil em aplicações como gerenciamento de tarefas, buffers, e simulações.
