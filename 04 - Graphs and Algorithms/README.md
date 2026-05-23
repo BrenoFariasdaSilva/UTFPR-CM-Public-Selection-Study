@@ -285,3 +285,7 @@ void dfs(int inicio) {
     }
 }
 ```
+
+### Complexidade
+
+O(V + E)
