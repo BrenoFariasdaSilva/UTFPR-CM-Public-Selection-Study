@@ -370,3 +370,17 @@ void dijkstra(int G[100][100], int n, int origem) {
 #### Complexidade
 
 O(V * E)
+
+### Floyd-Warshall
+
+#### Ideia
+
+* Calcula menores caminhos entre todos os pares de vértices
+* Usa programação dinâmica
+* Aceita arestas negativas, desde que não existam ciclos negativos
+
+#### Complexidade
+
+O(V³)
+
+---
