@@ -229,3 +229,7 @@ void bfs(int inicio) {
     }
 }
 ```
+
+### Complexidade
+
+O(V + E)
