@@ -426,3 +426,11 @@ O(E log E)
 ### Grafo conectado
 
 Existe caminho entre todos os pares de vértices
+
+### Componentes conexas
+
+Subgrafos conectados
+
+* DFS/BFS identificam componentes
+
+---
