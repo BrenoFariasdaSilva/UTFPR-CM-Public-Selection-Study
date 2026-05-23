@@ -140,3 +140,8 @@ typedef struct No {
 
 No* adj[100];
 ```
+
+### Vantagens
+
+* Usa O(V + E) memória
+* Eficiente para grafos esparsos
