@@ -327,31 +327,24 @@ Em grafos não ponderados, BFS pode substituir Dijkstra para encontrar menor cam
 #### Estrutura básica
 
 ```c
-#define INF 999999
+function Dijkstra(Graph, source):
+    for each vertex v in Graph.Vertices:
+        dist[v] ← INFINITY
+        prev[v] ← UNDEFINED
+        add v to Q
+    dist[source] ← 0
+    
+    while Q is not empty:
+        u ← vertex in Q with min dist[u]
+        remove u from Q
+        
+        for each neighbor v of u still in Q:
+            alt ← dist[u] + Graph.Edges(u, v)
+            if alt < dist[v]:
+                dist[v] ← alt
+                prev[v] ← u
 
-void dijkstra(int G[100][100], int n, int origem) {
-    int dist[100], visitado[100] = {0};
-
-    for (int i = 0; i < n; i++)
-        dist[i] = INF;
-
-    dist[origem] = 0;
-
-    for (int i = 0; i < n; i++) {
-        int u = -1;
-
-        for (int j = 0; j < n; j++)
-            if (!visitado[j] && (u == -1 || dist[j] < dist[u]))
-                u = j;
-
-        visitado[u] = 1;
-
-        for (int v = 0; v < n; v++) {
-            if (G[u][v] && dist[u] + G[u][v] < dist[v])
-                dist[v] = dist[u] + G[u][v];
-        }
-    }
-}
+    return dist[], prev[]
 ```
 
 ### Complexidade
