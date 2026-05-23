@@ -316,3 +316,40 @@ Esses algoritmos são usados para encontrar menores caminhos em grafos ponderado
 ### Restrição importante
 
 Dijkstra NÃO funciona corretamente com arestas de peso negativo.
+
+### Quando usar BFS vs Dijkstra
+
+* BFS: grafos não ponderados, ou quando todas as arestas possuem o mesmo custo
+* Dijkstra: grafos ponderados com pesos não negativos
+
+Em grafos não ponderados, BFS pode substituir Dijkstra para encontrar menor caminho em número de arestas.
+
+#### Estrutura básica
+
+```c
+#define INF 999999
+
+void dijkstra(int G[100][100], int n, int origem) {
+    int dist[100], visitado[100] = {0};
+
+    for (int i = 0; i < n; i++)
+        dist[i] = INF;
+
+    dist[origem] = 0;
+
+    for (int i = 0; i < n; i++) {
+        int u = -1;
+
+        for (int j = 0; j < n; j++)
+            if (!visitado[j] && (u == -1 || dist[j] < dist[u]))
+                u = j;
+
+        visitado[u] = 1;
+
+        for (int v = 0; v < n; v++) {
+            if (G[u][v] && dist[u] + G[u][v] < dist[v])
+                dist[v] = dist[u] + G[u][v];
+        }
+    }
+}
+```
