@@ -241,3 +241,21 @@ O(V + E)
 * Níveis em árvores
 
 ---
+
+## DFS (Depth-First Search)
+
+Explora profundamente antes de retroceder, ou seja, segue um caminho até o fim antes de voltar e explorar outros caminhos.
+
+### Uso de recursão
+
+```c
+void dfs(int v, int visitado[]) {
+    visitado[v] = 1;
+    printf("%d ", v);
+
+    for (No* p = adj[v]; p != NULL; p = p->prox) {
+        if (!visitado[p->v])
+            dfs(p->v, visitado);
+    }
+}
+```
