@@ -44,3 +44,18 @@ Um **grafo** é um par ordenado ( G = (V, E) ), onde:
 * Ligações entre componentes conectados mutuamente
 
 ---
+
+### Ponderado (Weighted Graph)
+
+* Arestas possuem peso/custo associado
+* O peso pode representar distância, custo, tempo, capacidade ou prioridade
+
+#### Casos de uso
+
+* GPS e cálculo de rotas
+* Redes de transporte
+* Redes de computadores com latência
+* Algoritmos de caminho mínimo
+* Sistemas logísticos
+
+---
