@@ -74,3 +74,24 @@ Um **grafo** é um par ordenado ( G = (V, E) ), onde:
 * Descoberta de componentes conectados
 
 ---
+
+### DAG (Directed Acyclic Graph)
+
+* É um grafo direcionado sem ciclos. Um ciclo ocorre quando há um caminho orientado que começa e termina no mesmo vértice. Em um DAG, isso não é permitido.
+* Não existe caminho orientado que saia de um vértice e volte para ele mesmo
+* Muito usado em dependências, pré-requisitos e ordenação topológica
+
+#### Casos de uso
+
+* Pipelines de processamento
+* Compiladores
+* Sistemas de build
+* Dependências de pacotes
+* Fluxos de tarefas
+* Agendamento de execução
+* Versionamento e histórico de commits
+
+---
+
+# 4.2 Representação (Graph Representation)
+Há duas formas comuns de representar grafos em memória:
