@@ -129,3 +129,14 @@ int G[100][100];
 ### Definição
 
 Cada vértice possui uma lista de vizinhos
+
+### Estrutura em C
+
+```c
+typedef struct No {
+    int v;
+    struct No* prox;
+} No;
+
+No* adj[100];
+```
