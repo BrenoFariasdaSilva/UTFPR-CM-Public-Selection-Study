@@ -358,3 +358,15 @@ void dijkstra(int G[100][100], int n, int origem) {
 
 * O(V²) (implementação simples)
 * O((V + E) log V) com heap
+
+### Bellman-Ford
+
+#### Ideia
+
+* Calcula menores caminhos a partir de uma origem
+* Aceita arestas com peso negativo
+* Detecta ciclos de peso negativo
+
+#### Complexidade
+
+O(V * E)
