@@ -233,3 +233,11 @@ void bfs(int inicio) {
 ### Complexidade
 
 O(V + E)
+
+### Aplicações
+
+* Menor caminho em grafos não ponderados
+* Verificação de conectividade
+* Níveis em árvores
+
+---
