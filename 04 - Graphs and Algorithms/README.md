@@ -259,3 +259,29 @@ void dfs(int v, int visitado[]) {
     }
 }
 ```
+
+### Uso de fila
+
+```c
+void dfs(int inicio) {
+    int visitado[100] = {0};
+    int pilha[100], topo = 0;
+
+    pilha[topo++] = inicio;
+
+    while (topo > 0) {
+        int v = pilha[--topo];
+
+        if (!visitado[v]) {
+            visitado[v] = 1;
+            printf("%d ", v);
+
+            for (No* p = adj[v]; p != NULL; p = p->prox) {
+                if (!visitado[p->v]) {
+                    pilha[topo++] = p->v;
+                }
+            }
+        }
+    }
+}
+```
