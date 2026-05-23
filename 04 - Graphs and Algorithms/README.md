@@ -145,3 +145,9 @@ No* adj[100];
 
 * Usa O(V + E) memória
 * Eficiente para grafos esparsos
+
+### Desvantagens
+
+* Acesso mais lento para verificar aresta
+
+---
