@@ -484,3 +484,9 @@ Grafos são fundamentais para:
 * Redes
 * Caminhos mínimos
 * Estruturas complexas
+
+### Domínio esperado:
+
+* Implementação básica em C
+* Clareza conceitual
+* Capacidade de análise de complexidade
