@@ -440,3 +440,47 @@ Subgrafos conectados
 ### Definição
 
 Caminho que começa e termina no mesmo vértice
+
+### Detecção
+
+DFS com controle de visita
+
+---
+
+# COMPARAÇÕES IMPORTANTES
+
+| Algoritmo      | Estrutura       | Complexidade       |
+| -------------- | --------------- | ------------------ |
+| BFS            | Fila            | O(V+E)             |
+| DFS            | Pilha/Recursão  | O(V+E)             |
+| Dijkstra       | Grafo ponderado | O(V²) / O(E log V) |
+| Bellman-Ford   | Grafo ponderado | O(V * E)           |
+| Floyd-Warshall | Grafo ponderado | O(V³)              |
+| Kruskal        | MST             | O(E log E)         |
+| Prim           | MST             | O(V²) / O(E log V) |
+
+---
+
+# COMO ISSO CAI NA PROVA
+
+Você precisa:
+
+* Definir formalmente grafos
+* Saber o que é um DAG e por que ele não possui ciclos direcionados
+* Comparar representações (matriz vs lista)
+* Explicar BFS e DFS passo a passo
+* Implementar BFS/DFS em C
+* Explicar Dijkstra (restrições e funcionamento)
+* Diferenciar cenários de uso entre Dijkstra, Bellman-Ford e Floyd-Warshall
+* Diferenciar Kruskal vs Prim
+* Identificar conectividade e ciclos
+
+---
+
+# CONCLUSÃO
+
+Grafos são fundamentais para:
+
+* Redes
+* Caminhos mínimos
+* Estruturas complexas
