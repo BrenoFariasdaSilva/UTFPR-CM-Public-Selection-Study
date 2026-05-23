@@ -111,3 +111,8 @@ M[i][j] = 1 se existe aresta entre i e j
 ```c
 int G[100][100];
 ```
+
+### Vantagens
+
+* Acesso O(1) para verificar arestas
+* Simples implementação
