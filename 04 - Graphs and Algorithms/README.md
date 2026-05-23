@@ -405,3 +405,18 @@ Esses algoritmos são usados para conectar todos os vértices com custo total m�
 O(E log E)
 
 ---
+
+### Prim
+
+#### Ideia
+
+* Cresce a árvore a partir de um vértice
+* Sempre adiciona a menor aresta possível
+
+#### Complexidade
+
+* O(V²) ou O((V + E) log V)
+
+---
+
+# 4.5 Propriedades (Graph Properties)
