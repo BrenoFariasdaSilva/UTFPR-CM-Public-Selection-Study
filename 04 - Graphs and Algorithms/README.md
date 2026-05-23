@@ -353,3 +353,8 @@ void dijkstra(int G[100][100], int n, int origem) {
     }
 }
 ```
+
+### Complexidade
+
+* O(V²) (implementação simples)
+* O((V + E) log V) com heap
