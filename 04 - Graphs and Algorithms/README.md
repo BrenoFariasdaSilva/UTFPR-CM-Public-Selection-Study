@@ -205,3 +205,27 @@ void bfs(int inicio) {
     bfs_recursivo(fila, &ini, &fim, visitado);
 }
 ```
+
+### Uso de fila
+
+```c
+void bfs(int inicio) {
+    int visitado[100] = {0};
+    int fila[100], ini = 0, fim = 0;
+
+    fila[fim++] = inicio;
+    visitado[inicio] = 1;
+
+    while (ini < fim) {
+        int v = fila[ini++];
+        printf("%d ", v);
+
+        for (No* p = adj[v]; p != NULL; p = p->prox) {
+            if (!visitado[p->v]) {
+                visitado[p->v] = 1;
+                fila[fim++] = p->v;
+            }
+        }
+    }
+}
+```
