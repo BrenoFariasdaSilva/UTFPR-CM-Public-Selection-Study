@@ -384,3 +384,24 @@ O(V * E)
 O(V³)
 
 ---
+
+## Árvores Geradoras Mínimas (Minimum Spanning Trees)
+
+Esses algoritmos são usados para conectar todos os vértices com custo total mínimo, sem formar ciclos, em grafos não-direcionados ponderados.
+
+### Kruskal
+
+#### Ideia
+
+* Ordena arestas por peso
+* Adiciona arestas sem formar ciclo
+
+#### Estrutura
+
+* Usa Union-Find (conjuntos disjuntos)
+
+#### Complexidade
+
+O(E log E)
+
+---
