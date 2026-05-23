@@ -164,3 +164,44 @@ No* adj[100];
 
 # 4.3 Percurso em grafos (Graph Traversal)
 Há dois algoritmos clássicos para percorrer grafos: BFS (Busca em Largura) e DFS (Busca em Profundidade).
+
+## BFS (Breadth-First Search)
+
+Explora o grafo por níveis (camadas), ou seja, visita todos os vizinhos de um vértice antes de visitar os filhos    .
+
+### Uso de recursão
+
+```c
+void bfs_recursivo(int fila[], int* ini, int* fim, int visitado[]) {
+    if (*ini >= *fim)
+        return;
+
+    int v = fila[(*ini)++];
+
+    printf("%d ", v);
+
+    for (No* p = adj[v]; p != NULL; p = p->prox) {
+        if (!visitado[p->v]) {
+            visitado[p->v] = 1;
+            fila[(*fim)++] = p->v;
+        }
+    }
+
+    bfs_recursivo(fila, ini, fim, visitado);
+}
+
+void bfs(int inicio) {
+    int visitado[100] = {0};
+
+    int fila[100];
+
+    int ini = 0;
+    int fim = 0;
+
+    fila[fim++] = inicio;
+
+    visitado[inicio] = 1;
+
+    bfs_recursivo(fila, &ini, &fim, visitado);
+}
+```
