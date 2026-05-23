@@ -151,3 +151,16 @@ No* adj[100];
 * Acesso mais lento para verificar aresta
 
 ---
+
+## Comparação
+
+| Critério         | Matriz | Lista   |
+| ---------------- | ------ | ------- |
+| Espaço           | O(n²)  | O(V+E)  |
+| Verificar aresta | O(1)   | O(grau) |
+| Iterar vizinhos  | O(n)   | O(grau) |
+
+---
+
+# 4.3 Percurso em grafos (Graph Traversal)
+Há dois algoritmos clássicos para percorrer grafos: BFS (Busca em Largura) e DFS (Busca em Profundidade).
