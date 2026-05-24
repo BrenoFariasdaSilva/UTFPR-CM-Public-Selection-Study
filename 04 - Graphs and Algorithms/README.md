@@ -251,3 +251,11 @@ function BFS(Graph, start):
 ### Complexidade
 
 O(V + E)
+
+### Aplicações
+
+* Menor caminho em grafos não ponderados
+* Verificação de conectividade
+* Níveis em árvores
+
+---
