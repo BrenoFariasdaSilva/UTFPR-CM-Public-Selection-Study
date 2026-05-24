@@ -59,3 +59,18 @@ Um **grafo** é um par ordenado ( G = (V, E) ), onde:
 * Sistemas logísticos
 
 ---
+
+### Não ponderado (Unweighted Graph)
+
+* Todas as arestas têm peso igual (ou irrelevante)
+* O interesse principal é apenas a existência da conexão
+
+#### Casos de uso
+
+* Redes sociais simples
+* Verificação de conectividade
+* Busca em largura (BFS)
+* Jogos e mapas simples
+* Descoberta de componentes conectados
+
+---
