@@ -574,3 +574,9 @@ Subgrafos conectados
 * DFS/BFS identificam componentes
 
 ---
+
+## Ciclos
+
+### Definição
+
+Caminho que começa e termina no mesmo vértice
