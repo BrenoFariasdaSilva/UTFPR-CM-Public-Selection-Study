@@ -259,3 +259,19 @@ O(V + E)
 * Níveis em árvores
 
 ---
+
+## DFS (Depth-First Search)
+
+### Uso de recursão
+
+```c
+void dfs(int v, int visitado[]) {
+    visitado[v] = 1;
+    printf("%d ", v);
+
+    for (No* p = adj[v]; p != NULL; p = p->prox) {
+        if (!visitado[p->v])
+            dfs(p->v, visitado);
+    }
+}
+```
