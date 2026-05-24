@@ -116,3 +116,10 @@ int G[100][100];
 
 * Acesso O(1) para verificar arestas
 * Simples implementação
+
+### Desvantagens
+
+* Consome O(n²) memória
+* Ineficiente para grafos esparsos
+
+---
