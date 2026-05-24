@@ -384,3 +384,40 @@ function Dijkstra(Graph, source):
 
 * O(V²) (implementação simples)
 * O((V + E) log V) com heap
+
+### Bellman-Ford
+
+#### Ideia
+
+* Calcula menores caminhos a partir de uma origem
+* Aceita arestas com peso negativo
+* Detecta ciclos de peso negativo
+* Vantagem sobre Dijkstra: pode lidar com pesos negativos
+* Desvantagem: é mais lento que Dijkstra
+
+#### Estrutura básica
+
+```text
+function BellmanFord(Graph, source):
+    for each vertex v in Graph.Vertices:
+        dist[v] ← INFINITY
+        prev[v] ← UNDEFINED
+    dist[source] ← 0
+
+    for i from 1 to |V|-1:
+        for each edge (u, v) with weight w in Graph.Edges:
+            if dist[u] + w < dist[v]:
+                dist[v] ← dist[u] + w
+                prev[v] ← u
+
+    // check for negative-weight cycles
+    for each edge (u, v) with weight w in Graph.Edges:
+        if dist[u] + w < dist[v]:
+            return "Negative cycle detected"
+
+    return dist[], prev[]
+```
+
+#### Complexidade
+
+O(V * E)
