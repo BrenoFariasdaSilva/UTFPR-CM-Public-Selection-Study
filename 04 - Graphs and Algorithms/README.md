@@ -95,3 +95,13 @@ Um **grafo** é um par ordenado ( G = (V, E) ), onde:
 
 # 4.2 Representação (Graph Representation)
 Há duas formas comuns de representar grafos em memória:
+
+## Matriz de adjacência
+
+### Definição
+
+Matriz ( N x N ), onde:
+
+```text
+M[i][j] = 1 se existe aresta entre i e j
+```
