@@ -517,3 +517,46 @@ function Union(x, y):
 O(E log E)
 
 ---
+
+### Prim
+
+#### Ideia
+
+* Cresce a árvore a partir de um vértice
+* Sempre adiciona a menor aresta possível
+* Vantagem: pode ser mais eficiente que Kruskal em grafos densos
+* Desvantagem: pode ser menos eficiente que Kruskal em grafos esparsos
+
+#### Estrutura básica
+
+```text
+function Prim(Graph, start):
+    for each vertex v in Graph.Vertices:
+        key[v] ← INFINITY
+        parent[v] ← UNDEFINED
+        inMST[v] ← false
+
+    key[start] ← 0
+    create priority queue Q keyed by key[v]
+    insert all vertices into Q
+
+    while Q is not empty:
+        u ← extract-min(Q)
+        inMST[u] ← true
+
+        for each neighbor v of u with weight w:
+            if not inMST[v] and w < key[v]:
+                parent[v] ← u
+                key[v] ← w
+                decrease-key(Q, v, key[v])
+
+    return parent // describes the MST
+```
+
+#### Complexidade
+
+* O(V²) or O((V + E) log V) with a binary/ Fibonacci heap
+
+---
+
+# 4.5 Propriedades (Graph Properties)
