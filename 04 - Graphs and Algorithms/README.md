@@ -123,3 +123,9 @@ int G[100][100];
 * Ineficiente para grafos esparsos
 
 ---
+
+## Lista de adjacência
+
+### Definição
+
+Cada vértice possui uma lista de vizinhos
