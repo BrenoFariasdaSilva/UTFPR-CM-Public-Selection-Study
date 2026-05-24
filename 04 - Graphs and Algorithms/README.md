@@ -322,3 +322,13 @@ function DFS(Graph, start):
 ### Complexidade
 
 O(V + E)
+
+### Aplicações
+
+* Detecção de ciclos
+* Ordenação topológica em DAGs
+* Componentes conexas
+
+---
+
+# 4.4 Algoritmos clássicos (Classical Algorithms)
