@@ -28,3 +28,19 @@ Um **grafo** é um par ordenado ( G = (V, E) ), onde:
 * Rotas com sentido único
 
 ---
+
+### Não-direcionado (Undirected Graph)
+
+* Arestas não possuem direção (bidirecionais)
+* Representadas como pares não ordenados: \( \{u, v\} \)
+* Se existe conexão entre \(u\) e \(v\), ambos podem se alcançar diretamente
+
+#### Casos de uso
+
+* Redes de amizade
+* Conexões físicas entre computadores
+* Redes elétricas
+* Mapas com ruas de mão dupla
+* Ligações entre componentes conectados mutuamente
+
+---
