@@ -379,3 +379,8 @@ function Dijkstra(Graph, source):
 
     return dist[], prev[]
 ```
+
+### Complexidade
+
+* O(V²) (implementação simples)
+* O((V + E) log V) com heap
