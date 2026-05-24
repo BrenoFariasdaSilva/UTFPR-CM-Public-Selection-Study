@@ -332,3 +332,16 @@ O(V + E)
 ---
 
 # 4.4 Algoritmos clássicos (Classical Algorithms)
+
+## Caminho mínimo (Shortest Path)
+
+Esses algoritmos são usados para encontrar menores caminhos em grafos ponderados, fundamentais em roteamento, logística e planejamento de redes.
+
+### Dijkstra
+
+#### Ideia
+
+* Calcula a menor distância de um vértice origem para todos os outros
+* É um algoritmo de caminho mínimo para grafos ponderados
+* Muito usado em otimização de rotas
+* Funciona apenas com pesos não negativos
