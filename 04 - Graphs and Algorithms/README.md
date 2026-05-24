@@ -345,3 +345,7 @@ Esses algoritmos são usados para encontrar menores caminhos em grafos ponderado
 * É um algoritmo de caminho mínimo para grafos ponderados
 * Muito usado em otimização de rotas
 * Funciona apenas com pesos não negativos
+
+### Restrição importante
+
+Dijkstra NÃO funciona corretamente com arestas de peso negativo.
