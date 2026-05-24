@@ -566,3 +566,11 @@ function Prim(Graph, start):
 ### Grafo conectado
 
 Existe caminho entre todos os pares de vértices
+
+### Componentes conexas
+
+Subgrafos conectados
+
+* DFS/BFS identificam componentes
+
+---
