@@ -203,3 +203,47 @@ void bfs(int inicio) {
     bfs_recursivo(fila, &ini, &fim, visitado);
 }
 ```
+
+### Uso de fila
+
+```c
+void bfs(int inicio) {
+    int visitado[100] = {0};
+    int fila[100], ini = 0, fim = 0;
+
+    fila[fim++] = inicio;
+    visitado[inicio] = 1;
+
+    while (ini < fim) {
+        int v = fila[ini++];
+        printf("%d ", v);
+
+        for (No* p = adj[v]; p != NULL; p = p->prox) {
+            if (!visitado[p->v]) {
+                visitado[p->v] = 1;
+                fila[fim++] = p->v;
+            }
+        }
+    }
+}
+```
+
+#### Estrutura básica
+
+```text
+function BFS(Graph, start):
+    create empty queue Q
+    for each vertex v in Graph.Vertices:
+        visited[v] ← false
+    visited[start] ← true
+    enqueue(Q, start)
+
+    while Q is not empty:
+        u ← dequeue(Q)
+        for each neighbor v of u:
+            if not visited[v]:
+                visited[v] ← true
+                enqueue(Q, v)
+
+    // returns visited order or reachable set as required
+```
