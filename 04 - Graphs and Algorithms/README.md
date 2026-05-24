@@ -349,3 +349,33 @@ Esses algoritmos são usados para encontrar menores caminhos em grafos ponderado
 ### Restrição importante
 
 Dijkstra NÃO funciona corretamente com arestas de peso negativo.
+
+### Quando usar BFS vs Dijkstra
+
+* BFS: grafos não ponderados, ou quando todas as arestas possuem o mesmo custo
+* Dijkstra: grafos ponderados com pesos não negativos
+
+Em grafos não ponderados, BFS pode substituir Dijkstra para encontrar menor caminho em número de arestas.
+
+#### Estrutura básica
+
+```c
+function Dijkstra(Graph, source):
+    for each vertex v in Graph.Vertices:
+        dist[v] ← INFINITY
+        prev[v] ← UNDEFINED
+        add v to Q
+    dist[source] ← 0
+    
+    while Q is not empty:
+        u ← vertex in Q with min dist[u]
+        remove u from Q
+        
+        for each neighbor v of u still in Q:
+            alt ← dist[u] + Graph.Edges(u, v)
+            if alt < dist[v]:
+                dist[v] ← alt
+                prev[v] ← u
+
+    return dist[], prev[]
+```
