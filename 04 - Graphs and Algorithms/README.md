@@ -318,3 +318,7 @@ function DFS(Graph, start):
 
     // For full traversal, call DFS_recursive on any unvisited vertex
 ```
+
+### Complexidade
+
+O(V + E)
