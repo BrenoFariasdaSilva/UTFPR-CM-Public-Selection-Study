@@ -580,3 +580,47 @@ Subgrafos conectados
 ### Definição
 
 Caminho que começa e termina no mesmo vértice
+
+### Detecção
+
+DFS com controle de visita
+
+---
+
+# COMPARAÇÕES IMPORTANTES
+
+| Algoritmo      | Categoria              | Estrutura principal | Tipo de grafo                 | Objetivo principal                          | Complexidade                  | Aceita pesos negativos | Usa fila/prioridade | Aplicações comuns                            |
+| ---------------| ---------------------- | ------------------- | ----------------------------- | ------------------------------------------- | ----------------------------- | ---------------------- | ------------------- | --------------------------------------------- |
+| BFS            | Percurso               | Fila                | Não ponderado                 | Percorrer por níveis / menor caminho simples | O(V + E)                     | Não aplicável          | Fila                | Conectividade, níveis, menor caminho simples |
+| DFS            | Percurso               | Pilha/Recursão      | Qualquer                      | Exploração profunda                         | O(V + E)                     | Não aplicável          | Pilha/Recursão      | Ciclos, componentes, ordenação topológica    |
+| Dijkstra       | Caminho mínimo         | Heap/Fila prioridade| Ponderado                     | Menor caminho                               | O(V²) / O((V + E) log V)     | Não                    | Fila de prioridade  | GPS, roteamento, redes                       |
+| Bellman-Ford   | Caminho mínimo         | Relaxamento         | Ponderado                     | Menor caminho                               | O(V * E)                     | Sim                    | Não                 | Redes com pesos negativos                    |
+| Floyd-Warshall | Caminho mínimo global  | Programação dinâmica| Ponderado                     | Menor caminho entre todos os pares          | O(V³)                        | Sim                    | Não                 | Análise completa de rotas                    |
+| Kruskal        | MST                    | Union-Find          | Não-direcionado ponderado     | Árvore geradora mínima                      | O(E log E)                   | Sim                    | Ordenação de arestas| Redes, infraestrutura                        |
+| Prim           | MST                    | Heap/Fila prioridade| Não-direcionado ponderado     | Árvore geradora mínima                      | O(V²) / O((V + E) log V)     | Sim                    | Fila de prioridade  | Redes, cabeamento, otimização estrutural     |
+
+---
+
+# COMO ISSO CAI NA PROVA
+
+Você precisa:
+
+* Definir formalmente grafos
+* Saber o que é um DAG e por que ele não possui ciclos direcionados
+* Comparar representações (matriz vs lista)
+* Explicar BFS e DFS passo a passo
+* Implementar BFS/DFS em C
+* Explicar Dijkstra (restrições e funcionamento)
+* Diferenciar cenários de uso entre Dijkstra, Bellman-Ford e Floyd-Warshall
+* Diferenciar Kruskal vs Prim
+* Identificar conectividade e ciclos
+
+---
+
+# CONCLUSÃO
+
+Grafos são fundamentais para:
+
+* Redes
+* Caminhos mínimos
+* Estruturas complexas
