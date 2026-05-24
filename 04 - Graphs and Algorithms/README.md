@@ -275,3 +275,46 @@ void dfs(int v, int visitado[]) {
     }
 }
 ```
+
+### Uso de fila
+
+```c
+void dfs(int inicio) {
+    int visitado[100] = {0};
+    int pilha[100], topo = 0;
+
+    pilha[topo++] = inicio;
+
+    while (topo > 0) {
+        int v = pilha[--topo];
+
+        if (!visitado[v]) {
+            visitado[v] = 1;
+            printf("%d ", v);
+
+            for (No* p = adj[v]; p != NULL; p = p->prox) {
+                if (!visitado[p->v]) {
+                    pilha[topo++] = p->v;
+                }
+            }
+        }
+    }
+}
+```
+
+#### Estrutura básica
+
+```text
+function DFS_recursive(Graph, v, visited):
+    visited[v] ← true
+    for each neighbor u of v:
+        if not visited[u]:
+            DFS_recursive(Graph, u, visited)
+
+function DFS(Graph, start):
+    for each vertex v in Graph.Vertices:
+        visited[v] ← false
+    DFS_recursive(Graph, start, visited)
+
+    // For full traversal, call DFS_recursive on any unvisited vertex
+```
