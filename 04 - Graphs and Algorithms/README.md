@@ -105,3 +105,9 @@ Matriz ( N x N ), onde:
 ```text
 M[i][j] = 1 se existe aresta entre i e j
 ```
+
+### Exemplo em C
+
+```c
+int G[100][100];
+```
