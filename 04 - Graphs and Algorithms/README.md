@@ -421,3 +421,36 @@ function BellmanFord(Graph, source):
 #### Complexidade
 
 O(V * E)
+
+### Floyd-Warshall
+
+#### Ideia
+
+* Calcula menores caminhos entre todos os pares de vértices
+* Usa programação dinâmica, que nada mais é do que resolver subproblemas menores para construir a solução final
+* Aceita arestas negativas, desde que não existam ciclos negativos
+
+#### Estrutura básica
+
+```text
+function FloydWarshall(Graph):
+    let dist be a |V|×|V| matrix
+    for each pair (i, j):
+        if i == j: dist[i][j] ← 0
+        else if edge (i, j) exists with weight w: dist[i][j] ← w
+        else: dist[i][j] ← INFINITY
+
+    for k from 1 to |V|:
+        for i from 1 to |V|:
+            for j from 1 to |V|:
+                if dist[i][k] + dist[k][j] < dist[i][j]:
+                    dist[i][j] ← dist[i][k] + dist[k][j]
+
+    return dist
+```
+
+#### Complexidade
+
+O(V³)
+
+---
