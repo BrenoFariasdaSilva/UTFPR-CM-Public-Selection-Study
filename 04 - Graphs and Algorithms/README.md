@@ -454,3 +454,66 @@ function FloydWarshall(Graph):
 O(V³)
 
 ---
+
+## Árvores Geradoras Mínimas (Minimum Spanning Trees)
+
+Esses algoritmos são usados para conectar todos os vértices com custo total mínimo, sem formar ciclos, em grafos não-direcionados ponderados.
+Essenciais para redes, design de circuitos e clustering.
+Vantagem: garantem a conexão de todos os vértices com o menor custo possível.
+Desvantagem: não são aplicáveis a grafos direcionados ou grafos com ciclos negativos.
+
+### Kruskal
+
+#### Ideia
+
+* Ordena arestas por peso
+* Adiciona arestas sem formar ciclo
+
+#### Estrutura básica
+
+* Usa Union-Find (conjuntos disjuntos)
+
+```text
+function Kruskal(Graph):
+    A ← empty set // edges in MST
+    for each vertex v in Graph.Vertices:
+        MakeSet(v) // create a set for each vertex
+
+    sort edges of Graph by nondecreasing weight
+
+    for each edge (u, v) with weight w in sorted edges:
+        if Find(u) ≠ Find(v):
+            A ← A ∪ {(u, v)}
+            Union(u, v)
+
+    return A
+```
+
+```text
+function MakeSet(x):
+    parent[x] ← x
+    rank[x] ← 0
+
+function Find(x):
+    if parent[x] ≠ x:
+        parent[x] ← Find(parent[x])
+    return parent[x]
+
+function Union(x, y):
+    rootX ← Find(x)
+    rootY ← Find(y)
+    if rootX ≠ rootY:
+        if rank[rootX] > rank[rootY]:
+            parent[rootY] ← rootX
+        else if rank[rootX] < rank[rootY]:
+            parent[rootX] ← rootY
+        else:
+            parent[rootY] ← rootX
+            rank[rootX] ← rank[rootX] + 1
+```
+
+#### Complexidade
+
+O(E log E)
+
+---
