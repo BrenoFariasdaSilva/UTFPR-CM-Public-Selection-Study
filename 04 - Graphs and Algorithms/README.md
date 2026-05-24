@@ -247,3 +247,7 @@ function BFS(Graph, start):
 
     // returns visited order or reachable set as required
 ```
+
+### Complexidade
+
+O(V + E)
