@@ -560,3 +560,9 @@ function Prim(Graph, start):
 ---
 
 # 4.5 Propriedades (Graph Properties)
+
+## Conectividade
+
+### Grafo conectado
+
+Existe caminho entre todos os pares de vértices
