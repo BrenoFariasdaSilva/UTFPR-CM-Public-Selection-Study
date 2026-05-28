@@ -394,3 +394,43 @@ Não estável
 | Heap      | Sim      |
 
 ---
+
+## Complexidade
+
+| Algoritmo | Melhor     | Médio      | Pior       |
+| --------- | ---------- | ---------- | ---------- |
+| Bubble    | O(n)       | O(n²)      | O(n²)      |
+| Selection | O(n²)      | O(n²)      | O(n²)      |
+| Insertion | O(n)       | O(n²)      | O(n²)      |
+| Merge     | O(n log n) | O(n log n) | O(n log n) |
+| Quick     | O(n log n) | O(n log n) | O(n²)      |
+| Heap      | O(n log n) | O(n log n) | O(n log n) |
+
+---
+
+# COMO ISSO CAI NA PROVA
+
+Você precisa:
+
+* Explicar funcionamento passo a passo de cada algoritmo
+* Comparar algoritmos (quando usar cada um)
+* Derivar complexidade corretamente
+* Saber estabilidade e uso de memória
+* Implementar em C sem consulta
+* Explicar diferença entre busca linear e binária
+
+---
+
+# CONCLUSÃO
+
+Este bloco é altamente cobrado por:
+
+* Comparações teóricas
+* Análise de eficiência
+* Implementação direta
+
+### Domínio esperado:
+
+* Código completo em C
+* Clareza na análise de complexidade
+* Capacidade de justificar escolha de algoritmo
