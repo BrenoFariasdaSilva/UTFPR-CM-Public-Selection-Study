@@ -294,3 +294,17 @@ void quick_sort(int v[], int l, int r) {
     }
 }
 ```
+
+### Complexidade
+
+| Caso   | Complexidade |
+| ------ | ------------ |
+| Melhor | O(n log n)   |
+| Médio  | O(n log n)   |
+| Pior   | O(n²)        |
+
+#### Estabilidade
+
+Não estável
+
+---
