@@ -46,3 +46,9 @@ int busca_linear(int v[], int n, int x) {
 ### Pré-requisito
 
 Vetor deve estar ordenado
+
+### Funcionamento
+
+Divide o espaço de busca pela metade a cada iteração.
+
+---
