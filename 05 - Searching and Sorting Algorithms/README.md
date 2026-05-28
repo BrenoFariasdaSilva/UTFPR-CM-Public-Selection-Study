@@ -201,3 +201,56 @@ void insertion_sort(int v[], int n) {
 Estável
 
 ---
+
+## Eficientes — O(n log n)
+
+### Merge Sort
+
+#### Ideia (Divisão e conquista)
+
+* Divide o vetor em duas partes
+* Ordena recursivamente
+* Combina (merge)
+
+#### Implementação
+
+```c
+void merge(int v[], int l, int m, int r) {
+    int i = l, j = m+1, k = 0;
+    int temp[1000];
+
+    while (i <= m && j <= r) {
+        if (v[i] <= v[j]) temp[k++] = v[i++];
+        else temp[k++] = v[j++];
+    }
+
+    while (i <= m) temp[k++] = v[i++];
+    while (j <= r) temp[k++] = v[j++];
+
+    for (i = l, k = 0; i <= r; i++, k++)
+        v[i] = temp[k];
+}
+
+void merge_sort(int v[], int l, int r) {
+    if (l < r) {
+        int m = (l + r) / 2;
+        merge_sort(v, l, m);
+        merge_sort(v, m+1, r);
+        merge(v, l, m, r);
+    }
+}
+```
+
+#### Complexidade
+
+O(n log n)
+
+#### Estabilidade
+
+Estável
+
+#### Memória
+
+Usa memória extra
+
+---
