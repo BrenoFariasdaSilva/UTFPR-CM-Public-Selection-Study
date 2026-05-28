@@ -52,3 +52,25 @@ Vetor deve estar ordenado
 Divide o espaço de busca pela metade a cada iteração.
 
 ---
+
+### Implementação iterativa
+
+```c
+int busca_binaria(int v[], int n, int x) {
+    int ini = 0, fim = n - 1;
+
+    while (ini <= fim) {
+        int meio = (ini + fim) / 2;
+
+        if (v[meio] == x)
+            return meio;
+        else if (x < v[meio])
+            fim = meio - 1;
+        else
+            ini = meio + 1;
+    }
+    return -1;
+}
+```
+
+---
