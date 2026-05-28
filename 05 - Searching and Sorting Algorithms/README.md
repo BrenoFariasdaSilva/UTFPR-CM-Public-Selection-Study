@@ -133,3 +133,33 @@ void bubble_sort(int v[], int n) {
 O(n²)
 
 ---
+
+### Selection Sort
+
+#### Funcionamento
+
+* Seleciona o menor elemento
+* Coloca na posição correta
+
+#### Implementação
+
+```c
+void selection_sort(int v[], int n) {
+    for (int i = 0; i < n-1; i++) {
+        int min = i;
+        for (int j = i+1; j < n; j++) {
+            if (v[j] < v[min])
+                min = j;
+        }
+        int temp = v[i];
+        v[i] = v[min];
+        v[min] = temp;
+    }
+}
+```
+
+#### Complexidade
+
+O(n²)
+
+---
