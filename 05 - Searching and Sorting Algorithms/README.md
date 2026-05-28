@@ -163,3 +163,27 @@ void selection_sort(int v[], int n) {
 O(n²)
 
 ---
+
+### Insertion Sort
+
+#### Funcionamento
+
+* Insere cada elemento na posição correta
+* Similar a ordenar cartas
+
+#### Implementação
+
+```c
+void insertion_sort(int v[], int n) {
+    for (int i = 1; i < n; i++) {
+        int chave = v[i];
+        int j = i - 1;
+
+        while (j >= 0 && v[j] > chave) {
+            v[j+1] = v[j];
+            j--;
+        }
+        v[j+1] = chave;
+    }
+}
+```
