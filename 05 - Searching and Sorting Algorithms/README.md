@@ -33,3 +33,10 @@ int busca_linear(int v[], int n, int x) {
 | Melhor | O(1)         |
 | Médio  | O(n)         |
 | Pior   | O(n)         |
+
+### Observações
+
+* Não requer ordenação
+* Simples, mas ineficiente para grandes volumes
+
+---
