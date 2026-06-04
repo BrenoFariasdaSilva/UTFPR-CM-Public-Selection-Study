@@ -510,3 +510,9 @@ int hash_remover(TabelaHash *tabela, int chave) {
 **Complexidade.** Média $O(1)$ para inserção, busca e remoção; pior caso $O(n)$ com colisões degeneradas; espaço $O(m + n)$.
 
 **Análise de desempenho.** Em cenários reais, o fator de carga e a distribuição das chaves determinam a diferença entre comportamento quase constante e degradação linear. Redimensionamento dinâmico melhora robustez, mas aumenta complexidade da implementação.
+
+## 4. Exemplos, Aplicações e Estudos de Caso
+
+Listas sequenciais são frequentes em estruturas de registros com cardinalidade (qtde elementos) máxima conhecida, como tabelas internas de compiladores simples ou buffers de entrada. Listas encadeadas aparecem em listas de adjacência, free lists e estruturas em que inserções locais são dominantes. Pilhas sustentam o mecanismo de chamadas, avaliação de expressões pós-fixas e algoritmos de retrocesso. Filas aparecem em escalonamento, BFS e pipelines. Tabelas hash são onipresentes em índices de bancos, caches, tabelas de símbolos e sistemas distribuídos.
+
+Um estudo de caso clássico é um processador de requisições web: fila para enfileirar pedidos, tabela hash para mapear sessões, pilha para análise sintática de templates e lista encadeada para encadear colisões de cache. Esse cenário evidencia que TADs raramente operam isoladamente; eles compõem arquiteturas maiores.
