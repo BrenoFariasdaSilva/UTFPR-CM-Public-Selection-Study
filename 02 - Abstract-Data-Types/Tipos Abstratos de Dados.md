@@ -212,3 +212,66 @@ int lista_encadeada_buscar(const No *cabeca, int valor) {
 **Complexidade.** Busca e remoção por valor $O(n)$; inserção no início $O(1)$; espaço $O(n)$ acrescido de ponteiros.
 
 **Explicação das partes relevantes.** O ponteiro `anterior` é necessário para reencadear a lista na remoção; o caso em que o nó removido é a cabeça demanda tratamento especial; a desalocação imediata evita vazamento de memória.
+
+### 3.3 Pilhas
+
+Pilhas obedecem à política LIFO, sendo fundamentais em chamada de funções, backtracking, avaliação de expressões e análise sintática.
+
+**Pseudocódigo**
+
+```text
+algoritmo push(pilha, valor)
+    se pilha cheia então retorne falso
+    pilha[topo + 1] <- valor
+    topo <- topo + 1
+    retorne verdadeiro
+
+algoritmo pop(pilha)
+    se pilha vazia então retorne falso
+    valor <- pilha[topo]
+    topo <- topo - 1
+    retorne valor
+```
+
+#### Algoritmo 3: pilha estática baseada em vetor
+
+**Implementação completa em C**
+
+```c
+#define PILHA_MAX 32
+
+typedef struct {
+    int dados[PILHA_MAX];
+    int topo;
+} Pilha;
+
+void pilha_inicializar(Pilha *pilha) {
+    pilha->topo = -1;
+}
+
+int pilha_vazia(const Pilha *pilha) {
+    return pilha->topo == -1;
+}
+
+int pilha_empilhar(Pilha *pilha, int valor) {
+    if (pilha->topo == PILHA_MAX - 1) {
+        return 0;
+    }
+    pilha->dados[++pilha->topo] = valor;
+    return 1;
+}
+
+int pilha_desempilhar(Pilha *pilha, int *valor_saida) {
+    if (pilha_vazia(pilha)) {
+        return 0;
+    }
+    *valor_saida = pilha->dados[pilha->topo--];
+    return 1;
+}
+```
+
+**Complexidade.** `push`, `pop` e `top` em $O(1)$; memória $O(n)$ fixa.
+
+**Entrada e saída.** Empilhando `10, 20, 30`, três remoções devolvem `30, 20, 10`.
+
+**Comparação com abordagens alternativas.** A pilha encadeada elimina capacidade fixa, mas aumenta custo por nó e fragmentação potencial.
