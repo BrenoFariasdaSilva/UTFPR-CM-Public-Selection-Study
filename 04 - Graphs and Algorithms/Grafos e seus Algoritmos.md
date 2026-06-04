@@ -53,3 +53,94 @@ typedef struct {
     int peso;
 } Aresta;
 ```
+
+### 3.2 BFS e DFS
+
+#### Algoritmo 1: BFS
+
+**Explicação teórica.** BFS explora camadas de distância crescente a partir da origem. Em grafos não ponderados, ela calcula distâncias mínimas em número de arestas.
+
+**Pseudocódigo**
+
+```text
+algoritmo bfs(G, origem)
+    inicialize fila
+    marque origem visitada
+    enquanto fila nao vazia faca
+        remova vertice u
+        para cada vizinho v de u faca
+            se v nao visitado entao
+                marque visitado e enfileire v
+fim
+```
+
+**Implementação completa em C**
+
+```c
+#include <stdio.h>
+
+void bfs(const GrafoMatriz *grafo, int origem) {
+    int visitado[MAXV] = {0};
+    int fila[MAXV];
+    int inicio = 0;
+    int fim = 0;
+
+    visitado[origem] = 1;
+    fila[fim++] = origem;
+
+    while (inicio < fim) {
+        int u = fila[inicio++];
+        printf("%d ", u);
+
+        for (int v = 0; v < grafo->vertices; v++) {
+            if (grafo->matriz[u][v] != 0 && !visitado[v]) {
+                visitado[v] = 1;
+                fila[fim++] = v;
+            }
+        }
+    }
+}
+```
+
+**Complexidade.** Em matriz, $O(V^2)$; em lista de adjacência, $O(V + E)$. Espaço adicional $O(V)$.
+
+**Partes importantes.** A fila garante travessia por níveis; a marcação antecipada evita múltiplas inserções do mesmo vértice.
+
+#### Algoritmo 2: DFS
+
+**Explicação teórica.** DFS aprofunda o caminho atual antes de retroceder. É útil para explorar componentes, detectar ciclos e realizar ordenação topológica.
+
+**Pseudocódigo**
+
+```text
+algoritmo dfs(G, origem)
+    marque origem visitada
+    para cada vizinho v de origem faca
+        se v nao visitado entao
+            dfs(G, v)
+fim
+```
+
+**Implementação completa em C**
+
+```c
+void dfs_visit(const GrafoMatriz *grafo, int u, int visitado[]) {
+    visitado[u] = 1;
+    printf("%d ", u);
+
+    for (int v = 0; v < grafo->vertices; v++) {
+        if (grafo->matriz[u][v] != 0 && !visitado[v]) {
+            dfs_visit(grafo, v, visitado);
+        }
+    }
+}
+
+void dfs(const GrafoMatriz *grafo, int origem) {
+    int visitado[MAXV] = {0};
+    dfs_visit(grafo, origem, visitado);
+}
+```
+
+**Complexidade.** Igual à BFS para a representação adotada.
+
+**Comparação.** BFS é preferível para distâncias mínimas em grafos não ponderados; DFS é mais comum para análise estrutural e exploração de caminhos.
