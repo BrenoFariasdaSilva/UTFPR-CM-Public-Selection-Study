@@ -528,3 +528,7 @@ Um estudo de caso clássico é um processador de requisições web: fila para en
 | Hash             | Média                       | Alta              | Excelente em média         | Moderado           | Busca quase constante | Sensível a colisões    | Índices associativos | Médio O(1), pior O(n)           |
 
 Armadilhas recorrentes incluem ponteiros pendentes após remoção, uso de memória não inicializada, vazamentos por ausência de `free`, confusão entre tamanho lógico e capacidade física e desenho inadequado de funções hash. Em otimização, recomenda-se usar listas sequenciais quando localidade de cache é crucial, optar por filas circulares para evitar deslocamentos e controlar fator de carga em tabelas hash com redimensionamento.
+
+## 6. Conclusão
+
+O estudo de tipos abstratos de dados mostra que desempenho não decorre apenas da ordem assintótica, mas da compatibilidade entre operação dominante, organização da memória e perfil do problema. Estruturas sequenciais, encadeadas, LIFO, FIFO e hash oferecem diferentes comportamentos entre simplicidade, flexibilidade e custo operacional. A maturidade em algoritmos exige reconhecer tais comportamentos e selecionar a representação mais adequada à carga de trabalho esperada.
