@@ -381,3 +381,16 @@ Não estável
 | Heap      | Não     |
 
 ---
+
+## In-place vs Não in-place
+
+| Algoritmo | In-place |
+| --------- | -------- |
+| Bubble    | Sim      |
+| Selection | Sim      |
+| Insertion | Sim      |
+| Merge     | Não      |
+| Quick     | Sim      |
+| Heap      | Sim      |
+
+---
