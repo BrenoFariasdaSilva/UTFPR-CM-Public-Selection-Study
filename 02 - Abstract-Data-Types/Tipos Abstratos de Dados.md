@@ -532,3 +532,15 @@ Armadilhas recorrentes incluem ponteiros pendentes após remoção, uso de memó
 ## 6. Conclusão
 
 O estudo de tipos abstratos de dados mostra que desempenho não decorre apenas da ordem assintótica, mas da compatibilidade entre operação dominante, organização da memória e perfil do problema. Estruturas sequenciais, encadeadas, LIFO, FIFO e hash oferecem diferentes comportamentos entre simplicidade, flexibilidade e custo operacional. A maturidade em algoritmos exige reconhecer tais comportamentos e selecionar a representação mais adequada à carga de trabalho esperada.
+
+## 7. Referências
+
+CORMEN, Thomas H.; LEISERSON, Charles E.; RIVEST, Ronald L.; STEIN, Clifford. Introduction to Algorithms. 3rd ed. Cambridge: MIT Press, 2009.
+
+CORMEN, Thomas H.; LEISERSON, Charles E.; RIVEST, Ronald L.; STEIN, Clifford. Algoritmos: teoria e prática. Rio de Janeiro: Elsevier, 2012.
+
+HOROWITZ, Ellis; SAHNI, Sartaj. Fundamentos de Estruturas de Dados. Rio de Janeiro: Campus, 1986.
+
+SEDGEWICK, Robert. Algorithms in C, Parts 1-4: Fundamentals, Data Structures, Sorting, Searching. 3rd ed. Reading: Addison-Wesley, 1998.
+
+ZIVIANI, Nivio. Projeto de Algoritmos: com Implementações em Pascal e C. São Paulo: Cengage Learning, 2004.
