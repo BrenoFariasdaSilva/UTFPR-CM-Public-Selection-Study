@@ -40,3 +40,9 @@ int busca_linear(int v[], int n, int x) {
 * Simples, mas ineficiente para grandes volumes
 
 ---
+
+## Busca binária (Binary Search)
+
+### Pré-requisito
+
+Vetor deve estar ordenado
