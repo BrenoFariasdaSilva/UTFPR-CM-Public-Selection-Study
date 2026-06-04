@@ -419,3 +419,92 @@ void heap_sort(int vetor[], int tamanho) {
 ```
 
 **Complexidade.** Melhor, médio e pior $O(n \log n)$; espaço adicional $O(1)$; não estável; in-place.
+
+### 3.4 Algoritmos por contagem e dígitos
+
+#### Algoritmo 9: Counting Sort
+
+**Explicação teórica.** Counting Sort conta ocorrências de chaves em faixa limitada. Não é baseado em comparação e pode ser estável.
+
+**Pseudocódigo**
+
+```text
+algoritmo counting_sort(entrada, saida, tamanho, maior_valor)
+    contagem[0..maior_valor] <- 0
+    para i de 0 ate tamanho - 1 faca
+        contagem[entrada[i]]++
+    para i de 1 ate maior_valor faca
+        contagem[i] += contagem[i - 1]
+    para i de tamanho - 1 ate 0 faca
+        saida[contagem[entrada[i]] - 1] <- entrada[i]
+        contagem[entrada[i]]--
+fim
+```
+
+**Implementação completa em C**
+
+```c
+void counting_sort(const int entrada[], int saida[], int tamanho, int maior_valor) {
+    int contagem[256] = {0};
+
+    for (int i = 0; i < tamanho; i++) contagem[entrada[i]]++;
+    for (int i = 1; i <= maior_valor; i++) contagem[i] += contagem[i - 1];
+    for (int i = tamanho - 1; i >= 0; i--) {
+        saida[contagem[entrada[i]] - 1] = entrada[i];
+        contagem[entrada[i]]--;
+    }
+}
+```
+
+**Complexidade.** Tempo $O(n + k)$, espaço $O(n + k)$, em que $k$ é a amplitude da chave; estável se implementado por varredura reversa.
+
+#### Algoritmo 10: Radix Sort
+
+**Explicação teórica.** Radix Sort ordena por dígitos sucessivos, normalmente usando Counting Sort estável em cada passo.
+
+**Pseudocódigo**
+
+```text
+algoritmo counting_sort_digito(vetor, tamanho, expoente)
+    contagem[0..9] <- 0
+    para i de 0 ate tamanho - 1 faca
+        contagem[(vetor[i] / expoente) % 10]++
+    para i de 1 ate 9 faca
+        contagem[i] += contagem[i - 1]
+    para i de tamanho - 1 ate 0 faca
+        digito <- (vetor[i] / expoente) % 10
+        saida[contagem[digito] - 1] <- vetor[i]
+        contagem[digito]--
+fim
+
+algoritmo radix_sort(vetor, tamanho, maior)
+    para expoente de 1 ate maior / expoente > 0 faca
+        counting_sort_digito(vetor, tamanho, expoente)
+fim
+```
+
+**Implementação completa em C**
+
+```c
+void counting_sort_digito(int vetor[], int tamanho, int expoente) {
+    int saida[128];
+    int contagem[10] = {0};
+
+    for (int i = 0; i < tamanho; i++) contagem[(vetor[i] / expoente) % 10]++;
+    for (int i = 1; i < 10; i++) contagem[i] += contagem[i - 1];
+    for (int i = tamanho - 1; i >= 0; i--) {
+        int digito = (vetor[i] / expoente) % 10;
+        saida[contagem[digito] - 1] = vetor[i];
+        contagem[digito]--;
+    }
+    for (int i = 0; i < tamanho; i++) vetor[i] = saida[i];
+}
+
+void radix_sort(int vetor[], int tamanho, int maior) {
+    for (int expoente = 1; maior / expoente > 0; expoente *= 10) {
+        counting_sort_digito(vetor, tamanho, expoente);
+    }
+}
+```
+
+**Complexidade.** Tempo $O(d(n + b))$, em que $d$ é número de dígitos e $b$ a base; espaço $O(n + b)$; estável se o subalgoritmo por dígito for estável.
