@@ -101,3 +101,35 @@ int busca_binaria_rec(int v[], int ini, int fim, int x) {
 ---
 
 # 5.2 Algoritmos de ordenação (Sorting Algorithms)
+
+## Simples — O(n²)
+
+### Bubble Sort
+
+#### Funcionamento
+
+* Compara elementos adjacentes
+* Troca se estiverem fora de ordem
+* Repete até não haver trocas
+
+#### Implementação
+
+```c
+void bubble_sort(int v[], int n) {
+    for (int i = 0; i < n-1; i++) {
+        for (int j = 0; j < n-i-1; j++) {
+            if (v[j] > v[j+1]) {
+                int temp = v[j];
+                v[j] = v[j+1];
+                v[j+1] = temp;
+            }
+        }
+    }
+}
+```
+
+#### Complexidade
+
+O(n²)
+
+---
