@@ -516,3 +516,15 @@ int hash_remover(TabelaHash *tabela, int chave) {
 Listas sequenciais são frequentes em estruturas de registros com cardinalidade (qtde elementos) máxima conhecida, como tabelas internas de compiladores simples ou buffers de entrada. Listas encadeadas aparecem em listas de adjacência, free lists e estruturas em que inserções locais são dominantes. Pilhas sustentam o mecanismo de chamadas, avaliação de expressões pós-fixas e algoritmos de retrocesso. Filas aparecem em escalonamento, BFS e pipelines. Tabelas hash são onipresentes em índices de bancos, caches, tabelas de símbolos e sistemas distribuídos.
 
 Um estudo de caso clássico é um processador de requisições web: fila para enfileirar pedidos, tabela hash para mapear sessões, pilha para análise sintática de templates e lista encadeada para encadear colisões de cache. Esse cenário evidencia que TADs raramente operam isoladamente; eles compõem arquiteturas maiores.
+
+## 5. Comparações e Análises
+
+| Estrutura        | Facilidade de implementação | Facilidade de uso | Desempenho                 | Consumo de memória | Vantagens             | Desvantagens           | Casos de uso         | Big O das operações principais  |
+| ---------------- | --------------------------- | ----------------- | -------------------------- | ------------------ | --------------------- | ---------------------- | -------------------- | ------------------------------- |
+| Lista sequencial | Alta                        | Alta              | Excelente para acesso      | Baixo              | Acesso direto         | Inserção/remoção caras | Catálogos indexados  | Acesso O(1), inserção O(n)      |
+| Lista encadeada  | Média                       | Média             | Boa em atualizações locais | Médio/alto         | Flexível              | Busca linear           | Listas de adjacência | Busca O(n), inserção local O(1) |
+| Pilha            | Alta                        | Alta              | Excelente                  | Baixo              | LIFO simples          | Restrita ao topo       | Backtracking         | `push`/`pop` O(1)               |
+| Fila circular    | Média                       | Alta              | Excelente                  | Baixo              | FIFO sem deslocamento | Capacidade fixa        | Escalonamento        | `enqueue`/`dequeue` O(1)        |
+| Hash             | Média                       | Alta              | Excelente em média         | Moderado           | Busca quase constante | Sensível a colisões    | Índices associativos | Médio O(1), pior O(n)           |
+
+Armadilhas recorrentes incluem ponteiros pendentes após remoção, uso de memória não inicializada, vazamentos por ausência de `free`, confusão entre tamanho lógico e capacidade física e desenho inadequado de funções hash. Em otimização, recomenda-se usar listas sequenciais quando localidade de cache é crucial, optar por filas circulares para evitar deslocamentos e controlar fator de carga em tabelas hash com redimensionamento.
