@@ -245,3 +245,106 @@ A Tabela 3 resume os principais mecanismos de passagem de parâmetros e escopo d
 | `static` local  | Média                       | Média             | Excelente                | Segmento estático          | Preserva estado entre chamadas                    | Dificulta reentrância e testes | Contadores e caches simples  | O(1)  |
 
 Em geral, a utilização de variáveis locais e passagem por valor tende a produzir código mais seguro e previsível. O uso de ponteiros, variáveis globais e armazenamento estático deve ser reservado para situações em que seus benefícios superem os custos adicionais de complexidade e manutenção.
+
+### 3.4 Vetores e matrizes
+
+Vetores e matrizes são estruturas fundamentais para o armazenamento e manipulação de coleções de dados. Ambas organizam elementos em posições contíguas de memória, permitindo acesso eficiente por meio de índices numéricos. Essa característica torna essas estruturas amplamente utilizadas em algoritmos científicos, processamento de sinais, computação gráfica, aprendizado de máquina e aplicações de engenharia em geral.
+
+Um vetor é uma coleção unidimensional de elementos do mesmo tipo. Cada elemento pode ser acessado diretamente a partir de seu índice, sem necessidade de percorrer posições intermediárias. Essa propriedade proporciona acesso aleatório em tempo constante, resultando em complexidade temporal $O(1)$ para operações de leitura e escrita por índice.
+
+```text
+Vetor:   [a0][a1][a2][a3]
+Índice:    0   1   2   3
+```
+
+Matrizes podem ser vistas como uma generalização dos vetores para múltiplas dimensões. Em uma matriz bidimensional, cada elemento é identificado por um par de índices que representam linha e coluna. Embora conceitualmente sejam organizadas em linhas e colunas, na memória elas são armazenadas de forma linear. Em linguagens como C, utiliza-se normalmente a convenção *row-major*, na qual os elementos de uma mesma linha são armazenados consecutivamente.
+
+```text
+Matriz 3x3 em row-major:
+[a00][a01][a02][a10][a11][a12][a20][a21][a22]
+```
+
+O acesso a qualquer posição de um vetor ou matriz continua apresentando custo constante $O(1)$, pois o endereço do elemento pode ser calculado diretamente a partir dos índices. Entretanto, operações que exigem percorrer todos os elementos possuem custo proporcional ao tamanho da estrutura. O percurso completo de um vetor com $n$ elementos requer tempo $O(n)$, enquanto o percurso completo de uma matriz com $n$ linhas e $m$ colunas requer tempo $O(nm)$.
+
+A Tabela 4 resume as principais características de vetores e matrizes.
+
+| Estrutura | Facilidade de implementação | Facilidade de uso | Desempenho | Consumo de memória | Vantagens                                     | Desvantagens                                             | Casos de uso                       | Big O principal             |
+| --------- | --------------------------- | ----------------- | ---------- | ------------------ | --------------------------------------------- | -------------------------------------------------------- | ---------------------------------- | --------------------------- |
+| Vetor     | Alta                        | Alta              | Excelente  | Baixo              | Acesso direto por índice                      | Inserções e remoções custosas em posições intermediárias | Listas indexadas, buffers, tabelas | Acesso O(1), percurso O(n)  |
+| Matriz    | Alta                        | Alta              | Excelente  | Moderado a alto    | Representação natural de dados bidimensionais | Consumo cresce com o produto das dimensões               | Imagens, tabelas, álgebra linear   | Acesso O(1), percurso O(nm) |
+
+#### Exemplo 3: multiplicação de matrizes
+
+**Explicação teórica.** A multiplicação de matrizes é uma das operações mais importantes da computação científica e da álgebra linear. Dadas duas matrizes compatíveis, $A_{n \times p}$ e $B_{p \times m}$, o elemento $C[i][j]$ da matriz resultante é obtido pelo produto interno entre a linha $i$ de $A$ e a coluna $j$ de $B$.
+
+Esse processo evidencia o uso de laços aninhados e demonstra como operações aparentemente simples podem exigir grande quantidade de processamento quando executadas sobre estruturas multidimensionais. Além disso, destaca a importância do layout de memória, pois a forma como os elementos estão organizados influencia diretamente a eficiência de acesso ao cache do processador.
+
+O algoritmo clássico utiliza três laços aninhados: o primeiro percorre as linhas da matriz resultante, o segundo percorre suas colunas e o terceiro calcula o produto interno necessário para cada posição. Considerando matrizes quadradas de ordem $n$, o custo computacional é $O(n^3)$.
+
+**Pseudocódigo**
+
+```text id="n0e4db"
+algoritmo multiplicar_matrizes(A, B, C, n, p, m)
+    para i de 0 ate n - 1 faca
+        para j de 0 ate m - 1 faca
+            C[i][j] <- 0
+
+            para k de 0 ate p - 1 faca
+                C[i][j] <- C[i][j] + A[i][k] * B[k][j]
+            fim
+        fim
+    fim
+```
+
+**Implementação completa em C**
+
+```c
+#include <stdio.h>
+
+#define LINHAS_A 2
+#define COLUNAS_A 3
+#define COLUNAS_B 2
+
+void multiplicar_matrizes(const int a[LINHAS_A][COLUNAS_A],
+                         const int b[COLUNAS_A][COLUNAS_B],
+                         int c[LINHAS_A][COLUNAS_B]) {
+    for (int i = 0; i < LINHAS_A; i++) {
+        for (int j = 0; j < COLUNAS_B; j++) {
+            c[i][j] = 0;
+            for (int k = 0; k < COLUNAS_A; k++) {
+                c[i][j] += a[i][k] * b[k][j];
+            }
+        }
+    }
+}
+
+int main(void) {
+    int a[LINHAS_A][COLUNAS_A] = {{1, 2, 3}, {4, 5, 6}};
+    int b[COLUNAS_A][COLUNAS_B] = {{7, 8}, {9, 10}, {11, 12}};
+    int c[LINHAS_A][COLUNAS_B];
+
+    multiplicar_matrizes(a, b, c);
+
+    for (int i = 0; i < LINHAS_A; i++) {
+        for (int j = 0; j < COLUNAS_B; j++) {
+            printf("%d ", c[i][j]);
+        }
+        printf("\n");
+    }
+
+    return 0;
+}
+```
+
+**Complexidade.** Tempo $O(npm)$; espaço adicional $O(1)$ além da matriz de saída. Em matrizes quadradas $n \times n$, o custo é $O(n^3)$.
+
+**Partes importantes.** A assinatura explicita dimensões em compile time; o acumulador `c[i][j]` precisa ser inicializado antes do laço interno; o laço em `k` representa o produto interno.
+
+**Entrada e saída.** Para as matrizes dadas, a saída é:
+
+```text
+58 64
+139 154
+```
+
+**Comparação com alternativas.** Algoritmos como Strassen reduzem complexidade assintótica, mas possuem maior constante oculta e só são vantajosos em matrizes grandes e contextos especializados.
