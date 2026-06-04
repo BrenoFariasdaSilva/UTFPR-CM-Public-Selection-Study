@@ -464,3 +464,7 @@ Tabela 4 consolida comparações entre abordagens estruturais recorrentes.
 | Matriz            | Média                       | Média             | Excelente para acesso regular | O(nm)               | Representação natural de grade   | Alto custo espacial                     | Álgebra linear, grafos densos | Acesso O(1)        |
 
 Entre as armadilhas mais comuns destacam-se: erro off-by-one em laços, ausência de caso base em recursão, uso indevido de variáveis globais, passagem de ponteiros inválidos, e percursos de matriz que desconsideram localidade de memória. Em termos de otimização, recomenda-se ordenar predicados por frequência esperada, preferir passagem por valor para escalares, usar `const` para contratos imutáveis e substituir recursão profunda por iteração quando a pilha for um recurso crítico.
+
+## 6. Conclusão
+
+Estruturas de controle, modularização, vetores, matrizes e recursividade não constituem apenas tópicos introdutórios; eles definem princípios permanentes da engenharia de algoritmos. Para tal, a qualidade de soluções mais avançadas depende diretamente da maturidade com que essas bases são dominadas. Em C, esse domínio exige compreender simultaneamente abstração e concretude: semântica do algoritmo, contratos funcionais, organização modular, custo assintótico, layout de memória e implicações do modelo de execução.
