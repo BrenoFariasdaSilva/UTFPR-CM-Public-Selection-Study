@@ -13,3 +13,7 @@ Do ponto de vista pedagógico e científico, a compreensão aprofundada desses t
 Em programação imperativa, o estado do programa é modificado por uma sequência de comandos. Estruturas de controle disciplinam essa sequência, permitindo seleção condicional e repetição. A instrução `if` implementa desvio condicional binário; `if-else if-else` permite encadeamentos hierárquicos de predicado; `switch` oferece despacho multi-ramo com custo lógico geralmente mais legível quando as alternativas são valores discretos de uma expressão inteira ou enumerada (Cormen et al., 2012).
 
 Do ponto de vista formal, essas construções podem ser descritas por funções de transição de estado. A relevância acadêmica reside em que decisões mal modeladas aumentam complexidade ciclomática, reduzem verificabilidade e ampliam risco de erros semânticos, como o clássico problema do dangling else.
+
+### 2.2 Repetição e invariantes de laço
+
+Laços `while`, `do-while` e `for` expressam iteração controlada por predicado, pós-teste ou contador. A análise correta dessas estruturas exige o conceito de invariante de laço: uma propriedade que permanece verdadeira antes e após cada iteração. Invariantes permitem provar correção parcial e total, além de sustentar análises assintóticas rigorosas (Knuth, 1997).
