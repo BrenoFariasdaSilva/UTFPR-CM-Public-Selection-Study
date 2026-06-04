@@ -434,3 +434,74 @@ void uf_unir(int pai[], int rank[], int a, int b) {
 ```
 
 **Complexidade.** Ordenação das arestas domina o custo: $O(E \log E)$, com operações quase constantes amortizadas na estrutura union-find.
+
+### 3.5 Ordenação topológica e componentes conexos
+
+#### Algoritmo 8: ordenação topológica por Kahn
+
+Ordenação topológica é possível apenas em DAGs. Kahn constrói a ordenação removendo iterativamente vértices de grau de entrada zero.
+
+**Implementação completa em C**
+
+```c
+int ordenacao_topologica(const GrafoMatriz *grafo, int ordem[]) {
+    int grau_entrada[MAXV] = {0};
+    int fila[MAXV];
+    int inicio = 0;
+    int fim = 0;
+    int quantidade = 0;
+
+    for (int u = 0; u < grafo->vertices; u++) {
+        for (int v = 0; v < grafo->vertices; v++) {
+            if (grafo->matriz[u][v] != 0) {
+                grau_entrada[v]++;
+            }
+        }
+    }
+
+    for (int i = 0; i < grafo->vertices; i++) {
+        if (grau_entrada[i] == 0) {
+            fila[fim++] = i;
+        }
+    }
+
+    while (inicio < fim) {
+        int u = fila[inicio++];
+        ordem[quantidade++] = u;
+        for (int v = 0; v < grafo->vertices; v++) {
+            if (grafo->matriz[u][v] != 0) {
+                grau_entrada[v]--;
+                if (grau_entrada[v] == 0) {
+                    fila[fim++] = v;
+                }
+            }
+        }
+    }
+
+    return quantidade == grafo->vertices;
+}
+```
+
+**Complexidade.** Em matriz, $O(V^2)$; em lista, $O(V + E)$.
+
+#### Algoritmo 9: componentes conexos
+
+**Implementação completa em C**
+
+```c
+int componentes_conexos(const GrafoMatriz *grafo) {
+    int visitado[MAXV] = {0};
+    int componentes = 0;
+
+    for (int v = 0; v < grafo->vertices; v++) {
+        if (!visitado[v]) {
+            dfs_visit(grafo, v, visitado);
+            componentes++;
+        }
+    }
+
+    return componentes;
+}
+```
+
+**Complexidade.** Igual à DFS base, pois cada vértice é iniciado no máximo uma vez.
