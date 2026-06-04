@@ -25,3 +25,7 @@ Funções e procedimentos reduzem acoplamento, aumentam coesão e tornam a prova
 ### 2.4 Estruturas homogêneas e layout de memória
 
 Vetores e matrizes são estruturas homogêneas porque armazenam elementos de mesmo tipo em posições contíguas. Esse arranjo fornece acesso aleatório em tempo constante, mas impõe tamanho fixo em sua forma estática e custo elevado para inserções e remoções internas. Matrizes em C são armazenadas em ordem row-major - ou seja, linha por linha - de modo que a travessia por linhas explora localidade espacial de cache com maior eficiência (Sedgewick, 1998).
+
+### 2.5 Recursividade
+
+Recursividade descreve algoritmos em que a solução de um problema depende de soluções para instâncias menores do mesmo problema. Seus componentes compõem caso base, redução do problema e progresso em direção à parada. Embora elegantemente alinhada à definição de estruturas indutivas, a recursão traz custos de empilhamento, possíveis riscos de estouro de pilha e, em alguns casos, redundância computacional, como em implementações ingênuas de Fibonacci (Cormen et al., 2009).
