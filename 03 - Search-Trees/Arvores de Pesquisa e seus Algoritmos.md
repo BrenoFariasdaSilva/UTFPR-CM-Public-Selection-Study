@@ -500,3 +500,44 @@ NoArvore *avl_inserir(NoArvore *raiz, int chave) {
 **Complexidade.** Busca, inserção e remoção em $O(\log n)$; espaço adicional $O(\log n)$ via recursão.
 
 **Comparação com BST.** AVL reduz rigorosamente a altura e tende a favorecer consultas, mas paga esse ganho com manutenção de alturas e rotações adicionais.
+
+### 3.3 Red-Black Trees
+
+Árvores rubro-negras impõem invariantes de cor: a raiz é preta, nós vermelhos não possuem filhos vermelhos, e todo caminho da raiz a uma folha nula tem a mesma altura negra. O balanceamento é menos rígido que em AVL, o que geralmente reduz rotações em atualizações.
+
+```text
+Propriedades essenciais:
+1. Cada nó é vermelho ou preto.
+2. A raiz é preta.
+3. Folhas nulas são pretas.
+4. Nenhum nó vermelho tem filho vermelho.
+5. Todos os caminhos possuem mesma altura negra.
+```
+
+**Pseudocódigo resumido da inserção.** Inserir como em BST, colorir o novo nó de vermelho e corrigir violações por recoloração e rotações, conforme a cor do tio. A remoção é mais complexa, envolvendo casos de nó vermelho ou preto e ajustes subsequentes para manter invariantes.
+
+**Exemplo de violação após inserção.**
+
+Após inserir a chave 10:
+
+```text
+        30(B)
+        /
+     20(R)
+     /
+  10(R)
+```
+
+A propriedade "nenhum nó vermelho possui filho vermelho" foi violada.
+
+Após uma rotação à direita e ajuste de cores:
+
+```text
+         20(B)
+        /     \
+    10(R)    30(R)
+```
+
+A árvore volta a satisfazer as propriedades rubro-negras.
+
+**Complexidade.** Busca, inserção e remoção em $O(\log n)$. Em bibliotecas de propósito geral, elas são frequentemente preferidas a AVL por melhor equilíbrio prático entre custo de manutenção e altura controlada. A vantagem de uma árvore rubro-negra é que ela é mais flexível em termos de balanceamento, o que pode resultar em menos rotações durante inserções e remoções, especialmente em cenários com muitas atualizações. No entanto, a implementação é mais complexa devido à necessidade de manter as invariantes de cor e realizar as rotações corretas.
