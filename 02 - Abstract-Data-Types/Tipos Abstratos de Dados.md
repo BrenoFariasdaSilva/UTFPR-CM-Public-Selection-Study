@@ -25,3 +25,105 @@ Pilhas (*stacks*) seguem o conceito LIFO (*Last In, First Out*), na qual o últi
 Filas (*queues*) seguem o conceito FIFO (*First In, First Out*), em que o primeiro elemento inserido é o primeiro a ser removido. São empregadas em escalonamento de processos, sistemas de atendimento, buffers de comunicação e algoritmos de busca em largura (BFS).
 
 Tabelas hash (*hash tables*) armazenam elementos por meio de uma função de dispersão (*hash function*), que transforma uma chave em uma posição de armazenamento. Quando a função hash distribui adequadamente os dados e o fator de carga permanece controlado, operações de busca, inserção e remoção apresentam custo médio próximo de $O(1)$. Em contrapartida, colisões podem ocorrer quando múltiplas chaves são mapeadas para a mesma posição, exigindo estratégias de tratamento como encadeamento separado ou endereçamento aberto (Cormen et al., 2012).
+
+## 3. Desenvolvimento
+
+```mermaid
+flowchart LR
+    A[TAD] --> B[Listas sequenciais]
+    A --> C[Listas encadeadas]
+    A --> D[Pilhas]
+    A --> E[Filas]
+    A --> F[Tabelas hash]
+```
+
+### 3.1 Listas estáticas e sequenciais
+
+Listas sequenciais estáticas armazenam elementos em vetor contíguo. O acesso por índice é $O(1)$, mas inserções e remoções no meio exigem deslocamentos lineares.
+
+| Estrutura      | Facilidade de implementação | Facilidade de uso | Desempenho          | Consumo de memória | Vantagens                          | Desvantagens    | Casos de uso                       | Big O principal                                |
+| -------------- | --------------------------- | ----------------- | ------------------- | ------------------ | ---------------------------------- | --------------- | ---------------------------------- | ---------------------------------------------- |
+| Lista estática | Alta                        | Alta              | Excelente em acesso | Baixo e previsível | Simplicidade e localidade de cache | Capacidade fixa | Tabelas pequenas, buffers estáveis | Busca O(n), acesso O(1), inserção interna O(n) |
+
+#### Algoritmo 1: inserção ordenada em lista sequencial
+
+**Explicação teórica.** Manter a lista ordenada reduz custo de futuras buscas binárias, mas a inserção exige localizar a posição e deslocar elementos para abrir espaço.
+
+**Pseudocódigo**
+
+```text
+algoritmo inserir_ordenado(lista, tamanho, capacidade, valor)
+    se tamanho = capacidade então retorne falso
+    i <- tamanho - 1
+    enquanto i >= 0 e lista[i] > valor faca
+        lista[i + 1] <- lista[i]
+        i <- i - 1
+    lista[i + 1] <- valor
+    tamanho <- tamanho + 1
+    retorne verdadeiro
+fim
+```
+
+**Implementação completa em C**
+
+```c
+#include <stdio.h>
+
+#define CAPACIDADE 16
+
+typedef struct {
+    int dados[CAPACIDADE];
+    int tamanho;
+} ListaEstatica;
+
+void lista_inicializar(ListaEstatica *lista) {
+    lista->tamanho = 0;
+}
+
+int lista_buscar(const ListaEstatica *lista, int valor) {
+    for (int indice = 0; indice < lista->tamanho; indice++) {
+        if (lista->dados[indice] == valor) {
+            return indice;
+        }
+    }
+    return -1;
+}
+
+int lista_inserir_ordenado(ListaEstatica *lista, int valor) {
+    if (lista->tamanho == CAPACIDADE) {
+        return 0;
+    }
+
+    int indice = lista->tamanho - 1;
+    while (indice >= 0 && lista->dados[indice] > valor) {
+        lista->dados[indice + 1] = lista->dados[indice];
+        indice--;
+    }
+
+    lista->dados[indice + 1] = valor;
+    lista->tamanho++;
+    return 1;
+}
+
+int lista_remover(ListaEstatica *lista, int valor) {
+    int posicao = lista_buscar(lista, valor);
+    if (posicao < 0) {
+        return 0;
+    }
+
+    for (int indice = posicao; indice < lista->tamanho - 1; indice++) {
+        lista->dados[indice] = lista->dados[indice + 1];
+    }
+
+    lista->tamanho--;
+    return 1;
+}
+```
+
+**Complexidade.** Busca $O(n)$; inserção e remoção no pior caso $O(n)$; acesso por índice $O(1)$; espaço $O(n)$ pré-alocado.
+
+**Partes importantes.** O deslocamento é executado de trás para frente para não sobrescrever dados; o tamanho lógico é independente da capacidade física; a remoção reutiliza busca linear.
+
+**Entrada e saída.** Inserindo `7, 3, 9, 5`, a lista final permanece `3 5 7 9`.
+
+**Comparação com alternativas.** Em relação à lista encadeada, a lista estática perde em inserção no início, mas ganha em localidade de cache e simplicidade de depuração.
