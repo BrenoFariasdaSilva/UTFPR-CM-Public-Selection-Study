@@ -74,3 +74,18 @@ int busca_binaria(int v[], int n, int x) {
 ```
 
 ---
+
+### Implementação recursiva
+
+```c
+int busca_binaria_rec(int v[], int ini, int fim, int x) {
+    if (ini > fim) return -1;
+
+    int meio = (ini + fim) / 2;
+
+    if (v[meio] == x) return meio;
+    if (x < v[meio])
+        return busca_binaria_rec(v, ini, meio - 1, x);
+    return busca_binaria_rec(v, meio + 1, fim, x);
+}
+```
