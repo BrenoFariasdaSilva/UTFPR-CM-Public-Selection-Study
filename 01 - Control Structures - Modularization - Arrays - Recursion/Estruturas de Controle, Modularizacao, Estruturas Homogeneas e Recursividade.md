@@ -29,3 +29,97 @@ Vetores e matrizes são estruturas homogêneas porque armazenam elementos de mes
 ### 2.5 Recursividade
 
 Recursividade descreve algoritmos em que a solução de um problema depende de soluções para instâncias menores do mesmo problema. Seus componentes compõem caso base, redução do problema e progresso em direção à parada. Embora elegantemente alinhada à definição de estruturas indutivas, a recursão traz custos de empilhamento, possíveis riscos de estouro de pilha e, em alguns casos, redundância computacional, como em implementações ingênuas de Fibonacci (Cormen et al., 2009).
+
+## 3. Desenvolvimento
+
+### 3.1 Estruturas de decisão
+
+As estruturas de decisão permitem que um algoritmo escolha diferentes caminhos de execução com base na avaliação de condições lógicas. Elas constituem um dos mecanismos fundamentais para o controle de fluxo em programas, possibilitando adaptar o comportamento do sistema de acordo com os dados de entrada ou com o estado da execução.
+
+A estrutura `if` simples é utilizada quando apenas uma ação deve ser executada caso determinada condição seja verdadeira. Trata-se da forma mais elementar de decisão e normalmente apresenta alta legibilidade para verificações pontuais.
+
+Quando existem múltiplos caminhos possíveis, pode-se utilizar cadeias de `if-else if`, nas quais as condições são avaliadas sequencialmente até que uma delas seja satisfeita. Essa abordagem oferece grande flexibilidade, pois cada condição pode envolver expressões distintas. Entretanto, o aumento do número de testes tende a elevar a complexidade do código e dificultar sua manutenção.
+
+A estrutura `switch` é indicada para situações em que uma única variável deve ser comparada com diversos valores discretos. Em muitos casos, ela proporciona maior legibilidade do que longas cadeias de `if-else if`. Dependendo da linguagem e do compilador utilizados, a implementação pode ser otimizada por meio de tabelas de salto (*jump tables*), reduzindo o custo das comparações.
+
+A Figura 1 apresenta um fluxo genérico de tomada de decisão em algoritmos.
+
+```mermaid
+flowchart TD
+    A[Entrada de dados] --> B{Condicao booleana}
+    B -->|Verdadeira| C[Executa bloco principal]
+    B -->|Falsa| D{Outra condicao?}
+    D -->|Sim| E[Executa bloco alternativo]
+    D -->|Nao| F[Executa caso padrao]
+```
+
+A Tabela 1 resume as principais características das estruturas de decisão discutidas.
+
+| Estrutura    | Facilidade de implementação | Facilidade de uso | Desempenho | Consumo de memória | Vantagens                         | Desvantagens                             | Casos de uso                         | Big O lógico |
+| ------------ | --------------------------- | ----------------- | ---------- | ------------------ | --------------------------------- | ---------------------------------------- | ------------------------------------ | ------------ |
+| `if` simples | Alta                        | Alta              | Excelente  | O(1)               | Clareza para decisão binária      | Escala mal com muitos casos              | Validação simples                    | O(1)         |
+| `if-else if` | Alta                        | Média             | Excelente  | O(1)               | Flexível para múltiplas condições | Pode aumentar a complexidade ciclomática | Regras de negócio                    | O(k)         |
+| `switch`     | Alta                        | Alta              | Muito bom  | O(1)               | Legibilidade para casos discretos | Menos flexível para expressões complexas | Menus, estados, analisadores léxicos | O(1) a O(k)  |
+
+#### Exemplo 1: classificação de desempenho acadêmico
+
+**Explicação teórica.** O algoritmo classifica uma nota em quatro categorias por decisão múltipla hierárquica. A ordem dos predicados é importante para preservar exclusividade e evitar avaliações redundantes.
+
+**Pseudocódigo**
+
+```text
+algoritmo classificar_nota(nota)
+    se nota < 0 ou nota > 100 então
+        escreva "invalida"
+    senao se nota >= 85 então
+        escreva "excelente"
+    senao se nota >= 70 então
+        escreva "boa"
+    senao se nota >= 50 então
+        escreva "suficiente"
+    senao
+        escreva "insuficiente"
+fim
+```
+
+**Implementação completa em C**
+
+```c
+#include <stdio.h>
+
+const char *classificar_nota(int nota) {
+    if (nota < 0 || nota > 100) {
+        return "invalida";
+    }
+
+    if (nota >= 85) {
+        return "excelente";
+    }
+
+    if (nota >= 70) {
+        return "boa";
+    }
+
+    if (nota >= 50) {
+        return "suficiente";
+    }
+
+    return "insuficiente";
+}
+
+int main(void) {
+    int nota = 78;
+    printf("Nota %d -> %s\n", nota, classificar_nota(nota));
+    return 0;
+}
+```
+
+**Complexidade.** Tempo $O(1)$, espaço adicional $O(1)$.
+
+**Partes importantes.** A primeira guarda evita estados inválidos; a sequência decrescente de limites elimina sobreposição de casos; o retorno imediato simplifica controle de fluxo.
+
+**Entrada e saída.** Entrada: `78`. Saída: `Nota 78 -> boa`.
+
+**Análise de desempenho.** O custo é constante, mas o número médio de comparações depende da distribuição das notas. Em distribuições concentradas em notas altas, a ordenação atual é favorável.
+
+**Comparação com alternativas.** Uma versão com `switch` não seria adequada porque as faixas de nota são intervalares, não valores discretos isolados.
