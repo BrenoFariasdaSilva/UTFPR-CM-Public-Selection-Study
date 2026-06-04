@@ -187,3 +187,17 @@ void insertion_sort(int v[], int n) {
     }
 }
 ```
+
+### Complexidade
+
+| Caso   | Complexidade |
+| ------ | ------------ |
+| Melhor | O(n)         |
+| Médio  | O(n²)        |
+| Pior   | O(n²)        |
+
+#### Estabilidade
+
+Estável
+
+---
