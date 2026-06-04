@@ -505,3 +505,9 @@ int componentes_conexos(const GrafoMatriz *grafo) {
 ```
 
 **Complexidade.** Igual à DFS base, pois cada vértice é iniciado no máximo uma vez.
+
+## 4. Exemplos, Aplicações e Estudos de Caso
+
+BFS é usado em roteamento sem pesos, análise de distância social e expansão por níveis em jogos. DFS é central em compiladores, análise de dependências e mineração de componentes. Dijkstra sustenta GPS e roteamento em redes com pesos não negativos. Bellman-Ford aparece em protocolos que precisam detectar custos negativos ou atualizações iterativas. Floyd-Warshall é útil em fechamento transitivo e análise de todos os pares em grafos densos. Prim e Kruskal modelam expansão de redes elétricas, ópticas e viárias. Ordenação topológica resolve planejamento com pré-requisitos. Componentes conexos apoiam análise de comunidades e segmentação estrutural.
+
+Um estudo de caso real é o planejamento de distribuição urbana: o grafo da malha viária pode ser percorrido por BFS para alcance, por Dijkstra para rotas mínimas, por Prim para expansão de infraestrutura e por componentes conexos para detectar regiões isoladas após falhas.
