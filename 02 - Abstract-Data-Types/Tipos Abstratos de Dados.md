@@ -127,3 +127,88 @@ int lista_remover(ListaEstatica *lista, int valor) {
 **Entrada e saída.** Inserindo `7, 3, 9, 5`, a lista final permanece `3 5 7 9`.
 
 **Comparação com alternativas.** Em relação à lista encadeada, a lista estática perde em inserção no início, mas ganha em localidade de cache e simplicidade de depuração.
+
+### 3.2 Listas dinâmicas e encadeadas
+
+Listas encadeadas representam cada elemento como nó com referência ao próximo. A principal vantagem é remover dependência de capacidade fixa e permitir inserções locais com custo constante quando a posição já é conhecida.
+
+| Estrutura       | Facilidade de implementação | Facilidade de uso | Desempenho                | Consumo de memória  | Vantagens                | Desvantagens         | Casos de uso                       | Big O principal                     |
+| --------------- | --------------------------- | ----------------- | ------------------------- | ------------------- | ------------------------ | -------------------- | ---------------------------------- | ----------------------------------- |
+| Lista encadeada | Média                       | Média             | Bom para inserções locais | Maior por ponteiros | Flexibilidade estrutural | Sem acesso aleatório | Filas, pilhas, dicionários simples | Busca O(n), inserção no início O(1) |
+
+#### Algoritmo 2: inserção e remoção em lista simplesmente encadeada
+
+**Pseudocódigo**
+
+```text
+algoritmo inserir_inicio(cabeca, valor)
+    novo <- aloque no
+    novo.valor <- valor
+    novo.proximo <- cabeca
+    cabeca <- novo
+fim
+
+algoritmo remover_valor(cabeca, valor)
+    percorra mantendo anterior e atual
+    quando encontrar valor, religue anterior ao proximo
+fim
+```
+
+**Implementação completa em C**
+
+```c
+#include <stdlib.h>
+
+typedef struct No {
+    int valor;
+    struct No *proximo;
+} No;
+
+No *lista_encadeada_inserir_inicio(No *cabeca, int valor) {
+    No *novo_no = (No *)malloc(sizeof(No));
+    if (novo_no == NULL) {
+        return cabeca;
+    }
+
+    novo_no->valor = valor;
+    novo_no->proximo = cabeca;
+    return novo_no;
+}
+
+No *lista_encadeada_remover(No *cabeca, int valor) {
+    No *anterior = NULL;
+    No *atual = cabeca;
+
+    while (atual != NULL && atual->valor != valor) {
+        anterior = atual;
+        atual = atual->proximo;
+    }
+
+    if (atual == NULL) {
+        return cabeca;
+    }
+
+    if (anterior == NULL) {
+        cabeca = atual->proximo;
+    } else {
+        anterior->proximo = atual->proximo;
+    }
+
+    free(atual);
+    return cabeca;
+}
+
+int lista_encadeada_buscar(const No *cabeca, int valor) {
+    while (cabeca != NULL) {
+        if (cabeca->valor == valor) {
+            return 1;
+        }
+        cabeca = cabeca->proximo;
+    }
+    return 0;
+}
+```
+
+**Complexidade.** Busca e remoção por valor $O(n)$; inserção no início $O(1)$; espaço $O(n)$ acrescido de ponteiros.
+
+**Explicação das partes relevantes.** O ponteiro `anterior` é necessário para reencadear a lista na remoção; o caso em que o nó removido é a cabeça demanda tratamento especial; a desalocação imediata evita vazamento de memória.
