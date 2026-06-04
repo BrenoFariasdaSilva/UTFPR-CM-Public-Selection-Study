@@ -111,3 +111,118 @@ int busca_binaria(const int vetor[], int tamanho, int chave) {
 **Complexidade.** Melhor caso $O(1)$, médio e pior $O(\log n)$, espaço $O(1)$.
 
 **Partes importantes.** O cálculo de `meio` evita overflow potencial; a pré-condição de ordenação é indispensável.
+
+### 3.2 Algoritmos simples de ordenação
+
+#### Algoritmo 3: Bubble Sort
+
+**Explicação teórica.** Repetidas trocas adjacentes movem gradualmente maiores elementos para o final. É estável e simples, porém ineficiente.
+
+**Pseudocódigo**
+
+```text
+algoritmo bubble_sort(vetor, n)
+    para i de 0 ate n - 2 faca
+        houve_troca <- falso
+        para j de 0 ate n - 2 - i faca
+            se vetor[j] > vetor[j + 1] entao
+                troque vetor[j] e vetor[j + 1]
+                houve_troca <- verdadeiro
+        se nao houve_troca entao pare
+```
+
+**Implementação completa em C**
+
+```c
+void bubble_sort(int vetor[], int tamanho) {
+    for (int i = 0; i < tamanho - 1; i++) {
+        int houve_troca = 0;
+        for (int j = 0; j < tamanho - 1 - i; j++) {
+            if (vetor[j] > vetor[j + 1]) {
+                int temp = vetor[j];
+                vetor[j] = vetor[j + 1];
+                vetor[j + 1] = temp;
+                houve_troca = 1;
+            }
+        }
+        if (!houve_troca) {
+            break;
+        }
+    }
+}
+```
+
+**Complexidade.** Melhor caso $O(n)$ com otimização, médio e pior $O(n^2)$, espaço $O(1)$.
+
+#### Algoritmo 4: Selection Sort
+
+O selection sort seleciona o menor elemento do vetor e o coloca na posição correta. Ele minimiza o número de trocas, mas não é adaptativo.
+
+**Pseudocódigo**
+
+```text
+algoritmo selection_sort(vetor, n)
+    para i de 0 ate n - 2 faca
+        minimo <- i
+        para j de i + 1 ate n - 1 faca
+            se vetor[j] < vetor[minimo] entao
+                minimo <- j
+        troque vetor[i] e vetor[minimo]
+```
+
+**Implementação completa em C**
+
+```c
+void selection_sort(int vetor[], int tamanho) {
+    for (int i = 0; i < tamanho - 1; i++) {
+        int minimo = i;
+        for (int j = i + 1; j < tamanho; j++) {
+            if (vetor[j] < vetor[minimo]) {
+                minimo = j;
+            }
+        }
+        int temp = vetor[i];
+        vetor[i] = vetor[minimo];
+        vetor[minimo] = temp;
+    }
+}
+```
+
+**Complexidade.** Melhor, médio e pior caso $O(n^2)$; espaço $O(1)$; não é estável na forma clássica.
+
+#### Algoritmo 5: Insertion Sort
+
+**Explicação teórica.** Mantém um prefixo ordenado e insere cada novo elemento em sua posição correta. É estável e adaptativo.
+
+**Pseudocódigo**
+
+```text
+algoritmo insertion_sort(vetor, n)
+    para i de 1 ate n - 1 faca
+        chave <- vetor[i]
+        j <- i - 1
+        enquanto j >= 0 e vetor[j] > chave faca
+            vetor[j + 1] <- vetor[j]
+            j <- j - 1
+        vetor[j + 1] <- chave
+```
+
+**Implementação completa em C**
+
+```c
+void insertion_sort(int vetor[], int tamanho) {
+    for (int i = 1; i < tamanho; i++) {
+        int chave = vetor[i];
+        int j = i - 1;
+        while (j >= 0 && vetor[j] > chave) {
+            vetor[j + 1] = vetor[j];
+            j--;
+        }
+        vetor[j + 1] = chave;
+    }
+}
+```
+
+**Complexidade.** Melhor caso $O(n)$, médio e pior $O(n^2)$; espaço $O(1)$.
+
+**Comparação dos métodos simples.** Bubble realiza muitas trocas; Selection minimiza trocas, mas não comparações; Insertion é o melhor em vetores pequenos ou quase ordenados.
