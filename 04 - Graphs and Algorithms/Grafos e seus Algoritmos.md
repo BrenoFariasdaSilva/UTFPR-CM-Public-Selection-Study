@@ -531,3 +531,15 @@ Armadilhas frequentes incluem ignorar direção das arestas, misturar representa
 ## 6. Conclusão
 
 Grafos resolvem problemas de conectividade, caminho, otimização e dependência. O domínio de seus algoritmos exige compreender, simultaneamente, representação, prova de corretude, restrições de aplicabilidade e custo assintótico. O valor desse domínio reside precisamente na habilidade de escolher o algoritmo adequado ao tipo de peso, densidade, direção e objetivo analítico do problema.
+
+## 7. Referências
+
+CORMEN, Thomas H. et al. Algoritmos: teoria e prática. Rio de Janeiro, RJ: Elsevier, 2012.
+
+CORMEN, Thomas H. et al. Introduction to algorithms. 3rd ed. Cambridge, MA: MIT Press, 2009.
+
+SEDGEWICK, R. Algorithms in C, Parts 1-4: Fundamentals, Data Structures, Sorting, Searching.
+
+SEDGEWICK, R. Algorithms in C, Part 5: Graph Algorithms. Third Edition. Addison-Wesley, 1997.
+
+ZIVIANI, Nivio. Projeto de algoritmos: com implementações em Pascal e C. Cengage Learning, 2004.
