@@ -275,3 +275,228 @@ void bst_inorder(const NoArvore *raiz) {
 **Complexidade.** Busca, inserção e remoção custam $O(h)$, em que $h$ é a altura. Melhor e médio caso aproximam-se de $O(\log n)$; pior caso $O(n)$. Espaço recursivo também é $O(h)$.
 
 **Explicação das partes relevantes.** A remoção com dois filhos substitui a chave pelo sucessor em-ordem; a busca preserva a propriedade de ordem local; a profundidade recursiva acompanha a altura da árvore.
+
+### 3.2 AVL
+
+Árvores AVL são árvores binárias de busca autobalanceadas nas quais o fator de balanceamento de cada nó deve permanecer em $\{-1, 0, 1\}$. O fator de balanceamento é definido como a diferença entre as alturas das subárvores esquerda e direita. Essa restrição mantém a altura da árvore em $O(\log n)$, garantindo operações eficientes de busca, inserção e remoção.
+
+**Exemplo de árvore AVL.** O fator de balanceamento de cada nó é calculado como a diferença entre as alturas das subárvores esquerda e direita. Em uma árvore AVL válida, esse valor deve permanecer entre -1 e 1.
+
+```text
+                     30 (0)
+                   /        \
+               20 (0)      40 (0)
+              /    \       /    \
+          10 (0) 25 (0) 35 (0) 50 (0)
+```
+
+Legenda:
+
+* Valor entre parênteses = fator de balanceamento.
+* Todos os nós possuem fator de balanceamento igual a 0.
+* A árvore encontra-se perfeitamente balanceada.
+* A altura cresce proporcionalmente a $\log n$.
+
+Por exemplo, o percurso em-ordem produz:
+
+```text
+10, 20, 25, 30, 35, 40, 50
+```
+
+Quando uma operação provoca desequilíbrio, rotações simples ou duplas são utilizadas para restaurar o balanceamento da estrutura.
+
+#### Rotação simples à direita
+
+A rotação simples à direita é aplicada quando ocorre um desequilíbrio do tipo esquerda-esquerda (LL), isto é, quando a inserção ocorre na subárvore esquerda do filho esquerdo.
+
+**Pseudocódigo**
+
+```text
+algoritmo rotacao_direita(y)
+    x <- y.esq
+    t2 <- x.dir
+
+    x.dir <- y
+    y.esq <- t2
+
+    atualize_alturas(x, y)
+
+    retorne x
+fim
+```
+
+#### Rotação simples à esquerda
+
+A rotação simples à esquerda é aplicada quando ocorre um desequilíbrio do tipo direita-direita (RR), isto é, quando a inserção ocorre na subárvore direita do filho direito.
+
+**Pseudocódigo**
+
+```text
+algoritmo rotacao_esquerda(x)
+    y <- x.dir
+    t2 <- y.esq
+
+    y.esq <- x
+    x.dir <- t2
+
+    atualize_alturas(x, y)
+
+    retorne y
+fim
+```
+
+#### Rotação dupla esquerda-direita (LR)
+
+A rotação dupla esquerda-direita é utilizada quando a inserção ocorre na subárvore direita do filho esquerdo. Nesse caso, executa-se inicialmente uma rotação à esquerda e depois uma rotação à direita.
+
+**Pseudocódigo**
+
+```text
+algoritmo rotacao_esquerda_direita(no)
+    no.esq <- rotacao_esquerda(no.esq)
+
+    retorne rotacao_direita(no)
+fim
+```
+
+#### Rotação dupla direita-esquerda (RL)
+
+A rotação dupla direita-esquerda é utilizada quando a inserção ocorre na subárvore esquerda do filho direito. Nesse caso, executa-se inicialmente uma rotação à direita e depois uma rotação à esquerda.
+
+**Pseudocódigo**
+
+```text
+algoritmo rotacao_direita_esquerda(no)
+    no.dir <- rotacao_direita(no.dir)
+
+    retorne rotacao_esquerda(no)
+fim
+```
+
+#### Algoritmo 2: Inserção em árvore AVL
+
+Após inserir um novo elemento seguindo as regras de uma BST, a árvore atualiza as alturas dos nós e verifica possíveis desequilíbrios. Caso o fator de balanceamento ultrapasse os limites permitidos, a rotação apropriada é aplicada.
+
+**Pseudocódigo**
+
+```text
+algoritmo avl_inserir(raiz, chave)
+    se raiz = nulo então
+        retorne novo_no(chave)
+    fim
+
+    se chave < raiz.chave então
+        raiz.esq <- avl_inserir(raiz.esq, chave)
+
+    senao se chave > raiz.chave então
+        raiz.dir <- avl_inserir(raiz.dir, chave)
+
+    senao
+        retorne raiz
+    fim
+
+    atualize_altura(raiz)
+
+    fator <- fator_balanceamento(raiz)
+
+    se fator > 1 e chave < raiz.esq.chave então
+        retorne rotacao_direita(raiz)
+    fim
+
+    se fator < -1 e chave > raiz.dir.chave então
+        retorne rotacao_esquerda(raiz)
+    fim
+
+    se fator > 1 e chave > raiz.esq.chave então
+        retorne rotacao_esquerda_direita(raiz)
+    fim
+
+    se fator < -1 e chave < raiz.dir.chave então
+        retorne rotacao_direita_esquerda(raiz)
+    fim
+
+    retorne raiz
+fim
+```
+
+A principal vantagem das árvores AVL é a garantia de altura limitada por $O(\log n)$, evitando a degeneração observada em árvores binárias de busca convencionais. Como consequência, operações de busca, inserção e remoção mantêm desempenho logarítmico mesmo em cenários desfavoráveis.
+
+#### Algoritmo 2: rotações e inserção AVL
+
+**Implementação completa em C**
+
+```c
+int maximo(int a, int b) {
+    return (a > b) ? a : b;
+}
+
+int avl_altura(NoArvore *no) {
+    return (no == NULL) ? 0 : no->altura;
+}
+
+int avl_fator_balanceamento(NoArvore *no) {
+    return (no == NULL) ? 0 : avl_altura(no->esquerda) - avl_altura(no->direita);
+}
+
+NoArvore *avl_rotacao_direita(NoArvore *y) {
+    NoArvore *x = y->esquerda;
+    NoArvore *t2 = x->direita;
+
+    x->direita = y;
+    y->esquerda = t2;
+
+    y->altura = 1 + maximo(avl_altura(y->esquerda), avl_altura(y->direita));
+    x->altura = 1 + maximo(avl_altura(x->esquerda), avl_altura(x->direita));
+    return x;
+}
+
+NoArvore *avl_rotacao_esquerda(NoArvore *x) {
+    NoArvore *y = x->direita;
+    NoArvore *t2 = y->esquerda;
+
+    y->esquerda = x;
+    x->direita = t2;
+
+    x->altura = 1 + maximo(avl_altura(x->esquerda), avl_altura(x->direita));
+    y->altura = 1 + maximo(avl_altura(y->esquerda), avl_altura(y->direita));
+    return y;
+}
+
+NoArvore *avl_inserir(NoArvore *raiz, int chave) {
+    if (raiz == NULL) {
+        return bst_criar_no(chave);
+    }
+
+    if (chave < raiz->chave) {
+        raiz->esquerda = avl_inserir(raiz->esquerda, chave);
+    } else if (chave > raiz->chave) {
+        raiz->direita = avl_inserir(raiz->direita, chave);
+    } else {
+        return raiz;
+    }
+
+    raiz->altura = 1 + maximo(avl_altura(raiz->esquerda), avl_altura(raiz->direita));
+    int fator = avl_fator_balanceamento(raiz);
+
+    if (fator > 1 && chave < raiz->esquerda->chave) {
+        return avl_rotacao_direita(raiz);
+    }
+    if (fator < -1 && chave > raiz->direita->chave) {
+        return avl_rotacao_esquerda(raiz);
+    }
+    if (fator > 1 && chave > raiz->esquerda->chave) {
+        raiz->esquerda = avl_rotacao_esquerda(raiz->esquerda);
+        return avl_rotacao_direita(raiz);
+    }
+    if (fator < -1 && chave < raiz->direita->chave) {
+        raiz->direita = avl_rotacao_direita(raiz->direita);
+        return avl_rotacao_esquerda(raiz);
+    }
+
+    return raiz;
+}
+```
+
+**Complexidade.** Busca, inserção e remoção em $O(\log n)$; espaço adicional $O(\log n)$ via recursão.
+
+**Comparação com BST.** AVL reduz rigorosamente a altura e tende a favorecer consultas, mas paga esse ganho com manutenção de alturas e rotações adicionais.
