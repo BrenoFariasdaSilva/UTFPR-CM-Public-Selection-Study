@@ -535,3 +535,15 @@ Do ponto de vista de estabilidade, Bubble, Insertion, Merge, Counting e Radix po
 ## 6. Conclusão
 
 Busca e ordenação sintetizam a lógica central da eficiência algorítmica: reduzir espaço de busca, organizar dados e explorar propriedades estruturais da entrada. A escolha do algoritmo ideal depende do tamanho da instância, da distribuição das chaves, da necessidade de estabilidade, das restrições de memória e da frequência relativa entre consultas e atualizações. O domínio avançado do tema não consiste em memorizar tabelas de complexidade, mas em reconhecer em que contexto cada método revela sua verdadeira vantagem computacional.
+
+## 7. Referências
+
+CORMEN, Thomas H.; LEISERSON, Charles E.; RIVEST, Ronald L.; STEIN, Clifford. Introduction to Algorithms. 3rd ed. Cambridge: MIT Press, 2009.
+
+CORMEN, Thomas H.; LEISERSON, Charles E.; RIVEST, Ronald L.; STEIN, Clifford. Algoritmos: teoria e prática. Rio de Janeiro: Elsevier, 2012.
+
+KNUTH, Donald E. The Art of Computer Programming. Volume 3: Sorting and Searching. 2nd ed. Reading: Addison-Wesley, 1998.
+
+SEDGEWICK, Robert. Algorithms in C, Parts 1-4: Fundamentals, Data Structures, Sorting, Searching. 3rd ed. Reading: Addison-Wesley, 1998.
+
+ZIVIANI, Nivio. Projeto de Algoritmos: com Implementações em Pascal e C. São Paulo: Cengage Learning, 2004.
