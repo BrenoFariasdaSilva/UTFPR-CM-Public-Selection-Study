@@ -541,3 +541,76 @@ Após uma rotação à direita e ajuste de cores:
 A árvore volta a satisfazer as propriedades rubro-negras.
 
 **Complexidade.** Busca, inserção e remoção em $O(\log n)$. Em bibliotecas de propósito geral, elas são frequentemente preferidas a AVL por melhor equilíbrio prático entre custo de manutenção e altura controlada. A vantagem de uma árvore rubro-negra é que ela é mais flexível em termos de balanceamento, o que pode resultar em menos rotações durante inserções e remoções, especialmente em cenários com muitas atualizações. No entanto, a implementação é mais complexa devido à necessidade de manter as invariantes de cor e realizar as rotações corretas.
+
+### 3.4 B-Trees
+
+B-Trees organizam múltiplas chaves por nó e são otimizadas para blocos de disco. Com grau mínimo $t$, cada nó interno possui entre $t$ e $2t$ filhos, exceto a raiz. Essa estrutura reduz número de acessos a armazenamento secundário e domina índices de bancos e sistemas de arquivos.
+
+**Exemplo de B-Tree.**
+
+Ao contrário das árvores binárias, uma B-Tree armazena múltiplas chaves em cada nó e pode possuir vários filhos.
+
+```text
+                     [30 | 60]
+                    /    |    \
+                   /     |     \
+                  /      |      \
+         [10 | 20]  [40 | 50]  [70 | 80 | 90]
+```
+
+Propriedades observadas:
+
+* As chaves dentro de cada nó permanecem ordenadas.
+* Os valores menores que 30 ficam no primeiro filho.
+* Os valores entre 30 e 60 ficam no filho central.
+* Os valores maiores que 60 ficam no filho da direita.
+* A altura da árvore permanece pequena mesmo para grandes volumes de dados.
+
+Essa organização reduz significativamente a quantidade de acessos a disco necessários para localizar uma chave.
+
+#### Algoritmo 3: busca em B-Tree
+
+**Pseudocódigo**
+
+```text
+algoritmo btree_buscar(no, chave)
+    encontre menor i tal que chave <= no.chaves[i]
+    se chave = no.chaves[i] entao retorne encontrado
+    se no for folha entao retorne fracasso
+    retorne btree_buscar(no.filhos[i], chave)
+fim
+```
+
+**Implementação completa em C**
+
+```c
+#define BTREE_T 2
+
+typedef struct BTreeNo {
+    int quantidade;
+    int folha;
+    int chaves[2 * BTREE_T - 1];
+    struct BTreeNo *filhos[2 * BTREE_T];
+} BTreeNo;
+
+BTreeNo *btree_buscar(BTreeNo *no, int chave, int *indice_saida) {
+    int indice = 0;
+
+    while (indice < no->quantidade && chave > no->chaves[indice]) {
+        indice++;
+    }
+
+    if (indice < no->quantidade && chave == no->chaves[indice]) {
+        *indice_saida = indice;
+        return no;
+    }
+
+    if (no->folha) {
+        return NULL;
+    }
+
+    return btree_buscar(no->filhos[indice], chave, indice_saida);
+}
+```
+
+**Complexidade.** Busca, inserção e remoção em $O(\log_t n)$ acessos de página. Em memória principal, constantes maiores tornam a estrutura menos atraente que BSTs balanceadas para conjuntos pequenos.
