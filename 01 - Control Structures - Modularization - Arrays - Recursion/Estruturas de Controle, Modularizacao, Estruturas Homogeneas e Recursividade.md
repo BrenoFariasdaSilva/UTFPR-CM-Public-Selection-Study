@@ -123,3 +123,93 @@ int main(void) {
 **Análise de desempenho.** O custo é constante, mas o número médio de comparações depende da distribuição das notas. Em distribuições concentradas em notas altas, a ordenação atual é favorável.
 
 **Comparação com alternativas.** Uma versão com `switch` não seria adequada porque as faixas de nota são intervalares, não valores discretos isolados.
+
+### 3.2 Estruturas de repetição
+
+Estruturas de repetição permitem executar um bloco de instruções múltiplas vezes, reduzindo a duplicação de código e possibilitando o processamento eficiente de coleções de dados, sequências numéricas e condições iterativas. Essas estruturas constituem um dos principais mecanismos de controle de fluxo em algoritmos.
+
+A estrutura `while` é utilizada quando o número de iterações não é conhecido previamente e a continuidade da execução depende da avaliação de uma condição lógica. Antes de cada iteração, a condição é verificada; caso seja falsa desde o início, o corpo do laço não será executado.
+
+A estrutura `do-while` possui comportamento semelhante ao `while`, porém garante que o bloco de instruções seja executado pelo menos uma vez, pois a condição é avaliada somente ao final de cada iteração. Essa característica a torna adequada para menus interativos e rotinas de validação de entrada.
+
+A estrutura `for` é geralmente empregada quando existe uma variável de controle e o número de repetições é conhecido ou pode ser determinado previamente. Sua sintaxe concentra inicialização, condição de parada e atualização da variável de controle em um único comando, favorecendo a legibilidade em percursos sequenciais.
+
+A escolha entre essas estruturas depende principalmente da previsibilidade do número de iterações e da forma como a condição de continuidade é expressa. Em termos de eficiência, todas apresentam custo proporcional à quantidade de iterações realizadas, diferindo principalmente em legibilidade, facilidade de manutenção e adequação ao problema modelado.
+
+A Tabela 2 resume as principais características das estruturas de repetição.
+
+| Estrutura  | Facilidade de implementação | Facilidade de uso | Desempenho | Consumo de memória | Vantagens                          | Desvantagens                           | Casos de uso                 | Big O das operações principais |
+| ---------- | --------------------------- | ----------------- | ---------- | ------------------ | ---------------------------------- | -------------------------------------- | ---------------------------- | ------------------------------ |
+| `while`    | Alta                        | Alta              | Muito bom  | O(1)               | Natural para laços condicionais    | Mais propenso a laços infinitos        | Leitura até sentinela        | O(n)                           |
+| `do-while` | Média                       | Média             | Muito bom  | O(1)               | Garante ao menos uma execução      | Menos utilizado em linguagens modernas | Menus e validação de entrada | O(n)                           |
+| `for`      | Alta                        | Alta              | Excelente  | O(1)               | Compacto para contagem e percursos | Pode concentrar lógica excessiva       | Vetores, matrizes e coleções | O(n)                           |
+
+#### Exemplo 2: média e desvio de notas usando vetores
+
+**Explicação teórica.** O algoritmo percorre um vetor em duas etapas. Na primeira passagem, calcula-se a soma dos elementos para obtenção da média aritmética. Na segunda passagem, calcula-se a soma dos desvios quadráticos em relação à média, permitindo determinar a variância e o desvio padrão.
+
+A utilização de dois percursos independentes torna o algoritmo mais simples de compreender e implementar, além de evitar problemas numéricos que podem surgir em fórmulas alternativas que tentam calcular todas as estatísticas em uma única passagem. Como cada percurso visita todos os elementos uma vez, o custo total permanece linear em relação ao tamanho do vetor, resultando em complexidade temporal O(n).  
+
+**Pseudocódigo**
+
+```text
+algoritmo estatisticas(vetor, n)
+    soma <- 0
+    para i de 0 ate n - 1 faca
+        soma <- soma + vetor[i]
+    media <- soma / n
+
+    soma_quadrados <- 0
+    para i de 0 ate n - 1 faca
+        diferenca <- vetor[i] - media
+        soma_quadrados <- soma_quadrados + diferenca * diferenca
+    retorne media e variancia
+fim
+```
+
+**Implementação completa em C**
+
+```c
+#include <math.h>
+#include <stdio.h>
+
+typedef struct {
+    double media;
+    double variancia;
+} Estatisticas;
+
+Estatisticas calcular_estatisticas(const int valores[], int tamanho) {
+    long soma = 0;
+    double soma_quadrados = 0.0;
+    Estatisticas resultado = {0.0, 0.0};
+
+    for (int indice = 0; indice < tamanho; indice++) {
+        soma += valores[indice];
+    }
+
+    resultado.media = (double)soma / tamanho;
+
+    for (int indice = 0; indice < tamanho; indice++) {
+        double diferenca = valores[indice] - resultado.media;
+        soma_quadrados += diferenca * diferenca;
+    }
+
+    resultado.variancia = soma_quadrados / tamanho;
+    return resultado;
+}
+
+int main(void) {
+    int notas[] = {65, 70, 78, 88, 91};
+    Estatisticas estatisticas = calcular_estatisticas(notas, 5);
+    printf("Media = %.2f, variancia = %.2f\n", estatisticas.media, estatisticas.variancia);
+    return 0;
+}
+```
+
+**Complexidade.** Tempo $O(n)$, espaço adicional $O(1)$.
+
+**Partes importantes.** O uso de `const int valores[]` documenta ausência de modificação; `long soma` reduz risco de overflow; o segundo laço explicita o custo linear adicional.
+
+**Entrada e saída.** Entrada: `{65, 70, 78, 88, 91}`. Saída aproximada: `Media = 78.40, variancia = 94.64`.
+
+**Comparação com alternativas.** Um laço único com fórmula incremental pode reduzir leituras, mas aumenta complexidade conceitual e potencial instabilidade numérica.
