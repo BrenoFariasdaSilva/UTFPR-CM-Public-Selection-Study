@@ -21,3 +21,7 @@ Laços `while`, `do-while` e `for` expressam iteração controlada por predicado
 ### 2.3 Modularização e abstração procedimental
 
 Funções e procedimentos reduzem acoplamento, aumentam coesão e tornam a prova de correção local. Em C, funções retornam um valor ou `void`, e a interface é declarada por protótipos. A linguagem realiza passagem por valor; a chamada por referência é simulada por meio do repasse de endereços, o que torna explícitas as implicações de aliasing, mutabilidade e custo de cópia (Horowitz; Sahni, 1986).
+
+### 2.4 Estruturas homogêneas e layout de memória
+
+Vetores e matrizes são estruturas homogêneas porque armazenam elementos de mesmo tipo em posições contíguas. Esse arranjo fornece acesso aleatório em tempo constante, mas impõe tamanho fixo em sua forma estática e custo elevado para inserções e remoções internas. Matrizes em C são armazenadas em ordem row-major - ou seja, linha por linha - de modo que a travessia por linhas explora localidade espacial de cache com maior eficiência (Sedgewick, 1998).
