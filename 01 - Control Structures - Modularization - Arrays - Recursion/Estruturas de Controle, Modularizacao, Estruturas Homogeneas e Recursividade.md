@@ -449,3 +449,18 @@ Entretanto, embora a recursão em cauda seja conceitualmente importante, a lingu
 Em sistemas embarcados, estruturas de controle simples e vetores estáticos são preferidos por previsibilidade temporal e baixo custo de alocação. Em computação científica, matrizes dominam a representação de sistemas lineares, imagens e malhas numéricas. Em compiladores e interpretadores, recursividade é central na descida recursiva para análise sintática. Em software corporativo, modularização adequada é requisito de testabilidade, reuso e manutenibilidade.
 
 Um estudo de caso didático relevante é o processamento de notas de uma turma: decisões classificam desempenho, laços percorrem registros, vetores armazenam notas, funções encapsulam cálculo de métricas, e recursividade pode ser explorada para operações agregadas. O ganho pedagógico reside em integrar conceitos fundamentais em um mesmo pipeline algorítmico.
+
+## 5. Comparações e Análises
+
+Tabela 4 consolida comparações entre abordagens estruturais recorrentes.
+
+| Abordagem         | Facilidade de implementação | Facilidade de uso | Desempenho                    | Consumo de memória  | Vantagens                        | Desvantagens                            | Casos de uso                  | Big O típico       |
+| ----------------- | --------------------------- | ----------------- | ----------------------------- | ------------------- | -------------------------------- | --------------------------------------- | ----------------------------- | ------------------ |
+| Decisão encadeada | Alta                        | Média             | Muito bom                     | O(1)                | Flexível                         | Menos legível para muitos casos         | Classificação por intervalos  | O(k)               |
+| `switch`          | Alta                        | Alta              | Muito bom                     | O(1)                | Estrutura clara para estados     | Não serve para intervalos arbitrários   | Menus e autômatos             | O(1) a O(k)        |
+| Iteração          | Alta                        | Alta              | Excelente                     | O(1)                | Eficiência operacional           | Menor aderência a estruturas recursivas | Varreduras lineares           | O(n), O(nm)        |
+| Recursão          | Média                       | Média             | Variável                      | O(profundidade)     | Elegância e aderência estrutural | Risco de stack overflow                 | Árvores, divide-and-conquer   | O(n) a exponencial |
+| Vetor             | Alta                        | Alta              | Excelente em acesso           | Contíguo e compacto | Cache-friendly                   | Inserções internas custosas             | Coleções indexadas            | Acesso O(1)        |
+| Matriz            | Média                       | Média             | Excelente para acesso regular | O(nm)               | Representação natural de grade   | Alto custo espacial                     | Álgebra linear, grafos densos | Acesso O(1)        |
+
+Entre as armadilhas mais comuns destacam-se: erro off-by-one em laços, ausência de caso base em recursão, uso indevido de variáveis globais, passagem de ponteiros inválidos, e percursos de matriz que desconsideram localidade de memória. Em termos de otimização, recomenda-se ordenar predicados por frequência esperada, preferir passagem por valor para escalares, usar `const` para contratos imutáveis e substituir recursão profunda por iteração quando a pilha for um recurso crítico.
