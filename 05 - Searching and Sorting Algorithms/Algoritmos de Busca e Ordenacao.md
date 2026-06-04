@@ -531,3 +531,7 @@ Um estudo de caso clássico é o de um mecanismo de indexação de logs: eventos
 | Radix         | Média                       | Média             | Excelente em inteiros       | O(n + b) por dígito | Muito rápido em chaves adequadas | Mais especializado                  | Chaves numéricas              | O(d(n + b))                   |
 
 Do ponto de vista de estabilidade, Bubble, Insertion, Merge, Counting e Radix podem ser estáveis; Selection, Quick e Heap, em suas formas usuais, não. Quanto a uso de memória, Bubble, Selection, Insertion e Heap são essencialmente in-place; Quick é quase in-place, mas consome pilha recursiva; Merge exige vetor auxiliar. Em análise empírica, Quick Sort costuma dominar em memória principal por localidade de cache, enquanto Merge Sort oferece previsibilidade superior e melhor adequação a ambientes externos ou paralelos.
+
+## 6. Conclusão
+
+Busca e ordenação sintetizam a lógica central da eficiência algorítmica: reduzir espaço de busca, organizar dados e explorar propriedades estruturais da entrada. A escolha do algoritmo ideal depende do tamanho da instância, da distribuição das chaves, da necessidade de estabilidade, das restrições de memória e da frequência relativa entre consultas e atualizações. O domínio avançado do tema não consiste em memorizar tabelas de complexidade, mas em reconhecer em que contexto cada método revela sua verdadeira vantagem computacional.
