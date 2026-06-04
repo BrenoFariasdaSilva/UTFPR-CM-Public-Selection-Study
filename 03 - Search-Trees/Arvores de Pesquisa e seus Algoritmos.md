@@ -620,3 +620,15 @@ BTreeNo *btree_buscar(BTreeNo *no, int chave, int *indice_saida) {
 BSTs aparecem em dicionários ordenados, tabelas de símbolos e estruturas acadêmicas de referência. AVL é apropriada quando consultas dominam atualizações, como índices em memória com forte exigência de latência. Red-Black Trees são empregadas em bibliotecas padrão de linguagens e kernels. B-Trees sustentam sistemas de arquivos, bancos de dados e sistemas de indexação, pois minimizam leituras e escritas em disco.
 
 Um estudo de caso ilustrativo é o de um sistema de gerenciamento bibliográfico: Red-Black Tree para índice em memória durante sessão interativa, B-Tree para persistência em disco e percurso em-ordem para geração de listagens ordenadas. Tal combinação mostra como diferentes árvores coexistem em uma arquitetura multicamadas.
+
+## 5. Comparações e Análises
+
+| Estrutura      | Facilidade de implementação | Facilidade de uso | Desempenho          | Consumo de memória          | Vantagens                      | Desvantagens                  | Casos de uso         | Complexidade Big O        |
+| -------------- | --------------------------- | ----------------- | ------------------- | --------------------------- | ------------------------------ | ----------------------------- | -------------------- | ------------------------- |
+| Árvore binária | Média                       | Média             | Dependente da forma | O(n)                        | Estrutura simples              | Busca linear em geral         | Hierarquias          | Busca O(n)                |
+| BST            | Média                       | Alta              | Boa se equilibrada  | O(n)                        | Ordenação implícita            | Pode degenerar                | Conjuntos ordenados  | Média O(log n), pior O(n) |
+| AVL            | Média                       | Média             | Muito alta em busca | O(n)                        | Altura estritamente controlada | Mais manutenção               | Consultas intensivas | O(log n)                  |
+| Red-Black      | Baixa                       | Média             | Excelente geral     | O(n)                        | Menos rotações que AVL         | Mais complexa conceitualmente | Bibliotecas          | O(log n)                  |
+| B-Tree         | Baixa                       | Média             | Excelente em disco  | O(n) distribuído em páginas | Baixo número de I/O            | Implementação extensa         | Bancos e FS          | O(log_t n)                |
+
+Entre as armadilhas mais frequentes estão: esquecer de atualizar alturas em AVL, violar invariantes de cor em Red-Black Trees, negligenciar casos de remoção com dois filhos e subestimar o impacto do layout de páginas em B-Trees. Em termos de otimização, a escolha deve considerar não apenas ordem assintótica, mas também hierarquia de memória, distribuição de operações e custo de manutenção estrutural.
