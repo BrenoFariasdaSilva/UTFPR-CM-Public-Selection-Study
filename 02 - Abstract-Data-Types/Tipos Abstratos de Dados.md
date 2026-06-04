@@ -275,3 +275,70 @@ int pilha_desempilhar(Pilha *pilha, int *valor_saida) {
 **Entrada e saída.** Empilhando `10, 20, 30`, três remoções devolvem `30, 20, 10`.
 
 **Comparação com abordagens alternativas.** A pilha encadeada elimina capacidade fixa, mas aumenta custo por nó e fragmentação potencial.
+
+### 3.4 Filas
+
+Filas modelam atendimento em ordem de chegada. Uma implementação eficiente em vetor deve ser circular, evitando deslocamentos lineares.
+
+**Pseudocódigo**
+
+```text
+algoritmo enqueue(fila, valor)
+    se fila cheia então retorne falso
+    fila[dados][fim] <- valor
+    fim <- (fim + 1) mod capacidade
+    quantidade <- quantidade + 1
+    retorne verdadeiro
+
+algoritmo dequeue(fila)
+    se fila vazia então retorne falso
+    valor <- fila[dados][inicio]
+    inicio <- (inicio + 1) mod capacidade
+    quantidade <- quantidade - 1
+    retorne valor
+```
+
+#### Algoritmo 4: fila circular
+
+**Implementação completa em C**
+
+```c
+#define FILA_MAX 32
+
+typedef struct {
+    int dados[FILA_MAX];
+    int inicio;
+    int fim;
+    int quantidade;
+} Fila;
+
+void fila_inicializar(Fila *fila) {
+    fila->inicio = 0;
+    fila->fim = 0;
+    fila->quantidade = 0;
+}
+
+int fila_enfileirar(Fila *fila, int valor) {
+    if (fila->quantidade == FILA_MAX) {
+        return 0;
+    }
+    fila->dados[fila->fim] = valor;
+    fila->fim = (fila->fim + 1) % FILA_MAX;
+    fila->quantidade++;
+    return 1;
+}
+
+int fila_desenfileirar(Fila *fila, int *valor_saida) {
+    if (fila->quantidade == 0) {
+        return 0;
+    }
+    *valor_saida = fila->dados[fila->inicio];
+    fila->inicio = (fila->inicio + 1) % FILA_MAX;
+    fila->quantidade--;
+    return 1;
+}
+```
+
+**Complexidade.** `enqueue` e `dequeue` em $O(1)$; espaço $O(n)$ fixo.
+
+**Partes importantes.** O operador módulo implementa circularidade; `quantidade` distingue fila vazia de fila cheia quando `inicio == fim`.
