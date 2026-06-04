@@ -89,3 +89,15 @@ int busca_binaria_rec(int v[], int ini, int fim, int x) {
     return busca_binaria_rec(v, meio + 1, fim, x);
 }
 ```
+
+### Complexidade
+
+| Caso   | Complexidade |
+| ------ | ------------ |
+| Melhor | O(1)         |
+| Médio  | O(log n)     |
+| Pior   | O(log n)     |
+
+---
+
+# 5.2 Algoritmos de ordenação (Sorting Algorithms)
