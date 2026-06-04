@@ -348,3 +348,98 @@ int main(void) {
 ```
 
 **Comparação com alternativas.** Algoritmos como Strassen reduzem complexidade assintótica, mas possuem maior constante oculta e só são vantajosos em matrizes grandes e contextos especializados.
+
+### 3.5 Recursividade
+
+Recursividade é uma técnica de programação na qual uma função resolve um problema chamando a si própria para resolver versões menores do mesmo problema. Essa abordagem é particularmente adequada para problemas que apresentam definição indutiva ou estrutura hierárquica, nos quais uma solução completa pode ser construída a partir de soluções para subproblemas menores.
+
+Toda função recursiva deve possuir dois componentes fundamentais: um caso base e um passo recursivo. O caso base representa a condição de parada da recursão, impedindo chamadas infinitas. O passo recursivo define como o problema atual é reduzido a uma instância menor, aproximando gradualmente a execução do caso base.
+
+Muitos algoritmos clássicos utilizam recursão, incluindo percursos em árvores, algoritmos de divisão e conquista, busca em estruturas hierárquicas, processamento de diretórios e diversas operações matemáticas definidas de forma indutiva. Em vários desses casos, a solução recursiva produz código mais próximo da formulação teórica do problema, favorecendo a clareza e a legibilidade.
+
+Entretanto, nem toda formulação recursiva é computacionalmente eficiente. Cada chamada recursiva consome espaço adicional na pilha de execução (*call stack*), o que pode aumentar o consumo de memória e, em casos extremos, provocar estouro de pilha (*stack overflow*). Além disso, algumas implementações recursivas realizam cálculos repetidos desnecessários, como ocorre na versão ingênua do cálculo da sequência de Fibonacci.
+
+Em muitos problemas, existe uma correspondência direta entre uma solução recursiva e uma solução iterativa baseada em estruturas de repetição. A escolha entre essas abordagens deve considerar fatores como clareza do algoritmo, consumo de memória, facilidade de manutenção e requisitos de desempenho.
+
+A Tabela 5 resume as principais características da recursividade em comparação com abordagens iterativas.
+
+| Abordagem | Facilidade de implementação | Facilidade de uso                | Desempenho        | Consumo de memória | Vantagens                                        | Desvantagens                                       | Casos de uso                                  | Big O típico         |
+| --------- | --------------------------- | -------------------------------- | ----------------- | ------------------ | ------------------------------------------------ | -------------------------------------------------- | --------------------------------------------- | -------------------- |
+| Recursiva | Média                       | Alta para problemas hierárquicos | Variável          | O(profundidade)    | Código mais próximo da definição matemática      | Sobrecarga de chamadas e risco de estouro de pilha | Árvores, divisão e conquista, grafos          | Depende do algoritmo |
+| Iterativa | Alta                        | Alta                             | Geralmente melhor | O(1) ou O(n)       | Menor consumo de memória e maior previsibilidade | Pode exigir estruturas auxiliares explícitas       | Processamento sequencial e percursos lineares | Depende do algoritmo |
+
+#### Exemplo 4: soma recursiva de vetor
+
+**Explicação teórica.** A soma dos elementos de um vetor pode ser definida recursivamente. Se o vetor estiver vazio, a soma é zero. Caso contrário, a soma corresponde ao último elemento do vetor somado ao resultado obtido para os elementos anteriores.
+
+Essa formulação demonstra o princípio fundamental da recursividade: decompor um problema em uma versão menor de si mesmo até alcançar uma condição de parada. Para um vetor com $n$ elementos, a função realiza exatamente $n$ chamadas recursivas, resultando em complexidade temporal $O(n)$ e consumo de memória também $O(n)$ devido à pilha de chamadas.
+
+Por ser um exemplo simples, a soma recursiva é frequentemente utilizada para introduzir os conceitos de caso base, passo recursivo e empilhamento de chamadas. Embora uma solução iterativa seja mais eficiente em termos de memória, a versão recursiva evidencia claramente o processo de decomposição do problema.
+
+**Pseudocódigo**
+
+```text id="1d8q2n"
+algoritmo soma_recursiva(vetor, n)
+    se n = 0 então
+        retorne 0
+    fim
+
+    retorne vetor[n - 1] + soma_recursiva(vetor, n - 1)
+fim
+```
+
+**Implementação completa em C**
+
+```c
+#include <stdio.h>
+
+int soma_recursiva(const int valores[], int tamanho) {
+    if (tamanho == 0) {
+        return 0;
+    }
+
+    return valores[tamanho - 1] + soma_recursiva(valores, tamanho - 1);
+}
+
+int main(void) {
+    int valores[] = {4, 8, 15, 16, 23, 42};
+    printf("Soma = %d\n", soma_recursiva(valores, 6));
+    return 0;
+}
+```
+
+**Complexidade.** Tempo $O(n)$, espaço adicional $O(n)$ devido à profundidade recursiva. Melhor, médio e pior caso coincidem, pois a estrutura de chamadas é fixa para um dado `n`.
+
+**Partes importantes.** O caso base `tamanho == 0` garante parada; a redução monotônica `tamanho - 1` assegura progresso; a profundidade recursiva máxima é `n`.
+
+**Entrada e saída.** Entrada: `{4, 8, 15, 16, 23, 42}`. Saída: `Soma = 108`.
+
+**Análise de desempenho.** Em relação à versão iterativa, a recursiva tem a mesma ordem temporal, porém maior consumo de pilha e overhead de chamada.
+
+**Comparação com abordagens alternativas.** A versão iterativa é preferível em produção quando se deseja minimizar uso de stack. A formulação recursiva, contudo, é mais alinhada a provas por indução e a problemas hierárquicos.
+
+É importante mencionar que, além da recursão tradicional, existe a chamada **recursão em cauda** (*tail recursion*), na qual a chamada recursiva é a última operação executada pela função antes do retorno. Nessa situação, não há necessidade de realizar cálculos adicionais após o retorno da chamada recursiva. Em algumas linguagens e compiladores, esse padrão pode ser otimizado por meio da técnica conhecida como *tail call optimization* (TCO), permitindo reutilizar o quadro atual da pilha em vez de criar um novo. Como resultado, uma implementação recursiva em cauda pode apresentar consumo de memória semelhante ao de uma solução iterativa.
+
+Por exemplo, a soma recursiva apresentada anteriormente não é uma recursão em cauda, pois a operação de adição ainda precisa ser realizada após o retorno da chamada recursiva:
+
+```text
+retorne vetor[n - 1] + soma_recursiva(vetor, n - 1)
+```
+
+Uma versão em cauda utilizaria um acumulador auxiliar:
+
+```text
+algoritmo soma_cauda(vetor, n, acumulador)
+    se n = 0 então
+        retorne acumulador
+    fim
+
+    retorne soma_cauda(
+        vetor,
+        n - 1,
+        acumulador + vetor[n - 1]
+    )
+fim
+```
+
+Entretanto, embora a recursão em cauda seja conceitualmente importante, a linguagem C não exige que compiladores realizem essa otimização. Portanto, não se deve assumir que uma implementação recursiva em cauda consumirá necessariamente memória constante em todos os ambientes de execução.
