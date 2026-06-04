@@ -368,3 +368,16 @@ Não estável
 ---
 
 # 5.3 Comparações importantes (Important Comparisons)
+
+## Estáveis vs Instáveis
+
+| Algoritmo | Estável |
+| --------- | ------- |
+| Bubble    | Sim     |
+| Selection | Não     |
+| Insertion | Sim     |
+| Merge     | Sim     |
+| Quick     | Não     |
+| Heap      | Não     |
+
+---
