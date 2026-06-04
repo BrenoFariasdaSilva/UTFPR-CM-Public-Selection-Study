@@ -632,3 +632,7 @@ Um estudo de caso ilustrativo é o de um sistema de gerenciamento bibliográfico
 | B-Tree         | Baixa                       | Média             | Excelente em disco  | O(n) distribuído em páginas | Baixo número de I/O            | Implementação extensa         | Bancos e FS          | O(log_t n)                |
 
 Entre as armadilhas mais frequentes estão: esquecer de atualizar alturas em AVL, violar invariantes de cor em Red-Black Trees, negligenciar casos de remoção com dois filhos e subestimar o impacto do layout de páginas em B-Trees. Em termos de otimização, a escolha deve considerar não apenas ordem assintótica, mas também hierarquia de memória, distribuição de operações e custo de manutenção estrutural.
+
+## 6. Conclusão
+
+Árvores de pesquisa representam um ponto de encontro entre teoria de algoritmos e engenharia de sistemas. A partir de um mesmo problema abstrato, busca em conjunto ordenado, emergem soluções muito diferentes, cada qual calibrada para um contexto operacional específico. A compreensão dessas estruturas requer transitar entre propriedades formais, rotações, invariantes, custo assintótico e comportamento em memória e disco.
