@@ -254,3 +254,43 @@ Estável
 Usa memória extra
 
 ---
+
+### Quick Sort
+
+#### Ideia
+
+* Escolhe pivô
+* Particiona em menores e maiores
+* Ordena recursivamente
+
+#### Implementação
+
+```c
+int particiona(int v[], int l, int r) {
+    int pivo = v[r];
+    int i = l - 1;
+
+    for (int j = l; j < r; j++) {
+        if (v[j] < pivo) {
+            i++;
+            int temp = v[i];
+            v[i] = v[j];
+            v[j] = temp;
+        }
+    }
+
+    int temp = v[i+1];
+    v[i+1] = v[r];
+    v[r] = temp;
+
+    return i+1;
+}
+
+void quick_sort(int v[], int l, int r) {
+    if (l < r) {
+        int p = particiona(v, l, r);
+        quick_sort(v, l, p-1);
+        quick_sort(v, p+1, r);
+    }
+}
+```
