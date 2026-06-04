@@ -468,3 +468,17 @@ Entre as armadilhas mais comuns destacam-se: erro off-by-one em laços, ausênci
 ## 6. Conclusão
 
 Estruturas de controle, modularização, vetores, matrizes e recursividade não constituem apenas tópicos introdutórios; eles definem princípios permanentes da engenharia de algoritmos. Para tal, a qualidade de soluções mais avançadas depende diretamente da maturidade com que essas bases são dominadas. Em C, esse domínio exige compreender simultaneamente abstração e concretude: semântica do algoritmo, contratos funcionais, organização modular, custo assintótico, layout de memória e implicações do modelo de execução.
+
+## 7. Referências
+
+CORMEN, Thomas H.; LEISERSON, Charles E.; RIVEST, Ronald L.; STEIN, Clifford. Introduction to Algorithms. 3rd ed. Cambridge: MIT Press, 2009.
+
+CORMEN, Thomas H.; LEISERSON, Charles E.; RIVEST, Ronald L.; STEIN, Clifford. Algoritmos: teoria e prática. Rio de Janeiro: Elsevier, 2012.
+
+HOROWITZ, Ellis; SAHNI, Sartaj. Fundamentos de Estruturas de Dados. Rio de Janeiro: Campus, 1986.
+
+KNUTH, Donald E. The Art of Computer Programming. Volume 1: Fundamental Algorithms. 3rd ed. Reading: Addison-Wesley, 1997.
+
+SEDGEWICK, Robert. Algorithms in C, Parts 1-4: Fundamentals, Data Structures, Sorting, Searching. 3rd ed. Reading: Addison-Wesley, 1998.
+
+ZIVIANI, Nivio. Projeto de Algoritmos: com Implementações em Pascal e C. São Paulo: Cengage Learning, 2004.
