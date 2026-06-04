@@ -226,3 +226,196 @@ void insertion_sort(int vetor[], int tamanho) {
 **Complexidade.** Melhor caso $O(n)$, médio e pior $O(n^2)$; espaço $O(1)$.
 
 **Comparação dos métodos simples.** Bubble realiza muitas trocas; Selection minimiza trocas, mas não comparações; Insertion é o melhor em vetores pequenos ou quase ordenados.
+
+### 3.3 Algoritmos eficientes por comparação
+
+#### Algoritmo 6: Merge Sort
+
+O merge sort é um algoritmo de divisão e conquista que divide o vetor em metades, ordena recursivamente e intercala os resultados. É estável e tem desempenho garantido $O(n \log n)$.
+
+**Pseudocódigo**
+
+```text
+algoritmo merge_sort(v, l, r)
+    se l >= r entao retorne
+    m <- (l + r) / 2
+    merge_sort(v, l, m)
+    merge_sort(v, m + 1, r)
+    intercale(v, l, m, r)
+fim
+
+algoritmo intercale(v, l, m, r)
+    n1 <- m - l + 1
+    n2 <- r - m
+    L[0..n1 - 1] <- v[l..m]
+    R[0..n2 - 1] <- v[m + 1..r]
+    i <- j <- 0
+    k <- l
+    enquanto i < n1 e j < n2 faca
+        se L[i] <= R[j] entao
+            v[k++] <- L[i++]
+        senao
+            v[k++] <- R[j++]
+    enquanto i < n1 faca
+        v[k++] <- L[i++]
+    enquanto j < n2 faca
+        v[k++] <- R[j++]
+```
+
+**Implementação completa em C**
+
+```c
+void merge(int vetor[], int esquerda, int meio, int direita) {
+    int n1 = meio - esquerda + 1;
+    int n2 = direita - meio;
+    int esquerda_temp[128];
+    int direita_temp[128];
+
+    for (int i = 0; i < n1; i++) esquerda_temp[i] = vetor[esquerda + i];
+    for (int j = 0; j < n2; j++) direita_temp[j] = vetor[meio + 1 + j];
+
+    int i = 0, j = 0, k = esquerda;
+    while (i < n1 && j < n2) {
+        if (esquerda_temp[i] <= direita_temp[j]) {
+            vetor[k++] = esquerda_temp[i++];
+        } else {
+            vetor[k++] = direita_temp[j++];
+        }
+    }
+    while (i < n1) vetor[k++] = esquerda_temp[i++];
+    while (j < n2) vetor[k++] = direita_temp[j++];
+}
+
+void merge_sort(int vetor[], int esquerda, int direita) {
+    if (esquerda >= direita) {
+        return;
+    }
+    int meio = esquerda + (direita - esquerda) / 2;
+    merge_sort(vetor, esquerda, meio);
+    merge_sort(vetor, meio + 1, direita);
+    merge(vetor, esquerda, meio, direita);
+}
+```
+
+**Complexidade.** Melhor, médio e pior $O(n \log n)$; espaço extra $O(n)$; estável; profundidade recursiva $O(\log n)$.
+
+#### Algoritmo 7: Quick Sort
+
+**Explicação teórica.** Quick Sort particiona o vetor em torno de um pivô. É tipicamente muito rápido na prática, embora tenha pior caso quadrático sem cuidados de pivoteamento.
+
+**Pseudocódigo**
+
+```text
+algoritmo quick_sort(vetor, baixo, alto)
+    se baixo < alto entao
+        p <- particionar(vetor, baixo, alto)
+        quick_sort(vetor, baixo, p - 1)
+        quick_sort(vetor, p + 1, alto)
+fim
+
+algoritmo particionar(vetor, baixo, alto)
+    pivo <- vetor[alto]
+    i <- baixo - 1
+    para j de baixo ate alto - 1 faca
+        se vetor[j] <= pivo entao
+            i <- i + 1
+            troque vetor[i] e vetor[j]
+    troque vetor[i + 1] e vetor[alto]
+    retorne i + 1
+fim
+```
+
+**Implementação completa em C**
+
+```c
+int particionar(int vetor[], int baixo, int alto) {
+    int pivo = vetor[alto];
+    int i = baixo - 1;
+    for (int j = baixo; j < alto; j++) {
+        if (vetor[j] <= pivo) {
+            i++;
+            int temp = vetor[i];
+            vetor[i] = vetor[j];
+            vetor[j] = temp;
+        }
+    }
+    int temp = vetor[i + 1];
+    vetor[i + 1] = vetor[alto];
+    vetor[alto] = temp;
+    return i + 1;
+}
+
+void quick_sort(int vetor[], int baixo, int alto) {
+    if (baixo < alto) {
+        int p = particionar(vetor, baixo, alto);
+        quick_sort(vetor, baixo, p - 1);
+        quick_sort(vetor, p + 1, alto);
+    }
+}
+```
+
+**Complexidade.** Melhor e médio $O(n \log n)$; pior $O(n^2)$; espaço de pilha médio $O(\log n)$ e pior $O(n)$; não é estável; in-place.
+O pior caso ocorre quando o pivô é consistentemente o menor ou maior elemento, como em vetores já ordenados ou inversamente ordenados. Estratégias de pivoteamento, como escolha aleatória ou mediana de três, podem mitigar esse risco.
+
+#### Algoritmo 8: Heap Sort
+
+**Explicação teórica.** Heap Sort constrói um heap máximo e extrai o maior elemento repetidamente. Tem garantia de pior caso $O(n \log n)$, mas não é estável.
+
+**Pseudocódigo**
+
+```text
+algoritmo heapify(vetor, tamanho, raiz)
+    maior <- raiz
+    esquerda <- 2 * raiz + 1
+    direita <- 2 * raiz + 2
+
+    se esquerda < tamanho e vetor[esquerda] > vetor[maior] entao
+        maior <- esquerda
+    se direita < tamanho e vetor[direita] > vetor[maior] entao
+        maior <- direita
+
+    se maior != raiz entao
+        troque vetor[raiz] e vetor[maior]
+        heapify(vetor, tamanho, maior)
+fim
+
+algoritmo heap_sort(vetor, tamanho)
+    para i de tamanho / 2 - 1 ate 0 faca
+        heapify(vetor, tamanho, i)
+    para i de tamanho - 1 ate 1 faca
+        troque vetor[0] e vetor[i]
+        heapify(vetor, i, 0)
+fim
+```
+
+**Implementação completa em C**
+
+```c
+void heapify(int vetor[], int tamanho, int raiz) {
+    int maior = raiz;
+    int esquerda = 2 * raiz + 1;
+    int direita = 2 * raiz + 2;
+
+    if (esquerda < tamanho && vetor[esquerda] > vetor[maior]) maior = esquerda;
+    if (direita < tamanho && vetor[direita] > vetor[maior]) maior = direita;
+
+    if (maior != raiz) {
+        int temp = vetor[raiz];
+        vetor[raiz] = vetor[maior];
+        vetor[maior] = temp;
+        heapify(vetor, tamanho, maior);
+    }
+}
+
+void heap_sort(int vetor[], int tamanho) {
+    for (int i = tamanho / 2 - 1; i >= 0; i--) heapify(vetor, tamanho, i);
+    for (int i = tamanho - 1; i > 0; i--) {
+        int temp = vetor[0];
+        vetor[0] = vetor[i];
+        vetor[i] = temp;
+        heapify(vetor, i, 0);
+    }
+}
+```
+
+**Complexidade.** Melhor, médio e pior $O(n \log n)$; espaço adicional $O(1)$; não estável; in-place.
