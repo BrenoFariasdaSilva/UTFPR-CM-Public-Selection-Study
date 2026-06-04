@@ -213,3 +213,35 @@ int main(void) {
 **Entrada e saída.** Entrada: `{65, 70, 78, 88, 91}`. Saída aproximada: `Media = 78.40, variancia = 94.64`.
 
 **Comparação com alternativas.** Um laço único com fórmula incremental pode reduzir leituras, mas aumenta complexidade conceitual e potencial instabilidade numérica.
+
+### 3.3 Funções, procedimentos e passagem de parâmetros
+
+Funções e procedimentos promovem modularidade, reutilização de código e separação de responsabilidades em programas. Ao decompor um problema em unidades menores, torna-se possível desenvolver, testar e manter cada parte do sistema de forma independente. Em linguagens como C, essa organização é normalmente realizada por meio da separação entre arquivos de cabeçalho (`.h`) e arquivos de implementação (`.c`).
+
+Os arquivos de cabeçalho contêm protótipos de funções, definições de tipos e contratos públicos utilizados por outros módulos do programa. Já os arquivos de implementação concentram os detalhes internos das funções e estruturas utilizadas. Essa separação reduz o acoplamento entre componentes e facilita a manutenção do software.
+
+```text
+Arquivo .h  -> protótipos e contratos
+Arquivo .c  -> definições e detalhes internos
+Chamador    -> envia cópias de valores ou endereços
+```
+
+A comunicação entre funções ocorre por meio da passagem de parâmetros. Em C, todos os parâmetros são formalmente passados por valor, ou seja, a função recebe uma cópia do argumento fornecido pelo chamador. Essa abordagem evita alterações acidentais nas variáveis originais, aumentando a previsibilidade do código.
+
+Entretanto, quando o endereço de uma variável é passado como argumento por meio de ponteiros, a função pode acessar e modificar diretamente o objeto original. Essa técnica permite implementar múltiplos valores de saída, manipular estruturas grandes sem realizar cópias completas e compartilhar dados entre diferentes partes do programa.
+
+Além da passagem de parâmetros, o comportamento das funções também depende do escopo e do tempo de vida das variáveis utilizadas. Variáveis locais existem apenas durante a execução da função e são destruídas ao seu término. Por outro lado, variáveis globais permanecem disponíveis durante toda a execução do programa, mas podem aumentar o acoplamento entre módulos. Por fim, variáveis declaradas com o modificador `static` dentro de funções mantêm seu valor entre chamadas sucessivas, permitindo preservar estado interno sem expô-lo globalmente.
+
+A escolha adequada entre passagem por valor, utilização de ponteiros e diferentes escopos influencia diretamente a legibilidade, a segurança e a manutenibilidade do software.
+
+A Tabela 3 resume os principais mecanismos de passagem de parâmetros e escopo disponíveis em C.
+
+| Mecanismo       | Facilidade de implementação | Facilidade de uso | Desempenho               | Consumo de memória         | Vantagens                                         | Desvantagens                   | Casos de uso                 | Big O |
+| --------------- | --------------------------- | ----------------- | ------------------------ | -------------------------- | ------------------------------------------------- | ------------------------------ | ---------------------------- | ----- |
+| Por valor       | Alta                        | Alta              | Muito bom                | O(1) por argumento escalar | Evita efeitos colaterais acidentais               | Pode copiar estruturas grandes | Parâmetros escalares         | O(1)  |
+| Por endereço    | Média                       | Média             | Muito bom                | O(1)                       | Permite múltiplos resultados e modificação direta | Exige domínio de ponteiros     | Estruturas, saídas múltiplas | O(1)  |
+| Variável local  | Alta                        | Alta              | Excelente                | Pilha (*stack*)            | Isolamento e segurança                            | Tempo de vida limitado         | Cálculos intermediários      | O(1)  |
+| Variável global | Alta                        | Alta inicialmente | Pode degradar manutenção | Segmento global            | Acesso simples por múltiplas funções              | Alto acoplamento               | Configurações compartilhadas | O(1)  |
+| `static` local  | Média                       | Média             | Excelente                | Segmento estático          | Preserva estado entre chamadas                    | Dificulta reentrância e testes | Contadores e caches simples  | O(1)  |
+
+Em geral, a utilização de variáveis locais e passagem por valor tende a produzir código mais seguro e previsível. O uso de ponteiros, variáveis globais e armazenamento estático deve ser reservado para situações em que seus benefícios superem os custos adicionais de complexidade e manutenção.
