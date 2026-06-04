@@ -614,3 +614,9 @@ BTreeNo *btree_buscar(BTreeNo *no, int chave, int *indice_saida) {
 ```
 
 **Complexidade.** Busca, inserção e remoção em $O(\log_t n)$ acessos de página. Em memória principal, constantes maiores tornam a estrutura menos atraente que BSTs balanceadas para conjuntos pequenos.
+
+## 4. Exemplos, Aplicações e Estudos de Caso
+
+BSTs aparecem em dicionários ordenados, tabelas de símbolos e estruturas acadêmicas de referência. AVL é apropriada quando consultas dominam atualizações, como índices em memória com forte exigência de latência. Red-Black Trees são empregadas em bibliotecas padrão de linguagens e kernels. B-Trees sustentam sistemas de arquivos, bancos de dados e sistemas de indexação, pois minimizam leituras e escritas em disco.
+
+Um estudo de caso ilustrativo é o de um sistema de gerenciamento bibliográfico: Red-Black Tree para índice em memória durante sessão interativa, B-Tree para persistência em disco e percurso em-ordem para geração de listagens ordenadas. Tal combinação mostra como diferentes árvores coexistem em uma arquitetura multicamadas.
