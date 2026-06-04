@@ -527,3 +527,7 @@ Um estudo de caso real é o planejamento de distribuição urbana: o grafo da ma
 | Componentes    | Alta                        | Alta              | Excelente              | O(V)               | Diagnóstico estrutural                      | Não resolve pesos             | Segmentação             | O(V + E)               |
 
 Armadilhas frequentes incluem ignorar direção das arestas, misturar representações com semânticas distintas, aplicar Dijkstra a pesos negativos, esquecer de inicializar infinito e negligenciar conectividade ao usar algoritmos de MST. A otimização prática costuma depender mais da representação e do uso de estruturas auxiliares eficientes do que do pseudocódigo básico isolado.
+
+## 6. Conclusão
+
+Grafos resolvem problemas de conectividade, caminho, otimização e dependência. O domínio de seus algoritmos exige compreender, simultaneamente, representação, prova de corretude, restrições de aplicabilidade e custo assintótico. O valor desse domínio reside precisamente na habilidade de escolher o algoritmo adequado ao tipo de peso, densidade, direção e objetivo analítico do problema.
