@@ -17,3 +17,7 @@ Do ponto de vista formal, essas construções podem ser descritas por funções 
 ### 2.2 Repetição e invariantes de laço
 
 Laços `while`, `do-while` e `for` expressam iteração controlada por predicado, pós-teste ou contador. A análise correta dessas estruturas exige o conceito de invariante de laço: uma propriedade que permanece verdadeira antes e após cada iteração. Invariantes permitem provar correção parcial e total, além de sustentar análises assintóticas rigorosas (Knuth, 1997).
+
+### 2.3 Modularização e abstração procedimental
+
+Funções e procedimentos reduzem acoplamento, aumentam coesão e tornam a prova de correção local. Em C, funções retornam um valor ou `void`, e a interface é declarada por protótipos. A linguagem realiza passagem por valor; a chamada por referência é simulada por meio do repasse de endereços, o que torna explícitas as implicações de aliasing, mutabilidade e custo de cópia (Horowitz; Sahni, 1986).
