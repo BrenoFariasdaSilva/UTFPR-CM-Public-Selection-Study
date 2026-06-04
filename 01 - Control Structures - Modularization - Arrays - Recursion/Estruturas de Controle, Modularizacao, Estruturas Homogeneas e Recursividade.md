@@ -443,3 +443,9 @@ fim
 ```
 
 Entretanto, embora a recursão em cauda seja conceitualmente importante, a linguagem C não exige que compiladores realizem essa otimização. Portanto, não se deve assumir que uma implementação recursiva em cauda consumirá necessariamente memória constante em todos os ambientes de execução.
+
+## 4. Exemplos, Aplicações e Estudos de Caso
+
+Em sistemas embarcados, estruturas de controle simples e vetores estáticos são preferidos por previsibilidade temporal e baixo custo de alocação. Em computação científica, matrizes dominam a representação de sistemas lineares, imagens e malhas numéricas. Em compiladores e interpretadores, recursividade é central na descida recursiva para análise sintática. Em software corporativo, modularização adequada é requisito de testabilidade, reuso e manutenibilidade.
+
+Um estudo de caso didático relevante é o processamento de notas de uma turma: decisões classificam desempenho, laços percorrem registros, vetores armazenam notas, funções encapsulam cálculo de métricas, e recursividade pode ser explorada para operações agregadas. O ganho pedagógico reside em integrar conceitos fundamentais em um mesmo pipeline algorítmico.
