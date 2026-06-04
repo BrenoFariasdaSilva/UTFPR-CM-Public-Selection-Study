@@ -144,3 +144,164 @@ void dfs(const GrafoMatriz *grafo, int origem) {
 **Complexidade.** Igual à BFS para a representação adotada.
 
 **Comparação.** BFS é preferível para distâncias mínimas em grafos não ponderados; DFS é mais comum para análise estrutural e exploração de caminhos.
+
+### 3.3 Caminhos mínimos
+
+#### Algoritmo 3: Dijkstra
+
+**Explicação teórica.** Dijkstra aplica busca gulosa escolhendo iterativamente o vértice não processado com menor distância temporária. Exige pesos não negativos.
+
+**Pseudocódigo**
+
+```text
+algoritmo dijkstra(G, origem)
+    dist <- infinito
+    dist[origem] <- 0
+    repita V vezes
+        u <- vertice não visitado com menor dist
+        visitado[u] <- verdadeiro
+        para cada vizinho v de u faça
+            se visitado[v] = falso então
+                nova_dist <- dist[u] + peso(u,v)
+                se nova_dist < dist[v] então
+                    dist[v] <- nova_dist
+                fim
+fim
+```
+
+**Implementação completa em C**
+
+```c
+int extrair_minimo(int dist[], int processado[], int vertices) {
+    int melhor = INFINITO;
+    int indice = -1;
+
+    for (int i = 0; i < vertices; i++) {
+        if (!processado[i] && dist[i] < melhor) {
+            melhor = dist[i];
+            indice = i;
+        }
+    }
+
+    return indice;
+}
+
+void dijkstra(const GrafoMatriz *grafo, int origem, int dist[]) {
+    int processado[MAXV] = {0};
+
+    for (int i = 0; i < grafo->vertices; i++) {
+        dist[i] = INFINITO;
+    }
+    dist[origem] = 0;
+
+    for (int i = 0; i < grafo->vertices; i++) {
+        int u = extrair_minimo(dist, processado, grafo->vertices);
+        if (u == -1) {
+            break;
+        }
+        processado[u] = 1;
+
+        for (int v = 0; v < grafo->vertices; v++) {
+            int peso = grafo->matriz[u][v];
+            if (peso > 0 && !processado[v] && dist[u] + peso < dist[v]) {
+                dist[v] = dist[u] + peso;
+            }
+        }
+    }
+}
+```
+
+**Complexidade.** Em matriz, $O(V^2)$; com heap binário e lista de adjacência, $O((V + E) \log V)$.
+
+**Limitação.** Não admite arestas negativas, pois pode levar a ciclos de redução infinita.
+
+#### Algoritmo 4: Bellman-Ford
+
+**Explicação teórica.** Bellman-Ford percorre todas as arestas por $V - 1$ iterações, atualizando sucessivamente as estimativas de distância entre os vértices, garantindo caminhos mínimos mesmo com pesos negativos, desde que não haja ciclo negativo alcançável.
+
+**Pseudocódigo**
+
+```text
+algoritmo bellman_ford(G, origem)
+    dist <- infinito
+    dist[origem] <- 0
+    para i de 1 a V-1 faça
+        para cada aresta (u, v) com peso w faça
+            se dist[u] + w < dist[v] então
+                dist[v] <- dist[u] + w
+            fim
+    para cada aresta (u, v) com peso w faça
+        se dist[u] + w < dist[v] então
+            retorne "Ciclo negativo detectado"
+    retorne dist
+```
+
+**Implementação completa em C**
+
+```c
+int bellman_ford(int vertices, int arestas, const Aresta lista_arestas[], int origem, int dist[]) {
+    for (int i = 0; i < vertices; i++) {
+        dist[i] = INFINITO;
+    }
+    dist[origem] = 0;
+
+    for (int i = 1; i < vertices; i++) {
+        for (int j = 0; j < arestas; j++) {
+            int u = lista_arestas[j].origem;
+            int v = lista_arestas[j].destino;
+            int peso = lista_arestas[j].peso;
+            if (dist[u] != INFINITO && dist[u] + peso < dist[v]) {
+                dist[v] = dist[u] + peso;
+            }
+        }
+    }
+
+    for (int j = 0; j < arestas; j++) {
+        int u = lista_arestas[j].origem;
+        int v = lista_arestas[j].destino;
+        int peso = lista_arestas[j].peso;
+        if (dist[u] != INFINITO && dist[u] + peso < dist[v]) {
+            return 0;
+        }
+    }
+
+    return 1;
+}
+```
+
+**Complexidade.** Tempo $O(VE)$; espaço $O(V)$.
+
+#### Algoritmo 5: Floyd-Warshall
+
+**Explicação teórica.** Floyd-Warshall resolve o problema de todos os pares via programação dinâmica, refinando gradualmente o conjunto de vértices intermediários permitidos.
+
+**Pseudocódigo**
+
+```text
+algoritmo floyd_warshall(G)
+    para k de 1 a V faça
+        para i de 1 a V faça
+            para j de 1 a V faça
+                se dist[i][k] + dist[k][j] < dist[i][j] então
+                    dist[i][j] <- dist[i][k] + dist[k][j]
+fim
+```
+
+**Implementação completa em C**
+
+```c
+void floyd_warshall(int vertices, int dist[MAXV][MAXV]) {
+    for (int k = 0; k < vertices; k++) {
+        for (int i = 0; i < vertices; i++) {
+            for (int j = 0; j < vertices; j++) {
+                if (dist[i][k] < INFINITO && dist[k][j] < INFINITO &&
+                    dist[i][k] + dist[k][j] < dist[i][j]) {
+                    dist[i][j] = dist[i][k] + dist[k][j];
+                }
+            }
+        }
+    }
+}
+```
+
+**Complexidade.** Tempo $O(V^3)$; espaço $O(V^2)$.
