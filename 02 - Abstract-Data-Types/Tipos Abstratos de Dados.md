@@ -342,3 +342,171 @@ int fila_desenfileirar(Fila *fila, int *valor_saida) {
 **Complexidade.** `enqueue` e `dequeue` em $O(1)$; espaço $O(n)$ fixo.
 
 **Partes importantes.** O operador módulo implementa circularidade; `quantidade` distingue fila vazia de fila cheia quando `inicio == fim`.
+
+### 3.5 Tabelas hash
+
+Tabelas hash armazenam pares chave-valor associando cada chave a uma posição calculada por uma função de dispersão (*hash function*). O objetivo é obter operações de busca, inserção e remoção em tempo próximo de constante. O desempenho depende da qualidade da função hash, da estratégia de tratamento de colisões e do fator de carga $\alpha = n/m$, sendo $n$ o número de elementos armazenados e $m$ o número de posições da tabela.
+
+Colisões ocorrem quando duas ou mais chaves são mapeadas para a mesma posição. Como colisões são inevitáveis em aplicações práticas, diferentes estratégias foram desenvolvidas para tratá-las.
+
+| Estrutura                      | Facilidade de implementação | Facilidade de uso | Desempenho                   | Consumo de memória | Vantagens                        | Desvantagens                                 | Casos de uso                | Big O principal           |
+| ------------------------------ | --------------------------- | ----------------- | ---------------------------- | ------------------ | -------------------------------- | -------------------------------------------- | --------------------------- | ------------------------- |
+| Hash com encadeamento separado | Média                       | Alta              | Excelente em média           | Moderado           | Simples e flexível               | Uso adicional de memória                     | Dicionários, caches         | Médio $O(1)$, pior $O(n)$ |
+| Hash com sondagem linear       | Alta                        | Alta              | Muito bom com baixa ocupação | Baixo              | Estrutura compacta               | Sofre agrupamento primário                   | Sistemas embarcados         | Médio $O(1)$, pior $O(n)$ |
+| Hash com sondagem quadrática   | Média                       | Média             | Bom                          | Baixo              | Reduz agrupamentos               | Pode dificultar cobertura completa da tabela | Tabelas estáticas           | Médio $O(1)$, pior $O(n)$ |
+| Hash duplo (*double hashing*)  | Média                       | Média             | Excelente                    | Baixo              | Menor incidência de agrupamentos | Implementação mais complexa                  | Sistemas de alto desempenho | Médio $O(1)$, pior $O(n)$ |
+
+#### Encadeamento separado
+
+No encadeamento separado (*separate chaining*), cada posição da tabela aponta para uma lista ou coleção de elementos que compartilham o mesmo índice hash. Quando ocorre uma colisão, o novo elemento é inserido na estrutura associada ao balde correspondente.
+
+**Pseudocódigo**
+
+```text
+algoritmo hash_inserir(tabela, valor)
+    indice <- hash(valor)
+    insira valor na lista do balde indice
+fim
+```
+
+#### Sondagem linear
+
+Na sondagem linear (*linear probing*), todos os elementos permanecem dentro da própria tabela. Quando ocorre colisão, procura-se sequencialmente a próxima posição livre.
+
+**Pseudocódigo**
+
+```text
+algoritmo hash_inserir(tabela, valor)
+    indice <- hash(valor)
+
+    enquanto tabela[indice] estiver ocupada faça
+        indice <- (indice + 1) mod tamanho_tabela
+    fim
+
+    tabela[indice] <- valor
+fim
+```
+
+#### Sondagem quadrática
+
+A sondagem quadrática (*quadratic probing*) utiliza deslocamentos quadráticos para reduzir o agrupamento de elementos.
+
+**Pseudocódigo**
+
+```text
+algoritmo hash_inserir(tabela, valor)
+    indice <- hash(valor)
+    i <- 1
+
+    enquanto tabela[indice] estiver ocupada faça
+        indice <- (hash(valor) + i²) mod tamanho_tabela
+        i <- i + 1
+    fim
+
+    tabela[indice] <- valor
+fim
+```
+
+#### Hash duplo
+
+O hash duplo (*double hashing*) utiliza uma segunda função hash para determinar a sequência de sondagem, reduzindo significativamente a formação de agrupamentos.
+
+**Pseudocódigo**
+
+```text
+algoritmo hash_inserir(tabela, valor)
+    h1 <- hash1(valor)
+    h2 <- hash2(valor)  
+    i <- 0
+
+    enquanto tabela[(h1 + i*h2) mod tamanho_tabela] estiver ocupada faça
+        i <- i + 1
+    fim
+
+    tabela[(h1 + i*h2) mod tamanho_tabela] <- valor
+fim
+```
+
+Em cenários médios, tabelas hash bem dimensionadas oferecem operações de busca, inserção e remoção em tempo esperado $O(1)$, tornando-se uma das estruturas mais utilizadas na implementação de mapas, dicionários, índices e mecanismos de cache.
+
+#### Algoritmo 5: hash com encadeamento separado
+
+**Implementação completa em C**
+
+```c
+#include <stdlib.h>
+
+#define HASH_TAMANHO 11
+
+typedef struct EntradaHash {
+    int chave;
+    struct EntradaHash *proximo;
+} EntradaHash;
+
+typedef struct {
+    EntradaHash *baldes[HASH_TAMANHO];
+} TabelaHash;
+
+int hash_funcao(int chave) {
+    return chave % HASH_TAMANHO;
+}
+
+void hash_inicializar(TabelaHash *tabela) {
+    for (int indice = 0; indice < HASH_TAMANHO; indice++) {
+        tabela->baldes[indice] = NULL;
+    }
+}
+
+void hash_inserir(TabelaHash *tabela, int chave) {
+    int indice = hash_funcao(chave);
+    EntradaHash *nova_entrada = (EntradaHash *)malloc(sizeof(EntradaHash));
+    if (nova_entrada == NULL) {
+        return;
+    }
+
+    nova_entrada->chave = chave;
+    nova_entrada->proximo = tabela->baldes[indice];
+    tabela->baldes[indice] = nova_entrada;
+}
+
+int hash_buscar(const TabelaHash *tabela, int chave) {
+    int indice = hash_funcao(chave);
+    EntradaHash *atual = tabela->baldes[indice];
+
+    while (atual != NULL) {
+        if (atual->chave == chave) {
+            return 1;
+        }
+        atual = atual->proximo;
+    }
+    return 0;
+}
+
+int hash_remover(TabelaHash *tabela, int chave) {
+    int indice = hash_funcao(chave);
+    EntradaHash *anterior = NULL;
+    EntradaHash *atual = tabela->baldes[indice];
+
+    while (atual != NULL && atual->chave != chave) {
+        anterior = atual;
+        atual = atual->proximo;
+    }
+
+    if (atual == NULL) {
+        return 0;
+    }
+
+    if (anterior == NULL) {
+        tabela->baldes[indice] = atual->proximo;
+    } else {
+        anterior->proximo = atual->proximo;
+    }
+
+    free(atual);
+    return 1;
+}
+```
+
+**Complexidade.** Média $O(1)$ para inserção, busca e remoção; pior caso $O(n)$ com colisões degeneradas; espaço $O(m + n)$.
+
+**Análise de desempenho.** Em cenários reais, o fator de carga e a distribuição das chaves determinam a diferença entre comportamento quase constante e degradação linear. Redimensionamento dinâmico melhora robustez, mas aumenta complexidade da implementação.
