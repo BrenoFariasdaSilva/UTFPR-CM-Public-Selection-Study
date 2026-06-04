@@ -305,3 +305,132 @@ void floyd_warshall(int vertices, int dist[MAXV][MAXV]) {
 ```
 
 **Complexidade.** Tempo $O(V^3)$; espaço $O(V^2)$.
+
+### 3.4 Árvores geradoras mínimas
+
+#### Algoritmo 6: Prim
+
+**Explicação teórica.** Prim cresce uma árvore a partir de um vértice inicial, sempre escolhendo a aresta de menor custo que conecta a árvore atual a um novo vértice.
+
+**Pseudocódigo**
+
+```text
+algoritmo prim(G, origem)
+    chave <- infinito para todos os vertices
+    pai <- -1 para todos os vertices
+    chave[origem] <- 0
+    incluido <- falso para todos os vertices
+
+    para i de 1 a V-1 faca
+        u <- vertice nao incluido com menor chave
+        incluido[u] <- verdadeiro
+        para cada vizinho v de u faca
+            se !incluido[v] e peso(u,v) < chave[v] entao
+                pai[v] <- u
+                chave[v] <- peso(u,v)
+fim
+```
+
+**Implementação completa em C**
+
+```c
+int minimo_chave(int chave[], int incluido[], int vertices) {
+    int melhor = INFINITO;
+    int indice = -1;
+    for (int v = 0; v < vertices; v++) {
+        if (!incluido[v] && chave[v] < melhor) {
+            melhor = chave[v];
+            indice = v;
+        }
+    }
+    return indice;
+}
+
+void prim(const GrafoMatriz *grafo, int pai[]) {
+    int chave[MAXV];
+    int incluido[MAXV] = {0};
+
+    for (int i = 0; i < grafo->vertices; i++) {
+        chave[i] = INFINITO;
+        pai[i] = -1;
+    }
+
+    chave[0] = 0;
+    for (int i = 0; i < grafo->vertices - 1; i++) {
+        int u = minimo_chave(chave, incluido, grafo->vertices);
+        incluido[u] = 1;
+        for (int v = 0; v < grafo->vertices; v++) {
+            int peso = grafo->matriz[u][v];
+            if (peso > 0 && !incluido[v] && peso < chave[v]) {
+                pai[v] = u;
+                chave[v] = peso;
+            }
+        }
+    }
+}
+```
+
+**Complexidade.** Em matriz, $O(V^2)$; com heap, $O(E \log V)$.
+
+#### Algoritmo 7: Kruskal
+
+**Explicação teórica.** Kruskal ordena arestas por peso e adiciona cada uma se ela conectar componentes distintos, usando união-busca para evitar ciclos.
+
+**Pseudocódigo**
+
+```text
+algoritmo kruskal(G)
+    ordene arestas por peso
+    para cada aresta (u, v) em ordem crescente faca
+        se uf_encontrar(u) != uf_encontrar(v) entao
+            uf_unir(u, v)
+fim
+
+algoritmo uf_encontrar(pai, x)
+    se pai[x] != x entao
+        pai[x] <- uf_encontrar(pai, pai[x])
+    retorne pai[x]
+
+algoritmo uf_unir(pai, rank, a, b)
+    a <- uf_encontrar(a)
+    b <- uf_encontrar(b)
+    se a == b entao
+        retorne
+    se rank[a] < rank[b] entao
+        pai[a] <- b
+    senao se rank[a] > rank[b] entao
+        pai[b] <- a
+    senao
+        pai[b] <- a
+        rank[a]++
+```
+
+**Implementação completa em C**
+
+```c
+int uf_encontrar(int pai[], int x) {
+    if (pai[x] != x) {
+        pai[x] = uf_encontrar(pai, pai[x]);
+    }
+    return pai[x];
+}
+
+void uf_unir(int pai[], int rank[], int a, int b) {
+    a = uf_encontrar(pai, a);
+    b = uf_encontrar(pai, b);
+
+    if (a == b) {
+        return;
+    }
+    if (rank[a] < rank[b]) {
+        pai[a] = b;
+    } else if (rank[a] > rank[b]) {
+        pai[b] = a;
+    } else {
+        pai[b] = a;
+        rank[a]++;
+    }
+}
+```
+
+**Complexidade.** Ordenação das arestas domina o custo: $O(E \log E)$, com operações quase constantes amortizadas na estrutura union-find.
