@@ -508,3 +508,9 @@ void radix_sort(int vetor[], int tamanho, int maior) {
 ```
 
 **Complexidade.** Tempo $O(d(n + b))$, em que $d$ é número de dígitos e $b$ a base; espaço $O(n + b)$; estável se o subalgoritmo por dígito for estável.
+
+## 4. Exemplos, Aplicações e Estudos de Caso
+
+Busca linear é adequada para coleções pequenas, fluxos transitórios e sequências não ordenadas. Busca binária é dominante em vetores ordenados, páginas de índices e tabelas estáticas. Bubble, Selection e Insertion Sort são pedagógicos e úteis apenas em cenários restritos, especialmente Insertion Sort em vetores pequenos ou quase ordenados. Merge Sort é amplamente empregado em ordenação externa e listas encadeadas. Quick Sort domina bibliotecas devido ao excelente desempenho médio e boa localidade de cache. Heap Sort oferece garantia forte de pior caso com uso constante de memória. Counting e Radix são adequados para inteiros, identificadores e chaves de faixa controlada.
+
+Um estudo de caso clássico é o de um mecanismo de indexação de logs: eventos chegam inicialmente em sequência não ordenada, podem ser pré-filtrados por busca linear, armazenados e posteriormente ordenados por Quick Sort ou Merge Sort, enquanto consultas repetidas se beneficiam de busca binária após ordenação. Se as chaves forem timestamps inteiros compactos, Counting ou Radix tornam-se particularmente competitivos.
