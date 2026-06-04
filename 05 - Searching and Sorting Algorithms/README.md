@@ -25,3 +25,11 @@ int busca_linear(int v[], int n, int x) {
     return -1;
 }
 ```
+
+### Complexidade
+
+| Caso   | Complexidade |
+| ------ | ------------ |
+| Melhor | O(1)         |
+| Médio  | O(n)         |
+| Pior   | O(n)         |
