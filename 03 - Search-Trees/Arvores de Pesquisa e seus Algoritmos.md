@@ -636,3 +636,15 @@ Entre as armadilhas mais frequentes estão: esquecer de atualizar alturas em AVL
 ## 6. Conclusão
 
 Árvores de pesquisa representam um ponto de encontro entre teoria de algoritmos e engenharia de sistemas. A partir de um mesmo problema abstrato, busca em conjunto ordenado, emergem soluções muito diferentes, cada qual calibrada para um contexto operacional específico. A compreensão dessas estruturas requer transitar entre propriedades formais, rotações, invariantes, custo assintótico e comportamento em memória e disco.
+
+## 7. Referências
+
+CORMEN, Thomas H.; LEISERSON, Charles E.; RIVEST, Ronald L.; STEIN, Clifford. Introduction to Algorithms. 3rd ed. Cambridge: MIT Press, 2009.
+
+CORMEN, Thomas H.; LEISERSON, Charles E.; RIVEST, Ronald L.; STEIN, Clifford. Algoritmos: teoria e prática. Rio de Janeiro: Elsevier, 2012.
+
+KNUTH, Donald E. The Art of Computer Programming. Volume 3: Sorting and Searching. 2nd ed. Reading: Addison-Wesley, 1998.
+
+SEDGEWICK, Robert. Algorithms in C, Parts 1-4: Fundamentals, Data Structures, Sorting, Searching. 3rd ed. Reading: Addison-Wesley, 1998.
+
+ZIVIANI, Nivio. Projeto de Algoritmos: com Implementações em Pascal e C. São Paulo: Cengage Learning, 2004.
